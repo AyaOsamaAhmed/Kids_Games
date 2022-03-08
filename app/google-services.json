@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "209654511807",
+    "project_id": "kids-game-fd7b9",
+    "storage_bucket": "kids-game-fd7b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:209654511807:android:4d164df50573c911e12e0a",
+        "android_client_info": {
+          "package_name": "com.aya.games"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "209654511807-5bvabfplvq1l7m90f5ud5depfhafov6j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtxgBJLWN6w8Ga4s6TnxF7pmRTXWRDeew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "209654511807-5bvabfplvq1l7m90f5ud5depfhafov6j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
