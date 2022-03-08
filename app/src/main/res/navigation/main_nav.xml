@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/SplashFragment"
+    >
+
+
+
+    <fragment
+        android:id="@+id/SplashFragment"
+        android:name="com.aya.games.presentation.ui.fragments.SplashFragment"
+        tools:layout="@layout/fragment_splash"
+        >
+        <action
+            android:id="@+id/SplashFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment"
+            />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/LoginFragment"
+        android:name="com.aya.games.presentation.ui.fragments.auth.LoginFragment"
+        tools:layout="@layout/fragment_login"
+        />
+
+</navigation>

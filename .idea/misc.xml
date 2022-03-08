@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/projects/games/app/src/main/res/drawable/ic_back.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/dialog_loading.xml" value="0.2" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_login.xml" value="0.1" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_splash.xml" value="0.2" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_splash2.xml" value="0.1" />
       </map>
     </option>
   </component>
