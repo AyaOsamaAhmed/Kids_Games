@@ -35,24 +35,63 @@
             android:id="@+id/layout_login"
             android:layout_width="@dimen/_200sdp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/small_margin"
             android:background="@drawable/background_login"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/lottieAnimationView"
             app:layout_constraintTop_toTopOf="parent">
 
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                app:layout_constraintTop_toTopOf="@id/tx_sign_up"
+                app:layout_constraintStart_toStartOf="parent"
+
+                />
             <TextView
-                android:id="@+id/login"
+                android:id="@+id/tx_sign_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
-                android:text="@string/login"
+                android:text="@string/sign_up"
                 android:textColor="@color/yellow"
                 android:textSize="@dimen/large_text_size"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/back"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_margin"
+                android:background="@drawable/background_border_grey"
+                android:drawableStart="@drawable/ic_user"
+                android:drawablePadding="@dimen/_5sdp"
+                android:hint="@string/first_name"
+                android:inputType="text"
+                android:paddingHorizontal="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tx_sign_up" />
+
+            <EditText
+                android:id="@+id/last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_margin"
+                android:background="@drawable/background_border_grey"
+                android:drawableStart="@drawable/ic_user"
+                android:drawablePadding="@dimen/_5sdp"
+                android:hint="@string/last_name"
+                android:inputType="text"
+                android:paddingHorizontal="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/first_name" />
 
             <EditText
                 android:id="@+id/userName"
@@ -67,7 +106,7 @@
                 android:paddingHorizontal="@dimen/_5sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/login" />
+                app:layout_constraintTop_toBottomOf="@id/last_name" />
 
             <EditText
                 android:id="@+id/password"
@@ -85,47 +124,19 @@
                 app:layout_constraintTop_toBottomOf="@id/userName" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/sign_in"
+                android:id="@+id/sign_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
                 android:background="@drawable/button_round_dark"
-                android:text="@string/login"
+                android:text="@string/sign_up"
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/forget_password" />
+                app:layout_constraintTop_toBottomOf="@id/password"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
-            <TextView
-                android:id="@+id/forget_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/do_forget_password"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/password" />
 
-            <TextView
-                android:id="@+id/check_sign_up"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5sdp"
-                android:text="@string/check_sign_up"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/sign_up"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sign_in" />
-
-            <TextView
-                android:id="@+id/sign_up"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_5sdp"
-                android:text="@string/sign_up"
-                android:textColor="@color/yellow"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/check_sign_up"
-                app:layout_constraintTop_toTopOf="@id/check_sign_up" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

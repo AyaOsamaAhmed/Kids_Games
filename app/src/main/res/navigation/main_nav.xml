@@ -21,9 +21,51 @@
 
 
     <fragment
+        android:id="@+id/ForgetPasswordFragment"
+        android:name="com.aya.games.presentation.ui.fragments.auth.ForgetPasswordFragment"
+        tools:layout="@layout/fragment_forget_password"
+        >
+        <action
+            android:id="@+id/ForgetPasswordFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/SignUpFragment"
+        android:name="com.aya.games.presentation.ui.fragments.auth.SignUpFragment"
+        tools:layout="@layout/fragment_signup"
+        >
+        <action
+            android:id="@+id/SignUpFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment"
+            />
+    </fragment>
+
+    <fragment
         android:id="@+id/LoginFragment"
         android:name="com.aya.games.presentation.ui.fragments.auth.LoginFragment"
         tools:layout="@layout/fragment_login"
+        >
+        <action
+            android:id="@+id/LoginFragment_to_SignUpFragment"
+            app:destination="@id/SignUpFragment"
+            />
+        <action
+            android:id="@+id/LoginFragment_to_ForgetPasswordFragment"
+            app:destination="@id/ForgetPasswordFragment"
+            />
+
+        <action
+            android:id="@+id/LoginFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.aya.games.presentation.ui.fragments.HomeFragment"
+        tools:layout="@layout/fragment_home"
         />
 
 </navigation>

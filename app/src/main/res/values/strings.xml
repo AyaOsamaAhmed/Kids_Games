@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Kids Games</string>
     <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="do_forget_password">Forget Password ?</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="check_sign_up">You do not have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="msg_found">enter Data</string>
+    <string name="msg_password">enter password larger than 6 numbers</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="get_account">Get Account</string>
 </resources>

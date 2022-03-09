@@ -12,11 +12,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.aya.games.R
 import com.aya.games.databinding.FragmentLoginBinding
+import com.aya.games.databinding.FragmentSignupBinding
 import com.aya.games.presentation.ui.viewModel.AuthViewModel
 
-class LoginFragment :Fragment() {
+class SignUpFragment :Fragment() {
 
-    private lateinit var binding: FragmentLoginBinding
+    private lateinit var binding: FragmentSignupBinding
     private lateinit var viewModel : AuthViewModel
 
     private val navController by lazy {
@@ -33,12 +34,11 @@ class LoginFragment :Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentLoginBinding.inflate(inflater , container , false)
-        viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
+        binding = FragmentSignupBinding.inflate(inflater , container , false)
+      viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
 
-
-        operationResult()
-        clickable()
+      //  operationResult()
+         clickable()
 
         return binding.root
     }
@@ -48,34 +48,18 @@ class LoginFragment :Fragment() {
         binding.signUp.setOnClickListener {
             signUp()
         }
-        binding.signIn.setOnClickListener {
-            login(binding.userName.text.toString(),binding.password.text.toString())
+        binding.back.setOnClickListener {
+            skip()
         }
-        binding.forgetPassword.setOnClickListener {
-            forgetPasswordOnClick()
-        }
-
     }
-
 
     fun skip(){
-     //   startActivity(Intent(activity , MainActivity::class.java))
-     //   requireActivity().finish()
-
+        navController.navigate(R.id.SignUpFragment_to_LoginFragment)
     }
-    fun forgetPasswordOnClick(){
-        navController.navigate(R.id.LoginFragment_to_ForgetPasswordFragment)
-    }
-
-    fun login(txtEmail: String, txtPassword: String){
-        if (checkValid( txtEmail  , txtPassword )){
-          //  viewModel.login(txtEmail  , txtPassword)
-            navController.navigate(R.id.LoginFragment_to_HomeFragment)
-          }
-    }
-
     fun signUp(){
-        navController.navigate(R.id.LoginFragment_to_SignUpFragment)
+        if(checkValid(binding.firstName.text.toString(),binding.lastName.text.toString(),binding.userName.text.toString()
+            , binding.password.text.toString()))
+        navController.navigate(R.id.SignUpFragment_to_LoginFragment)
     }
 
     fun operationResult(){
@@ -88,10 +72,24 @@ class LoginFragment :Fragment() {
 
     }
 
-    private fun checkValid(txtEmail: String , txtPassword: String): Boolean {
+    private fun checkValid(first_name: String ,last_name: String ,txtEmail: String , txtPassword: String): Boolean {
 
 
         var status = true
+
+        // Check Validation Email
+        if (first_name.isEmpty()) {
+            binding.firstName.error = getText(R.string.msg_found)
+            binding.firstName.requestFocus()
+            status = false
+        }
+
+        // Check Validation Email
+        if (last_name.isEmpty()) {
+            binding.lastName.error = getText(R.string.msg_found)
+            binding.lastName.requestFocus()
+            status = false
+        }
 
         // Check Validation Email
         if (txtEmail.isEmpty()) {
