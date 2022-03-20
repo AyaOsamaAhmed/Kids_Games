@@ -1,32 +1,40 @@
 package com.aya.games.presentation.ui.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.aya.games.R
 import com.aya.games.databinding.FragmentHomeBinding
-import com.aya.games.databinding.FragmentLoginBinding
-import com.aya.games.presentation.ui.viewModel.AuthViewModel
+import com.aya.games.domain.model.General
+import com.aya.games.domain.model.Home
+import com.aya.games.presentation.ui.interfaces.OnClickHome
+import com.aya.games.presentation.ui.adapter.AdapterHome
+import com.aya.games.presentation.ui.viewModel.MainViewModel
+import com.aya.games.presentation.utils.Constants
+import com.aya.games.presentation.utils.SharedPrefsHelper
+import com.google.gson.Gson
+import com.squareup.picasso.Picasso
 
-class HomeFragment :Fragment() {
+class HomeFragment :Fragment() , OnClickHome {
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var viewModel : AuthViewModel
+    private lateinit var viewModel : MainViewModel
 
+    var check_data = true
     private val navController by lazy {
         val navHostFragment = activity?.supportFragmentManager
             ?.findFragmentById(R.id.homeframlayout) as NavHostFragment
-
         navHostFragment.navController
     }
+
     val mainActivity  by lazy { activity }
+    var lislHomeGames : ArrayList<Home> = arrayListOf()
+    var sharedPrefsHelper : SharedPrefsHelper? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,97 +43,45 @@ class HomeFragment :Fragment() {
     ): View {
 
         binding = FragmentHomeBinding.inflate(inflater , container , false)
-//      viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        sharedPrefsHelper = SharedPrefsHelper(mainActivity!!.applicationContext)
 
+        setGeneral()
+        if(check_data)viewModel.getListItems()
 
-      //  operationResult()
-     //   clickable()
+        viewModel.requestLiveData.observe(viewLifecycleOwner, Observer {
+            check_data = true
+            lislHomeGames = it as ArrayList<Home>
+            val adapterGmaes = AdapterHome(lislHomeGames , this)
+            binding.recyclerGames.adapter =  adapterGmaes
+        })
+
+        clickable()
 
         return binding.root
     }
 
-/*
+    private fun setGeneral() {
+        val background : General= Gson().fromJson(sharedPrefsHelper?.getStringValue(Constants.GENERAL), General::class.java)
+        Picasso.get().load(background.background_main).into(binding.layout)
+
+    }
+
     fun clickable(){
-        binding.signUp.setOnClickListener {
-            signUp()
+        binding.setting.setOnClickListener {
+           navController.navigate(R.id.HomeFragment_to_SettingFragment)
         }
-        binding.signIn.setOnClickListener {
-            login(binding.emailOrMobileNumber.text.toString(),binding.password.text.toString())
-        }
-        binding.forgrtPassword.setOnClickListener {
-            forgetPasswordOnClick()
-        }
-        binding.imageBack.setOnClickListener {
-            skip()
-        }
-    }
-
-
- */
-    fun skip(){
-     //   startActivity(Intent(activity , MainActivity::class.java))
-     //   requireActivity().finish()
-
-    }
-    fun forgetPasswordOnClick(){
-    //    navController.navigate(R.id.LoginFragment_to_ForgetPasswordFragment)
-    }
-
-    fun login(txtEmail: String, txtPassword: String){
-    /*    if (checkValid( txtEmail  , txtPassword )){
-            viewModel.login(txtEmail  , txtPassword)
-          }
-
-     */
-    }
-
-    fun signUp(){
-     //   navController.navigate(R.id.LoginFragment_to_SignUpFragment)
-    }
-
-    fun operationResult(){
-        viewModel.loginData.observe(viewLifecycleOwner, Observer {
-            // loadingDialog.dismiss()
-            Toast.makeText(mainActivity, "Success Login , Congratulation", Toast.LENGTH_LONG).show();
-    //        startActivity(Intent(mainActivity, MainActivity::class.java))
-            requireActivity().finish()
-        })
-
-    }
-
-    fun loginByGmail(){
-
-    }
-    fun signInFacebook(){
-
-    }
-
-/*
-    private fun checkValid(txtEmail: String , txtPassword: String): Boolean {
-
-
-        var status = true
-
-        // Check Validation Email
-        if (txtEmail.isEmpty()) {
-            binding.emailOrMobileNumber.error = getText(R.string.msg_found)
-            binding.emailOrMobileNumber.requestFocus()
-            status = false
+        binding.exam.setOnClickListener {
+           navController.navigate(R.id.HomeFragment_to_ExamFragment)
         }
 
-        // Check Validation Password
-        if (txtPassword.isEmpty()) {
-            binding.password.error = getText(R.string.msg_found)
-            binding.password.requestFocus()
-            status = false
-        } else if (txtPassword.length < 6) {
-            binding.password.error = getText(R.string.msg_password)
-            binding.password.requestFocus()
-            status = false
-        }
-
-        return status
     }
-*/
+
+    override fun onClickChooseGames(id: String) {
+        when(id){
+            "1" ->   navController.navigate(R.id.HomeFragment_to_GameOneFragment)
+        }
+    }
+
 
 }

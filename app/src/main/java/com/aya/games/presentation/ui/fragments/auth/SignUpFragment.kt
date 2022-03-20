@@ -13,7 +13,12 @@ import androidx.navigation.fragment.NavHostFragment
 import com.aya.games.R
 import com.aya.games.databinding.FragmentLoginBinding
 import com.aya.games.databinding.FragmentSignupBinding
+import com.aya.games.domain.model.General
 import com.aya.games.presentation.ui.viewModel.AuthViewModel
+import com.aya.games.presentation.utils.Constants
+import com.aya.games.presentation.utils.SharedPrefsHelper
+import com.google.gson.Gson
+import com.squareup.picasso.Picasso
 
 class SignUpFragment :Fragment() {
 
@@ -27,6 +32,7 @@ class SignUpFragment :Fragment() {
         navHostFragment.navController
     }
     val mainActivity  by lazy { activity }
+    var sharedPrefsHelper : SharedPrefsHelper? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,14 +42,20 @@ class SignUpFragment :Fragment() {
 
         binding = FragmentSignupBinding.inflate(inflater , container , false)
       viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
+        sharedPrefsHelper = SharedPrefsHelper(mainActivity!!.applicationContext)
 
       //  operationResult()
+        setGeneral()
          clickable()
 
         return binding.root
     }
 
+    private fun setGeneral() {
+        val background : General = Gson().fromJson(sharedPrefsHelper?.getStringValue(Constants.GENERAL), General::class.java)
+        Picasso.get().load(background.background_auth).into(binding.layout)
 
+    }
     fun clickable(){
         binding.signUp.setOnClickListener {
             signUp()

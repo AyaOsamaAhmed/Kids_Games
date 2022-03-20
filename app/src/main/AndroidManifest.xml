@@ -6,9 +6,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/logo_kids_2"
+        android:icon="@mipmap/logo_kids"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/logo_kids_2"
+        android:roundIcon="@drawable/logokids"
         android:supportsRtl="true"
         android:theme="@style/Theme.Games">
         <activity

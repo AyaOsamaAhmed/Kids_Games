@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kids Games</string>
+    <string name="login">تسجيل دخول</string>
+    <string name="password">كلمه المرور</string>
+    <string name="email">الايميل</string>
+    <string name="do_forget_password">نسيت كلمه المرور ؟</string>
+    <string name="forget_password">نسيت كلمه المرور</string>
+    <string name="check_sign_up">هل لديك حساب ؟</string>
+    <string name="sign_up">انشاء حساب</string>
+    <string name="msg_found">برجاء ادخال البيانات المطلوبه</string>
+    <string name="msg_password">ادخل كلمه المرور اكبر من   6 ارقام</string>
+    <string name="first_name">"الاسم الاول "</string>
+    <string name="last_name">"الاسم التانى "</string>
+    <string name="get_account">"استرداد الحساب "</string>
+    <string name="talk">لعبه التحدث</string>
+    <string name="Next">التالى</string>
+    <string name="back">السابق</string>
+    <string name="back_home">العوده للصفحه الرئيسيه</string>
+    <string name="answer">الاجابه</string>
+
+</resources>

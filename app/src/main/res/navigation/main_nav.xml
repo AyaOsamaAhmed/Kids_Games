@@ -66,6 +66,37 @@
         android:id="@+id/HomeFragment"
         android:name="com.aya.games.presentation.ui.fragments.HomeFragment"
         tools:layout="@layout/fragment_home"
+        >
+        <action
+            android:id="@+id/HomeFragment_to_ExamFragment"
+            app:destination="@id/ExamFragment"
+            />
+        <action
+            android:id="@+id/HomeFragment_to_SettingFragment"
+            app:destination="@id/SettingFragment"
+            />
+        <action
+            android:id="@+id/HomeFragment_to_GameOneFragment"
+            app:destination="@id/GameOneFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/GameOneFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.GameOneFragment"
+        tools:layout="@layout/fragment_game_one"
         />
 
+
+    <fragment
+        android:id="@+id/ExamFragment"
+        android:name="com.aya.games.presentation.ui.fragments.ExamFragment"
+        tools:layout="@layout/fragment_exam"
+        />
+
+    <fragment
+        android:id="@+id/SettingFragment"
+        android:name="com.aya.games.presentation.ui.fragments.SettingFragment"
+        tools:layout="@layout/fragment_setting"
+        />
 </navigation>

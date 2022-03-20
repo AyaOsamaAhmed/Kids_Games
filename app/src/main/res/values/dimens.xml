@@ -16,7 +16,8 @@
 
     <dimen name="very_small_text_size">@dimen/_8sdp</dimen>
 
-
+    <dimen name="width_Auth">@dimen/_300sdp</dimen>
+    <dimen name="height_Auth">@dimen/_200sdp</dimen>
 
     <dimen name="bottom_space">@dimen/_45sdp</dimen>
     <dimen name="edit_text_size">@dimen/_10sdp</dimen>

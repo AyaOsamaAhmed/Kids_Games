@@ -2,9 +2,12 @@ package com.aya.games.presentation.ui.viewModel
 
 import android.app.Activity
 import android.app.Application
+import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.aya.games.domain.model.General
+import com.aya.games.domain.model.Home
 import com.aya.games.domain.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -12,9 +15,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
 import java.util.*
 
 
@@ -33,12 +38,37 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
      var registrationData = MutableLiveData<Any>()
      var userInfo = MutableLiveData<User>()
      var logoutData = MutableLiveData<Any>()
+     var requestLiveData = MutableLiveData<Any>()
 
      private var auth: FirebaseAuth = Firebase.auth
      val TAG = "AuthViewModel"
      // Initialize Firebase Auth
      var db: FirebaseFirestore  = FirebaseFirestore.getInstance()
 
+     fun getGeneralItems() {
+          db.collection("general").get()
+               .addOnSuccessListener( OnSuccessListener<QuerySnapshot>() {
+                    if(it.isEmpty)  Log.d(ContentValues.TAG, "onSuccess: LIST EMPTY");
+                    else{
+                         val   size =it.documents.size
+                         var   list_id : MutableList<DocumentSnapshot> =  it.documents
+                         repeat(size){
+                              val document = list_id.get(it).data
+                              var data = General()
+                                   data.background_auth = document!!.get("background_auth").toString()
+                                   data.background_main = document!!.get("background_main").toString()
+                                   data.sound = document!!.get("sound").toString()
+                              requestLiveData.value = data
+                         }
+
+                         Log.d(ContentValues.TAG, "onSuccess: $size")
+                    }
+
+               })
+               .addOnFailureListener {
+                    Log.d(ContentValues.TAG, "onFailure: $it")
+               };
+     }
 
      fun  login (txtEmail: String, txtPassword: String){
           auth.signInWithEmailAndPassword(

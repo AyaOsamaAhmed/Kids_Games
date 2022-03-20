@@ -3,21 +3,31 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/projects/games/app/src/main/res/drawable-v24/bg_corner_white.xml" value="0.2037037037037037" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/background_border_grey.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/background_login.xml" value="0.14722222222222223" />
+        <entry key="..\:/projects/games/app/src/main/res/drawable/bg_corner_button.xml" value="0.21614583333333334" />
+        <entry key="..\:/projects/games/app/src/main/res/drawable/bg_corner_white.xml" value="0.13703703703703704" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/button_round_dark.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_back.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_email.xml" value="0.21614583333333334" />
+        <entry key="..\:/projects/games/app/src/main/res/drawable/ic_mic.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_password.xml" value="0.21614583333333334" />
+        <entry key="..\:/projects/games/app/src/main/res/drawable/ic_setting.xml" value="0.1" />
+        <entry key="..\:/projects/games/app/src/main/res/drawable/ic_sound.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_user.xml" value="0.20833333333333334" />
         <entry key="..\:/projects/games/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/projects/games/app/src/main/res/layout/dialog_loading.xml" value="0.2" />
-        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_forget_password.xml" value="0.33" />
-        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_exam.xml" value="0.2" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_forget_password.xml" value="0.2843601895734597" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_game_one.xml" value="0.15" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_login.xml" value="0.1" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_setting.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_signup.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_splash.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_splash2.xml" value="0.1" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/item_home.xml" value="0.2" />
       </map>
     </option>
   </component>
