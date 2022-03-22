@@ -85,7 +85,11 @@
         android:id="@+id/GameOneFragment"
         android:name="com.aya.games.presentation.ui.fragments.games.GameOneFragment"
         tools:layout="@layout/fragment_game_one"
-        />
+        >
+        <action
+            android:id="@+id/GameOneFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment"/>
+    </fragment>
 
 
     <fragment

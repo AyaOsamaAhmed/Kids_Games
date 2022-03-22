@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.aya.games.R
 import com.aya.games.databinding.FragmentSplashBinding
 import com.aya.games.domain.model.General
+import com.aya.games.presentation.ui.interfaces.OnClickMain
 import com.aya.games.presentation.ui.viewModel.AuthViewModel
 import com.aya.games.presentation.ui.viewModel.GeneralViewModel
 import com.aya.games.presentation.utils.Constants
@@ -53,6 +54,8 @@ class SplashFragment : Fragment() {
        Handler(Looper.getMainLooper()).postDelayed({
             // Create an Intent that will start.
             navController.navigate(R.id.SplashFragment_to_LoginFragment)
+
+           //navController.navigate(R.id.GameOneFragment)
         }, 5000)
 
 

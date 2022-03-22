@@ -8,6 +8,7 @@ import com.aya.games.R
 import com.aya.games.databinding.ItemHomeBinding
 import com.aya.games.domain.model.Home
 import com.aya.games.presentation.ui.interfaces.OnClickHome
+import com.aya.games.presentation.utils.setGlideImageUrl
 import com.squareup.picasso.Picasso
 
 class AdapterHome(
@@ -35,10 +36,9 @@ class AdapterHome(
     override fun onBindViewHolder(holder: ViewHolderAppointment, position: Int) {
         val model = list[position]
         holder.bind(model)
-      //  holder.itemRowBinding.nameDoctor.text = model.name_doctor
+        // Picasso.get().load(model.image).into(holder.itemRowBinding.image)
+        holder.itemRowBinding.image.setGlideImageUrl(model.image!!,holder.itemRowBinding.progress)
 
-      //  Glide.with(myFragment).load(model.image_doctor).centerCrop().into(holder.itemRowBinding.image);
-        Picasso.get().load(model.image).into(holder.itemRowBinding.image)
         holder.itemRowBinding.image.setOnClickListener {
             onClick.onClickChooseGames(model.id!!)
         }

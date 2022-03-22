@@ -1,12 +1,9 @@
 package com.aya.games.presentation.ui.fragments.auth
 
-import android.content.ContentValues.TAG
-import android.media.AudioManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RemoteViews
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -17,13 +14,10 @@ import com.aya.games.databinding.FragmentLoginBinding
 import com.aya.games.domain.model.General
 import com.aya.games.presentation.ui.viewModel.AuthViewModel
 import com.aya.games.presentation.utils.Constants
-import com.aya.games.presentation.utils.Constants.GENERAL
 import com.aya.games.presentation.utils.SharedPrefsHelper
+import com.aya.games.presentation.utils.setGlideImageUrl
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
-import android.media.MediaPlayer
-import android.util.Log
-import java.io.IOException
 
 
 class LoginFragment :Fragment() {
@@ -39,8 +33,6 @@ class LoginFragment :Fragment() {
     }
     val mainActivity  by lazy { activity }
     var sharedPrefsHelper : SharedPrefsHelper? = null
-    var  mediaPlayer = MediaPlayer()
-    var play_Audio = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,8 +53,8 @@ class LoginFragment :Fragment() {
 
     private fun setGeneral() {
         val background : General= Gson().fromJson(sharedPrefsHelper?.getStringValue(Constants.GENERAL), General::class.java)
-        Picasso.get().load(background.background_auth).into(binding.layout)
-        if(!play_Audio)playAudio(background.sound!!)
+        //Picasso.get().load(background.background_auth).into(binding.layout)
+        binding.layout.setGlideImageUrl(background.background_auth!!,binding.progress)
 
     }
 
@@ -128,29 +120,6 @@ class LoginFragment :Fragment() {
         return status
     }
 
-    fun playAudio( audioUrl:String) {
 
-
-        // stream type for our media player.
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
-        try {
-            mediaPlayer.setDataSource(audioUrl)
-            mediaPlayer.prepare()
-            mediaPlayer.start()
-            mediaPlayer.isLooping= true
-            play_Audio = true
-            Log.i(TAG, "playAudio: true")
-        } catch (e: IOException) {
-            e.printStackTrace()
-            Log.i(TAG, "playAudio: false")
-        }
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mediaPlayer.stop()
-    }
 
 }

@@ -17,6 +17,7 @@ import com.aya.games.domain.model.General
 import com.aya.games.presentation.ui.viewModel.AuthViewModel
 import com.aya.games.presentation.utils.Constants
 import com.aya.games.presentation.utils.SharedPrefsHelper
+import com.aya.games.presentation.utils.setGlideImageUrl
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 
@@ -53,8 +54,8 @@ class SignUpFragment :Fragment() {
 
     private fun setGeneral() {
         val background : General = Gson().fromJson(sharedPrefsHelper?.getStringValue(Constants.GENERAL), General::class.java)
-        Picasso.get().load(background.background_auth).into(binding.layout)
-
+        //Picasso.get().load(background.background_auth).into(binding.layout)
+        binding.layout.setGlideImageUrl(background.background_auth!!,binding.progress)
     }
     fun clickable(){
         binding.signUp.setOnClickListener {

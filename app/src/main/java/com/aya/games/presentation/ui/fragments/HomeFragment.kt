@@ -17,6 +17,8 @@ import com.aya.games.presentation.ui.adapter.AdapterHome
 import com.aya.games.presentation.ui.viewModel.MainViewModel
 import com.aya.games.presentation.utils.Constants
 import com.aya.games.presentation.utils.SharedPrefsHelper
+import com.aya.games.presentation.utils.getRefrenceHiddenHome
+import com.aya.games.presentation.utils.setGlideImageUrl
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 
@@ -63,8 +65,11 @@ class HomeFragment :Fragment() , OnClickHome {
 
     private fun setGeneral() {
         val background : General= Gson().fromJson(sharedPrefsHelper?.getStringValue(Constants.GENERAL), General::class.java)
-        Picasso.get().load(background.background_main).into(binding.layout)
+       // Picasso.get().load(background.background_main).into(binding.layout)
+        binding.layout.setGlideImageUrl(background.background_main!!,binding.progress)
 
+        if(!getRefrenceHiddenHome().checkIsPlaying())
+        getRefrenceHiddenHome().autoRunSound(true)
     }
 
     fun clickable(){

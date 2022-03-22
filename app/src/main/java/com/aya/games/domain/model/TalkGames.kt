@@ -6,5 +6,6 @@ data class TalkGames(
     var question_ar :String? = null,
     var answer :String? = null,
     var question_ar_2 :String? = null,
-    var answer_2 :String? = null
+    var answer_2 :String? = null,
+    var answer_2_2 :String? = null
 )
