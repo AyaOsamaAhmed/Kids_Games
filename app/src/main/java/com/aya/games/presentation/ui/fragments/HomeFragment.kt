@@ -74,7 +74,7 @@ class HomeFragment :Fragment() , OnClickHome {
 
     fun clickable(){
         binding.setting.setOnClickListener {
-           navController.navigate(R.id.HomeFragment_to_SettingFragment)
+          // navController.navigate(R.id.HomeFragment_to_SettingFragment)
         }
         binding.exam.setOnClickListener {
            navController.navigate(R.id.HomeFragment_to_ExamFragment)

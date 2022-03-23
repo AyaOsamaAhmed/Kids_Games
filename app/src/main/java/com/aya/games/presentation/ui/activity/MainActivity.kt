@@ -24,6 +24,7 @@ import com.aya.games.presentation.utils.setRefrenceHiddenHome
 import com.google.gson.Gson
 import java.io.IOException
 import java.util.*
+import kotlin.math.log
 
 class MainActivity : AppCompatActivity() , OnClickMain {
 
@@ -32,9 +33,10 @@ class MainActivity : AppCompatActivity() , OnClickMain {
     var sharedPrefsHelper : SharedPrefsHelper? = null
     lateinit var background : General
     var  mediaPlayer = MediaPlayer()
-
+    val TAG = "MainActivity11"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i(TAG, "onCreate: ")
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         sharedPrefsHelper = SharedPrefsHelper(this)
@@ -80,5 +82,16 @@ class MainActivity : AppCompatActivity() , OnClickMain {
 
     override fun checkIsPlaying(): Boolean {
         return mediaPlayer.isPlaying
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i(TAG, "onPause: ")
+        mediaPlayer.pause()
+    }
+    override fun onRestart() {
+        super.onRestart()
+        Log.i(TAG, "onRestart: ")
+        mediaPlayer.start()
     }
 }
