@@ -77,7 +77,7 @@ class HomeFragment :Fragment() , OnClickHome {
           // navController.navigate(R.id.HomeFragment_to_SettingFragment)
         }
         binding.exam.setOnClickListener {
-           navController.navigate(R.id.HomeFragment_to_ExamFragment)
+          // navController.navigate(R.id.HomeFragment_to_ExamFragment)
         }
 
     }
@@ -85,6 +85,7 @@ class HomeFragment :Fragment() , OnClickHome {
     override fun onClickChooseGames(id: String) {
         when(id){
             "1" ->   navController.navigate(R.id.HomeFragment_to_GameOneFragment)
+            "2" ->   navController.navigate(R.id.HomeFragment_to_GameTwoFragment)
         }
     }
 

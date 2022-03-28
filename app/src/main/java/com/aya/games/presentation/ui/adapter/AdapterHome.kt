@@ -15,9 +15,9 @@ class AdapterHome(
     private var list: ArrayList<Home>,
     val onClick : OnClickHome
 
-) : RecyclerView.Adapter<AdapterHome.ViewHolderAppointment>() {
+) : RecyclerView.Adapter<AdapterHome.ViewHolderHome>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderAppointment {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderHome {
         val binding: ItemHomeBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             R.layout.item_home, parent, false
@@ -26,14 +26,14 @@ class AdapterHome(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )*/
-        return ViewHolderAppointment(binding)
+        return ViewHolderHome(binding)
     }
 
     override fun getItemCount(): Int {
         return if (list.size > 0) list.size else 0
     }
 
-    override fun onBindViewHolder(holder: ViewHolderAppointment, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolderHome, position: Int) {
         val model = list[position]
         holder.bind(model)
         // Picasso.get().load(model.image).into(holder.itemRowBinding.image)
@@ -44,7 +44,7 @@ class AdapterHome(
         }
     }
 
-    class ViewHolderAppointment(binding: ItemHomeBinding) :
+    class ViewHolderHome(binding: ItemHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         var itemRowBinding: ItemHomeBinding = binding
         fun bind(model: Home) {

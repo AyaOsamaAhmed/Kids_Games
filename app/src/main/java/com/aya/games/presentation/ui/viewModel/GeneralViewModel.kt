@@ -39,6 +39,7 @@ class GeneralViewModel(application: Application) : AndroidViewModel(application)
                                    data.game_talk = document!!.get("game_talk").toString()
                                    data.correct_answer = document!!.get("correct_answer").toString()
                                    data.wrong_answer = document!!.get("wrong_answer").toString()
+                                   data.game_look = document.get("game_look").toString()
                               requestLiveData.value = data
                          }
 

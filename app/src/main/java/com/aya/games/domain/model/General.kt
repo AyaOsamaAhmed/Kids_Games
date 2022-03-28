@@ -6,5 +6,7 @@ data class General(
     var sound :String? = null,
     var game_talk : String? = null,
     var correct_answer :String? = null,
-    var wrong_answer :String? = null
+    var wrong_answer :String? = null,
+    //
+    var game_look :String? = null
 )

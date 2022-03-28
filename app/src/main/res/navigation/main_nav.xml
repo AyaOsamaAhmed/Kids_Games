@@ -68,13 +68,10 @@
         tools:layout="@layout/fragment_home"
         >
         <action
-            android:id="@+id/HomeFragment_to_ExamFragment"
-            app:destination="@id/ExamFragment"
+            android:id="@+id/HomeFragment_to_GameTwoFragment"
+            app:destination="@id/GameTwoFragment"
             />
-        <action
-            android:id="@+id/HomeFragment_to_SettingFragment"
-            app:destination="@id/SettingFragment"
-            />
+
         <action
             android:id="@+id/HomeFragment_to_GameOneFragment"
             app:destination="@id/GameOneFragment"/>
@@ -93,14 +90,40 @@
 
 
     <fragment
-        android:id="@+id/ExamFragment"
-        android:name="com.aya.games.presentation.ui.fragments.ExamFragment"
-        tools:layout="@layout/fragment_exam"
-        />
+        android:id="@+id/GameTwoFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.GameTwoFragment"
+        tools:layout="@layout/fragment_game_two"
+        >
+        <action
+            android:id="@+id/GameTwoFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment"/>
+
+        <action
+            android:id="@+id/GameTwoFragment_to_SubGameTwoFragment"
+            app:destination="@id/SubGameTwoFragment"
+            >
+            <argument
+                android:name="category"
+                app:argType="string"
+                android:defaultValue="0" />
+        </action>
+
+    </fragment>
 
     <fragment
-        android:id="@+id/SettingFragment"
-        android:name="com.aya.games.presentation.ui.fragments.SettingFragment"
-        tools:layout="@layout/fragment_setting"
-        />
+        android:id="@+id/SubGameTwoFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.lookGames.SubGameTwoFragment"
+        tools:layout="@layout/fragment_sub_game_two"
+        >
+        <argument
+            android:name="category"
+            app:argType="string"
+            android:defaultValue="0" />
+
+        <action
+            android:id="@+id/SubGameTwoFragment_to_GameTwoFragment"
+            app:destination="@id/GameTwoFragment"/>
+    </fragment>
+
+
 </navigation>

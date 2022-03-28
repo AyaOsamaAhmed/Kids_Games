@@ -53,9 +53,9 @@ class SplashFragment : Fragment() {
 
        Handler(Looper.getMainLooper()).postDelayed({
             // Create an Intent that will start.
-            navController.navigate(R.id.SplashFragment_to_LoginFragment)
+           // navController.navigate(R.id.SplashFragment_to_LoginFragment)
 
-           //navController.navigate(R.id.GameOneFragment)
+           navController.navigate(R.id.HomeFragment)
         }, 5000)
 
 
