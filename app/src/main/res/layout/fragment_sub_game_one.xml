@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        tools:src ="@tools:sample/backgrounds/scenic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="@dimen/width_Auth"
+        android:layout_height="@dimen/_150sdp"
+        tools:src="@drawable/logokids"
+        android:layout_marginTop="@dimen/medium_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <ProgressBar
+        android:id="@+id/progress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/image"
+        />
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:hint="@string/question"
+        android:textColor="@color/purple_200"
+        android:textSize="@dimen/text_size"
+        android:gravity="center_vertical|center"
+        android:drawableEnd="@drawable/ic_sound"
+        android:background="@drawable/bg_corner_white"
+        android:layout_marginTop="@dimen/very_medium_margin"
+        app:layout_constraintTop_toBottomOf="@id/image"
+        app:layout_constraintEnd_toStartOf="@id/answer"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/answer"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:hint="@string/answer"
+        android:textColor="@color/purple_200"
+        android:textSize="@dimen/text_size"
+        android:gravity="center_vertical|center"
+        android:background="@drawable/bg_corner_white"
+        android:drawableEnd="@drawable/ic_mic"
+        android:layout_marginTop="@dimen/very_medium_margin"
+        app:layout_constraintTop_toBottomOf="@id/image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/question"
+        />
+
+    <TextView
+        android:id="@+id/question_two"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:hint="@string/question"
+        android:textColor="@color/purple_200"
+        android:textSize="@dimen/text_size"
+        android:gravity="center_vertical|center"
+        android:background="@drawable/bg_corner_white"
+        android:drawableEnd="@drawable/ic_sound"
+        android:layout_marginTop="@dimen/very_medium_margin"
+        app:layout_constraintTop_toBottomOf="@id/question"
+        app:layout_constraintEnd_toStartOf="@id/answer"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/answer_two"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:hint="@string/answer"
+        android:textColor="@color/purple_200"
+        android:textSize="@dimen/text_size"
+        android:gravity="center_vertical|center"
+        android:background="@drawable/bg_corner_white"
+        android:drawableEnd="@drawable/ic_mic"
+        android:layout_marginTop="@dimen/very_medium_margin"
+        app:layout_constraintTop_toBottomOf="@id/question"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/question"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/back"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:text="@string/back"
+        android:background="@drawable/bg_corner_button"
+        android:layout_margin="@dimen/medium_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/next"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@drawable/bg_corner_button"
+        android:text="@string/Next"
+        android:layout_margin="@dimen/medium_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+    <ImageView
+        android:id="@+id/back_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back_home"
+        android:src="@drawable/ic_home"
+        android:textColor="@color/purple_700"
+        android:textSize="@dimen/small_text_size"
+        android:textStyle="bold"
+        android:layout_margin="@dimen/medium_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/question"
+        />
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/result"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_120sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/small_margin"
+        app:lottie_autoPlay="true"
+        android:visibility="gone"
+        app:lottie_fileName="correct_answer.json"
+        app:lottie_loop="true" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

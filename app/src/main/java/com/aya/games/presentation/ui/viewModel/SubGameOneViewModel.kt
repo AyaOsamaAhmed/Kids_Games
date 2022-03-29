@@ -17,6 +17,7 @@ import com.google.firebase.firestore.QuerySnapshot
 import android.speech.tts.TextToSpeech
 import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.viewModelScope
+import com.aya.games.domain.model.LookGames
 import com.aya.games.domain.model.TalkCategoryGames
 import kotlinx.coroutines.launch
 import java.util.*
@@ -26,10 +27,10 @@ import kotlin.collections.ArrayList
  * Created by ( Eng Aya Osama )
  * Class do : GameOneViewModel
  */
-class GameOneViewModel(application: Application) : AndroidViewModel(application) {
+class SubGameOneViewModel(application: Application) : AndroidViewModel(application) {
 
     var requestLiveData = MutableLiveData<Any>()
-     var TalkCategoryGames : ArrayList<TalkCategoryGames> = arrayListOf()
+     var TalkGames : ArrayList<TalkGames> = arrayListOf()
     private lateinit var textToSpeechEngine: TextToSpeech
     private lateinit var startForResult: ActivityResultLauncher<Intent>
 
@@ -63,30 +64,34 @@ class GameOneViewModel(application: Application) : AndroidViewModel(application)
         textToSpeechEngine.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
     }
 
-      fun getListItems() {
-          db.collection("talk_game").get()
-               .addOnSuccessListener( OnSuccessListener<QuerySnapshot>() {
-                    if(it.isEmpty)  Log.d(TAG, "onSuccess: LIST EMPTY");
-                    else{
-                      val   size =it.documents.size
-                      var   list_id : MutableList<DocumentSnapshot> =  it.documents
-                       repeat(size){
-                              val document = list_id.get(it).data
-                              var data  = TalkCategoryGames()
-                           // Log.d(TAG, "onSuccess: LIST $size item $it");
-                                data.id = document!!.get("id").toString()
-                                data.image = document!!.get("image").toString()
-                                data.name_ar = document!!.get("name_ar").toString()
+    fun getListItems(id :String) {
 
-                           TalkCategoryGames.add(data)
-                         }
-                        requestLiveData.value = TalkCategoryGames
-                         Log.d(TAG, "onSuccess: $size")
+        val docRef = db.collection("talk_game").document(id).collection("1")
+
+        docRef.get()
+            .addOnSuccessListener( OnSuccessListener<QuerySnapshot>() {
+                if(it.isEmpty)  Log.d(TAG, "onSuccess: LIST EMPTY");
+                else{
+                    val   size =it.documents.size
+                    var   list_id : MutableList<DocumentSnapshot> =  it.documents
+                    repeat(size){
+                        val document = list_id.get(it).data
+                        var data  = TalkGames()
+
+                        data.id = document!!.get("id").toString()
+                        data.question =  document.get("question") as ArrayList<String>
+                        data.image = document.get("image").toString()
+                        data.answer = document.get("answer") as ArrayList<String>
+
+                        TalkGames.add(data)
                     }
+                    requestLiveData.value = TalkGames
+                    Log.d(TAG, "onSuccess: $size")
+                }
 
-               })
-               .addOnFailureListener {
-                    Log.d(TAG, "onFailure: $it")
-               };
-               }
+            })
+            .addOnFailureListener {
+                Log.d(TAG, "onFailure: $it")
+            };
+    }
 }

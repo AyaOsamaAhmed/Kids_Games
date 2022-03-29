@@ -76,6 +76,10 @@
             android:id="@+id/HomeFragment_to_GameOneFragment"
             app:destination="@id/GameOneFragment"/>
 
+        <action
+            android:id="@+id/HomeFragment_to_GameThreeFragment"
+            app:destination="@id/GameThreeFragment"/>
+
     </fragment>
 
     <fragment
@@ -86,6 +90,31 @@
         <action
             android:id="@+id/GameOneFragment_to_HomeFragment"
             app:destination="@id/HomeFragment"/>
+
+        <action
+            android:id="@+id/GameOneFragment_to_SubGameOneFragment"
+            app:destination="@id/SubGameOneFragment"
+            >
+            <argument
+                android:name="category"
+                app:argType="string"
+                android:defaultValue="0" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/SubGameOneFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.TalkGames.SubGameOneFragment"
+        tools:layout="@layout/fragment_sub_game_one"
+        >
+        <argument
+            android:name="category"
+            app:argType="string"
+            android:defaultValue="0" />
+
+        <action
+            android:id="@+id/SubGameOneFragment_to_GameOneFragment"
+            app:destination="@id/GameOneFragment"/>
     </fragment>
 
 
@@ -125,5 +154,41 @@
             app:destination="@id/GameTwoFragment"/>
     </fragment>
 
+
+    <fragment
+        android:id="@+id/GameThreeFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.GameThreeFragment"
+        tools:layout="@layout/fragment_game_three"
+        >
+        <action
+            android:id="@+id/GameThreeFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment"/>
+
+        <action
+            android:id="@+id/GameThreeFragment_to_SubGameThreeFragment"
+            app:destination="@id/SubGameThreeFragment"
+            >
+            <argument
+                android:name="category"
+                app:argType="string"
+                android:defaultValue="0" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/SubGameThreeFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.listenGames.SubGameThreeFragment"
+        tools:layout="@layout/fragment_sub_game_three"
+        >
+        <argument
+            android:name="category"
+            app:argType="string"
+            android:defaultValue="0" />
+
+        <action
+            android:id="@+id/SubGameThreeFragment_to_GameThreeFragment"
+            app:destination="@id/GameThreeFragment"/>
+    </fragment>
 
 </navigation>

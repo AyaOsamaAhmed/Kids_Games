@@ -17,6 +17,7 @@ import com.google.firebase.firestore.QuerySnapshot
 import android.speech.tts.TextToSpeech
 import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.viewModelScope
+import com.aya.games.domain.model.ListenCategoryGames
 import com.aya.games.domain.model.LookCategoryGames
 import com.google.firebase.firestore.DocumentReference
 import kotlinx.coroutines.launch
@@ -27,17 +28,17 @@ import kotlin.collections.ArrayList
  * Created by ( Eng Aya Osama )
  * Class do : GameTwoViewModel
  */
-class GameTwoViewModel(application: Application) : AndroidViewModel(application) {
+class GameThreeViewModel(application: Application) : AndroidViewModel(application) {
 
     var requestLiveData = MutableLiveData<Any>()
-     var lookCategoryGames : ArrayList<LookCategoryGames> = arrayListOf()
+     var lookCategoryGames : ArrayList<ListenCategoryGames> = arrayListOf()
 
      // Initialize Firebase store
      var db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
       fun getListItems() {
 
-          db.collection("look").get()
+          db.collection("listen").get()
                .addOnSuccessListener( OnSuccessListener<QuerySnapshot>() {
                     if(it.isEmpty)  Log.d(TAG, "onSuccess: LIST EMPTY");
                     else{
@@ -45,7 +46,7 @@ class GameTwoViewModel(application: Application) : AndroidViewModel(application)
                       var   list_id : MutableList<DocumentSnapshot> =  it.documents
                        repeat(size){
                               val document = list_id.get(it).data
-                              var data  = LookCategoryGames()
+                              var data  = ListenCategoryGames()
 
                                 data.id = document!!.get("id").toString()
                                 data.image = document.get("image").toString()

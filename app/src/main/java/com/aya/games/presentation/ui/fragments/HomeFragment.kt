@@ -86,6 +86,7 @@ class HomeFragment :Fragment() , OnClickHome {
         when(id){
             "1" ->   navController.navigate(R.id.HomeFragment_to_GameOneFragment)
             "2" ->   navController.navigate(R.id.HomeFragment_to_GameTwoFragment)
+            "3" ->   navController.navigate(R.id.HomeFragment_to_GameThreeFragment)
         }
     }
 

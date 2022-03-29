@@ -19,153 +19,20 @@
         />
 
 
-   <ImageView
-       android:id="@+id/color"
-       android:layout_width="@dimen/width_look_category"
-       android:layout_height="@dimen/height_look_category"
-       tools:src="@tools:sample/avatars"
-       android:layout_marginTop="@dimen/medium_margin"
-       app:layout_constraintTop_toTopOf="parent"
-       app:layout_constraintEnd_toStartOf="@id/direction"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintBottom_toTopOf="@id/letter"
-       />
-    <TextView
-        android:id="@+id/color_tx"
-        android:layout_width="@dimen/width_look_category"
-        android:layout_height="wrap_content"
-        tools:text="@tools:sample/cities"
-        android:textSize="@dimen/text_size"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:background="@drawable/bg_corner_green"
-        app:layout_constraintTop_toBottomOf="@id/color"
-        app:layout_constraintStart_toStartOf="@id/color"
-        app:layout_constraintEnd_toEndOf="@id/color"
-        />
-   <ImageView
-       android:id="@+id/direction"
-       android:layout_width="@dimen/width_look_category"
-       android:layout_height="@dimen/height_look_category"
-       tools:src="@tools:sample/avatars"
-       android:layout_marginTop="@dimen/medium_margin"
-       app:layout_constraintTop_toTopOf="parent"
-       app:layout_constraintEnd_toStartOf="@id/kind"
-       app:layout_constraintStart_toEndOf="@id/color"
-       app:layout_constraintBottom_toTopOf="@id/shaps"
-       />
-    <TextView
-        android:id="@+id/direction_tx"
-        android:layout_width="@dimen/width_look_category"
-        android:layout_height="wrap_content"
-        tools:text="@tools:sample/cities"
-        android:textSize="@dimen/text_size"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:background="@drawable/bg_corner_green"
-        app:layout_constraintTop_toBottomOf="@id/direction"
-        app:layout_constraintStart_toStartOf="@id/direction"
-        app:layout_constraintEnd_toEndOf="@id/direction"
-        />
-
-   <ImageView
-       android:id="@+id/kind"
-       android:layout_width="@dimen/width_look_category"
-       android:layout_height="@dimen/height_look_category"
-       tools:src="@tools:sample/avatars"
-       android:layout_marginTop="@dimen/medium_margin"
-       app:layout_constraintTop_toTopOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toEndOf="@id/direction"
-       app:layout_constraintBottom_toTopOf="@id/size"
-       />
-
-    <TextView
-        android:id="@+id/kind_tx"
-        android:layout_width="@dimen/width_look_category"
-        android:layout_height="wrap_content"
-        tools:text="@tools:sample/cities"
-        android:textSize="@dimen/text_size"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:background="@drawable/bg_corner_green"
-        app:layout_constraintTop_toBottomOf="@id/kind"
-        app:layout_constraintStart_toStartOf="@id/kind"
-        app:layout_constraintEnd_toEndOf="@id/kind"
-        />
-   <ImageView
-       android:id="@+id/letter"
-       android:layout_width="@dimen/width_look_category"
-       android:layout_height="@dimen/height_look_category"
-       tools:src="@tools:sample/avatars"
-       app:layout_constraintTop_toBottomOf="@id/color"
-       app:layout_constraintEnd_toStartOf="@id/shaps"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintBottom_toBottomOf="parent"
-       />
-    <TextView
-        android:id="@+id/letter_tx"
-        android:layout_width="@dimen/width_look_category"
-        android:layout_height="wrap_content"
-        tools:text="@tools:sample/cities"
-        android:textSize="@dimen/text_size"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:background="@drawable/bg_corner_green"
-        app:layout_constraintTop_toBottomOf="@id/letter"
-        app:layout_constraintStart_toStartOf="@id/letter"
-        app:layout_constraintEnd_toEndOf="@id/letter"
-        />
-
-
-   <ImageView
-       android:id="@+id/shaps"
-       android:layout_width="@dimen/width_look_category"
-       android:layout_height="@dimen/height_look_category"
-       tools:src="@tools:sample/avatars"
-       app:layout_constraintTop_toBottomOf="@id/direction"
-       app:layout_constraintEnd_toStartOf="@id/size"
-       app:layout_constraintStart_toEndOf="@id/letter"
-       app:layout_constraintBottom_toBottomOf="parent"
-       />
-    <TextView
-        android:id="@+id/shaps_tx"
-        android:layout_width="@dimen/width_look_category"
-        android:layout_height="wrap_content"
-        tools:text="@tools:sample/cities"
-        android:textSize="@dimen/text_size"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:background="@drawable/bg_corner_green"
-        app:layout_constraintTop_toBottomOf="@id/shaps"
-        app:layout_constraintStart_toStartOf="@id/shaps"
-        app:layout_constraintEnd_toEndOf="@id/shaps"
-        />
-
-   <ImageView
-       android:id="@+id/size"
-       android:layout_width="@dimen/width_look_category"
-       android:layout_height="@dimen/height_look_category"
-       tools:src="@tools:sample/avatars"
-       app:layout_constraintTop_toBottomOf="@id/kind"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toEndOf="@id/shaps"
-       app:layout_constraintBottom_toBottomOf="parent"
-       />
-    <TextView
-        android:id="@+id/size_tx"
-        android:layout_width="@dimen/width_look_category"
-        android:layout_height="wrap_content"
-        tools:text="@tools:sample/cities"
-        android:textSize="@dimen/text_size"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:background="@drawable/bg_corner_green"
-        app:layout_constraintTop_toBottomOf="@id/size"
-        app:layout_constraintStart_toStartOf="@id/size"
-        app:layout_constraintEnd_toEndOf="@id/size"
-        />
-
+  <androidx.recyclerview.widget.RecyclerView
+     android:id="@+id/game"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     tools:src="@tools:sample/avatars"
+     tools:listitem="@layout/item_category_game_one"
+     tools:itemCount="3"
+     android:orientation="horizontal"
+     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+     app:layout_constraintTop_toTopOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintBottom_toBottomOf="parent"
+     />
     <ProgressBar
         android:id="@+id/progress"
         style="?android:attr/progressBarStyle"
@@ -178,17 +45,19 @@
         />
 
 
-    <TextView
+    <ImageView
         android:id="@+id/back_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/back_home"
+        android:src="@drawable/ic_home"
         android:textColor="@color/purple_700"
         android:textSize="@dimen/small_text_size"
         android:textStyle="bold"
         android:layout_margin="@dimen/medium_margin"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/question"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
