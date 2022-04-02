@@ -42,3 +42,4 @@ import com.bumptech.glide.request.target.Target
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(this)
     }
+

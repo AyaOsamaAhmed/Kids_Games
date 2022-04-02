@@ -11,18 +11,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aya.games.R
-import com.aya.games.databinding.FragmentGameOneBinding
 import com.aya.games.databinding.FragmentGameThreeBinding
-import com.aya.games.databinding.FragmentGameTwoBinding
 import com.aya.games.domain.model.General
 import com.aya.games.domain.model.ListenCategoryGames
-import com.aya.games.domain.model.LookCategoryGames
-import com.aya.games.domain.model.TalkGames
 import com.aya.games.presentation.ui.adapter.AdapterGameThree
-import com.aya.games.presentation.ui.adapter.AdapterGameTwo
 import com.aya.games.presentation.ui.interfaces.OnClickGameThree
 import com.aya.games.presentation.ui.viewModel.GameThreeViewModel
-import com.aya.games.presentation.ui.viewModel.GameTwoViewModel
 import com.aya.games.presentation.utils.Constants
 import com.aya.games.presentation.utils.SharedPrefsHelper
 import com.aya.games.presentation.utils.getRefrenceHiddenHome
@@ -99,9 +93,14 @@ class GameThreeFragment :Fragment() , OnClickGameThree {
         navController.navigate(R.id.GameThreeFragment_to_HomeFragment)
     }
 
-    override fun onClickChooseGames(id: String) {
-
-
+    override fun onClickChooseGames(id: String , type:String) {
+        val bundle = bundleOf("category" to id)
+        if (type.equals("1")){
+        navController.navigate(R.id.GameThreeFragment_to_SubGameThreeFragment,bundle)
+    }
+       else if (type.equals("2")){
+            navController.navigate(R.id.GameThreeFragment_to_SubGameThreeTypeFragment,bundle)
+        }
     }
 
 

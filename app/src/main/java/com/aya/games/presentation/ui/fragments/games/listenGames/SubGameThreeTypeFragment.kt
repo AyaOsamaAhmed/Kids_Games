@@ -1,32 +1,27 @@
 package com.aya.games.presentation.ui.fragments.games.listenGames
 
-import android.app.Activity
-import android.content.ActivityNotFoundException
 import android.content.ContentValues
-import android.content.Intent
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.speech.RecognizerIntent
-import android.speech.tts.TextToSpeech
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.aya.games.R
 import com.aya.games.databinding.FragmentSubGameThreeBinding
+import com.aya.games.databinding.FragmentSubGameTypeThreeBinding
 import com.aya.games.domain.model.General
 import com.aya.games.domain.model.ListenGames
 import com.aya.games.domain.model.LookGames
 import com.aya.games.presentation.ui.adapter.AdapterSubGameThree
-import com.aya.games.presentation.ui.fragments.games.TalkGames.SubGameOneFragment
 import com.aya.games.presentation.ui.interfaces.OnClickSubGameThree
 import com.aya.games.presentation.ui.viewModel.SubGameThreeViewModel
 import com.aya.games.presentation.utils.Constants
@@ -35,12 +30,11 @@ import com.aya.games.presentation.utils.getRefrenceHiddenHome
 import com.aya.games.presentation.utils.setGlideImageUrl
 import com.google.gson.Gson
 import java.io.IOException
-import java.util.*
 import kotlin.collections.ArrayList
 
-class SubGameThreeFragment :Fragment()  {
+class SubGameThreeTypeFragment :Fragment() {
 
-    private lateinit var binding: FragmentSubGameThreeBinding
+    private lateinit var binding: FragmentSubGameTypeThreeBinding
     private lateinit var viewModel : SubGameThreeViewModel
 
     private val navController by lazy {
@@ -49,12 +43,7 @@ class SubGameThreeFragment :Fragment()  {
 
         navHostFragment.navController
     }
-
-    companion object {
-        private const val REQUEST_CODE_STT = 1
-        private const val TAG = "SubGameThreeFragment"
-    }
-     var media_player  : MediaPlayer? = null
+    var media_player : MediaPlayer? = null
     val mainActivity  by lazy { activity }
     var sharedPrefsHelper : SharedPrefsHelper? = null
     lateinit var data : ArrayList<ListenGames>
@@ -62,7 +51,9 @@ class SubGameThreeFragment :Fragment()  {
     var num_game = 0
     var answer = "0"
     var size_data = 0
-    var question:String = ""
+    var sound:String = ""
+    var sound2:String = ""
+    var access_check = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,7 +61,7 @@ class SubGameThreeFragment :Fragment()  {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentSubGameThreeBinding.inflate(inflater , container , false)
+        binding = FragmentSubGameTypeThreeBinding.inflate(inflater , container , false)
         viewModel = ViewModelProvider(this).get(SubGameThreeViewModel::class.java)
         sharedPrefsHelper = SharedPrefsHelper(mainActivity!!.applicationContext)
 
@@ -95,16 +86,12 @@ class SubGameThreeFragment :Fragment()  {
 
     private fun getCurrentQuestion(num:Int){
         answer = data[num].answer!!
+        showGames(data[num].sound!! , data[num_game].question!!)
 
-        binding.question.text = data[num_game].question!!
-        question = data[num].sound!![0]
-        startSound(question)
-        // Reset answer
-        binding.answer.text = ""
-        binding.answer.setBackgroundResource(R.drawable.bg_corner_white)
-        val drawable = getResources().getDrawable(R.drawable.ic_mic)
-        binding.answer.setCompoundDrawablesWithIntrinsicBounds(null,null,drawable,null)
-
+        //
+        val drawable2 = getResources().getDrawable(R.drawable.bg_corner_white)
+        binding.answer1.background = drawable2
+        binding.answer2.background = drawable2
         //back button
         if(num == 0)
             binding.back.visibility = View.GONE
@@ -117,85 +104,76 @@ class SubGameThreeFragment :Fragment()  {
         else
             binding.next.visibility = View.VISIBLE
     }
-
+    private fun showGames(data : ArrayList<String> , question : String) {
+        binding.question.text = question
+        sound = data[0]
+        sound2 = data[1]
+    }
 
     private fun setGeneral() {
          background = Gson().fromJson(sharedPrefsHelper?.getStringValue(Constants.GENERAL), General::class.java)
         // loading image
         binding.progress.visibility = View.VISIBLE
         binding.layout.setGlideImageUrl(background.game_look!!,binding.progress)
+
+
     }
+
 
     fun clickable(){
         binding.backHome.setOnClickListener {
            skip()
         }
-
         binding.back.setOnClickListener {
-            if(media_player!= null) setPauseMedia()
             getCurrentQuestion(--num_game)
         }
         binding.next.setOnClickListener {
-            if(media_player!= null) setPauseMedia()
             getCurrentQuestion(++num_game)
         }
-        binding.image.setOnClickListener {
-            startSound(question)
-        }
-        binding.answer.setOnClickListener {
-            if(media_player!= null) setPauseMedia()
-            startSpeechToText()
-        }
-    }
+        // check when be correct answer
+        if(access_check) {
+            binding.image.setOnClickListener {
+                if (media_player != null) setPauseMedia()
+                startSound(sound)
+            }
+            binding.image2.setOnClickListener {
+                if (media_player != null) setPauseMedia()
+                startSound(sound2)
+            }
+            val drawable = getResources().getDrawable(R.drawable.border_green_check)
 
-    private fun startSpeechToText() {
-        val sttIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-        sttIntent.putExtra(
-            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-        )
-        sttIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ar")//Locale.getDefault()
-        sttIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak now!")
-
-        try {
-            startActivityForResult(sttIntent, REQUEST_CODE_STT)
-        } catch (e: ActivityNotFoundException) {
-            e.printStackTrace()
-            Toast.makeText(context, "Your device does not support STT.", Toast.LENGTH_LONG).show()
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            REQUEST_CODE_STT -> {
-                if (resultCode == Activity.RESULT_OK && data != null) {
-                    val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                    result?.let {
-                        val recognizedText = it[0]
-                             binding.answer.setText(recognizedText)
-                             correctAnswer(recognizedText)
-                    }
-                }
+            binding.answer1.setOnClickListener {
+                binding.answer1.background = drawable
+                checkAnswer("0")
+            }
+            binding.answer2.setOnClickListener {
+                binding.answer2.background = drawable
+                checkAnswer("1")
             }
         }
     }
 
-    private fun correctAnswer(recognizedText: String?) {
-            if(recognizedText == answer){
-                binding.answer.setBackgroundResource(R.drawable.bg_corner_green)
-                binding.answer.setCompoundDrawables(null,null,null,null)
-                show_result(true)
-            }else{
-                binding.answer.text = ""
-                show_result(false)
-            }
+    private fun checkAnswer(id: String) {
+        if(media_player != null) setPauseMedia()
+        if(id == answer){
+            access_check = false
+            show_result(true)
+        }else{
+            val drawable2 = getResources().getDrawable(R.drawable.bg_corner_white)
+            binding.answer1.background = drawable2
+            binding.answer2.background = drawable2
+            show_result(false)
+            Handler(Looper.getMainLooper()).postDelayed({
+                getCurrentQuestion(num_game)
+            }, 3000)
+
+        }
     }
 
     fun skip(){
-        navController.navigate(R.id.SubGameThreeFragment_to_GameThreeFragment)
+        navController.navigate(R.id.SubGameThreeTypeFragment_to_GameThreeFragment)
     }
-    
+
     fun show_result(result : Boolean){
         binding.result.visibility = View.VISIBLE
 
@@ -216,7 +194,7 @@ class SubGameThreeFragment :Fragment()  {
 
     fun startSound (sound : String){
         // stream type for our media player.
-        val mediaPlayer  : MediaPlayer = MediaPlayer()
+        val mediaPlayer  = MediaPlayer()
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
         try {
@@ -237,6 +215,7 @@ class SubGameThreeFragment :Fragment()  {
     }
 
     fun setPauseMedia(){
-       media_player!!.pause()
+        media_player!!.pause()
     }
+
 }

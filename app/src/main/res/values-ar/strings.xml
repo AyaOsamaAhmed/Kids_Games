@@ -18,5 +18,7 @@
     <string name="back">السابق</string>
     <string name="back_home">العوده للصفحه الرئيسيه</string>
     <string name="answer">الاجابه</string>
+    <string name="question">سؤال </string>
+    <string name="choose">أختر </string>
 
 </resources>

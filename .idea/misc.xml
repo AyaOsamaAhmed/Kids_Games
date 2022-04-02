@@ -13,6 +13,7 @@
         <entry key="..\:/projects/games/app/src/main/res/drawable/border_green_check.xml" value="0.16018518518518518" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/button_round_dark.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_back.xml" value="0.21614583333333334" />
+        <entry key="..\:/projects/games/app/src/main/res/drawable/ic_check_click.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_email.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_home.xml" value="0.18425925925925926" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_mic.xml" value="0.21614583333333334" />
@@ -36,10 +37,12 @@
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_one.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_three.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_two.xml" value="0.18" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_type_three.xml" value="0.33" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_category_game_one.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_category_game_three.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_category_game_two.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_home.xml" value="0.2" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_three.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_two.xml" value="0.2" />
       </map>
     </option>

@@ -174,6 +174,16 @@
                 android:defaultValue="0" />
         </action>
 
+        <action
+            android:id="@+id/GameThreeFragment_to_SubGameThreeTypeFragment"
+            app:destination="@id/SubGameThreeTypeFragment"
+            >
+            <argument
+                android:name="category"
+                app:argType="string"
+                android:defaultValue="0" />
+        </action>
+
     </fragment>
 
     <fragment
@@ -190,5 +200,22 @@
             android:id="@+id/SubGameThreeFragment_to_GameThreeFragment"
             app:destination="@id/GameThreeFragment"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/SubGameThreeTypeFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.listenGames.SubGameThreeTypeFragment"
+        tools:layout="@layout/fragment_sub_game_type_three"
+        >
+        <argument
+            android:name="category"
+            app:argType="string"
+            android:defaultValue="0" />
+
+        <action
+            android:id="@+id/SubGameThreeTypeFragment_to_GameThreeFragment"
+            app:destination="@id/GameThreeFragment"/>
+    </fragment>
+
+
 
 </navigation>

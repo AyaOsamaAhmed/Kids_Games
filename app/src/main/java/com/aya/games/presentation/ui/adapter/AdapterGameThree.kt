@@ -6,11 +6,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.aya.games.R
 import com.aya.games.databinding.ItemCategoryGameThreeBinding
-import com.aya.games.databinding.ItemCategoryGameTwoBinding
 import com.aya.games.domain.model.ListenCategoryGames
-import com.aya.games.domain.model.LookCategoryGames
 import com.aya.games.presentation.ui.interfaces.OnClickGameThree
-import com.aya.games.presentation.ui.interfaces.OnClickGameTwo
 import com.aya.games.presentation.utils.setGlideImageUrl
 
 class AdapterGameThree(
@@ -38,7 +35,7 @@ class AdapterGameThree(
         holder.itemRowBinding.imageTx.text = model.name_ar
 
         holder.itemRowBinding.image.setOnClickListener {
-                onClick.onClickChooseGames(model.id.toString())
+                onClick.onClickChooseGames(model.id.toString(),model.type.toString())
         }
     }
 
