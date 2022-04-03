@@ -123,7 +123,7 @@ class SubGameThreeFragment :Fragment()  {
          background = Gson().fromJson(sharedPrefsHelper?.getStringValue(Constants.GENERAL), General::class.java)
         // loading image
         binding.progress.visibility = View.VISIBLE
-        binding.layout.setGlideImageUrl(background.game_look!!,binding.progress)
+        binding.layout.setGlideImageUrl(background.game_listen!!,binding.progress)
     }
 
     fun clickable(){

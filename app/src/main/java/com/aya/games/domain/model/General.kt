@@ -8,5 +8,7 @@ data class General(
     var correct_answer :String? = null,
     var wrong_answer :String? = null,
     //
-    var game_look :String? = null
+    var game_look :String? = null,
+    var game_listen : String? = null,
+    var game_memory : String? = null
 )

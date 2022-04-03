@@ -11,11 +11,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aya.games.R
-import com.aya.games.databinding.FragmentGameThreeBinding
+import com.aya.games.databinding.FragmentGameFourBinding
 import com.aya.games.domain.model.General
 import com.aya.games.domain.model.ListenCategoryGames
+import com.aya.games.domain.model.MemoryCategoryGames
+import com.aya.games.presentation.ui.adapter.AdapterGameFour
 import com.aya.games.presentation.ui.adapter.AdapterGameThree
+import com.aya.games.presentation.ui.interfaces.OnClickGameFour
 import com.aya.games.presentation.ui.interfaces.OnClickGameThree
+import com.aya.games.presentation.ui.viewModel.GameFourViewModel
 import com.aya.games.presentation.ui.viewModel.GameThreeViewModel
 import com.aya.games.presentation.utils.Constants
 import com.aya.games.presentation.utils.SharedPrefsHelper
@@ -24,10 +28,10 @@ import com.aya.games.presentation.utils.setGlideImageUrl
 import com.google.gson.Gson
 import kotlin.collections.ArrayList
 
-class GameThreeFragment :Fragment() , OnClickGameThree {
+class GameFourFragment :Fragment() , OnClickGameFour {
 
-    private lateinit var binding: FragmentGameThreeBinding
-    private lateinit var viewModel : GameThreeViewModel
+    private lateinit var binding: FragmentGameFourBinding
+    private lateinit var viewModel : GameFourViewModel
 
     private val navController by lazy {
         val navHostFragment = activity?.supportFragmentManager
@@ -38,7 +42,6 @@ class GameThreeFragment :Fragment() , OnClickGameThree {
 
     val mainActivity  by lazy { activity }
     var sharedPrefsHelper : SharedPrefsHelper? = null
-//    lateinit var data : ArrayList<ListenCategoryGames>
     lateinit var background : General
 
 
@@ -48,8 +51,8 @@ class GameThreeFragment :Fragment() , OnClickGameThree {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentGameThreeBinding.inflate(inflater , container , false)
-        viewModel = ViewModelProvider(this).get(GameThreeViewModel::class.java)
+        binding = FragmentGameFourBinding.inflate(inflater , container , false)
+        viewModel = ViewModelProvider(this).get(GameFourViewModel::class.java)
         sharedPrefsHelper = SharedPrefsHelper(mainActivity!!.applicationContext)
 
 
@@ -57,10 +60,8 @@ class GameThreeFragment :Fragment() , OnClickGameThree {
         setGeneral()
         viewModel.getListItems()
         viewModel.requestLiveData.observe(viewLifecycleOwner, Observer {
-          val   data = it as ArrayList<ListenCategoryGames>
-
+          val   data = it as ArrayList<MemoryCategoryGames>
             showCategory(data)
-
         })
 
         clickable()
@@ -68,10 +69,10 @@ class GameThreeFragment :Fragment() , OnClickGameThree {
         return binding.root
     }
 
-    private fun showCategory(data : ArrayList<ListenCategoryGames> ) {
+    private fun showCategory(data : ArrayList<MemoryCategoryGames> ) {
         // loading list
         binding.game.layoutManager = GridLayoutManager(mainActivity,2)
-        val adapter = AdapterGameThree(data,this)
+        val adapter = AdapterGameFour(data,this)
         binding.game.adapter = adapter
     }
 
@@ -79,7 +80,7 @@ class GameThreeFragment :Fragment() , OnClickGameThree {
          background = Gson().fromJson(sharedPrefsHelper?.getStringValue(Constants.GENERAL), General::class.java)
         // loading image
         binding.progress.visibility = View.VISIBLE
-        binding.layout.setGlideImageUrl(background.game_listen!!,binding.progress)
+        binding.layout.setGlideImageUrl(background.game_memory!!,binding.progress)
     }
 
 
@@ -90,18 +91,14 @@ class GameThreeFragment :Fragment() , OnClickGameThree {
     }
 
     fun skip(){
-        navController.navigate(R.id.GameThreeFragment_to_HomeFragment)
+        navController.navigate(R.id.GameFourFragment_to_HomeFragment)
     }
 
     override fun onClickChooseGames(id: String , type:String) {
         val bundle = bundleOf("category" to id)
-        if (type.equals("1")){
-        navController.navigate(R.id.GameThreeFragment_to_SubGameThreeFragment,bundle)
+        navController.navigate(R.id.GameFourFragment_to_SubGameFourFragment,bundle)
     }
-       else if (type.equals("2")){
-            navController.navigate(R.id.GameThreeFragment_to_SubGameThreeTypeFragment,bundle)
-        }
-    }
+
 
 
 }

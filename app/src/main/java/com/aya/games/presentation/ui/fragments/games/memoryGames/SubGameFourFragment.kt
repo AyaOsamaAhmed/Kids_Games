@@ -1,4 +1,4 @@
-package com.aya.games.presentation.ui.fragments.games.listenGames
+package com.aya.games.presentation.ui.fragments.games.memoryGames
 
 import android.content.ContentValues
 import android.media.AudioManager
@@ -6,7 +6,6 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,14 +15,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.aya.games.R
-import com.aya.games.databinding.FragmentSubGameThreeBinding
-import com.aya.games.databinding.FragmentSubGameTypeThreeBinding
+import com.aya.games.databinding.FragmentSubGameFourBinding
 import com.aya.games.domain.model.General
-import com.aya.games.domain.model.ListenGames
-import com.aya.games.domain.model.LookGames
-import com.aya.games.presentation.ui.adapter.AdapterSubGameThree
-import com.aya.games.presentation.ui.interfaces.OnClickSubGameThree
-import com.aya.games.presentation.ui.viewModel.SubGameThreeViewModel
+import com.aya.games.domain.model.MemoryGames
+import com.aya.games.presentation.ui.adapter.AdapterSubGameFour
+import com.aya.games.presentation.ui.interfaces.OnClickSubGameFour
+import com.aya.games.presentation.ui.viewModel.SubGameFourViewModel
 import com.aya.games.presentation.utils.Constants
 import com.aya.games.presentation.utils.SharedPrefsHelper
 import com.aya.games.presentation.utils.getRefrenceHiddenHome
@@ -31,11 +28,15 @@ import com.aya.games.presentation.utils.setGlideImageUrl
 import com.google.gson.Gson
 import java.io.IOException
 import kotlin.collections.ArrayList
+import android.os.CountDownTimer
+import java.text.DecimalFormat
+import java.text.NumberFormat
 
-class SubGameThreeTypeFragment :Fragment() {
 
-    private lateinit var binding: FragmentSubGameTypeThreeBinding
-    private lateinit var viewModel : SubGameThreeViewModel
+class SubGameFourFragment :Fragment() , OnClickSubGameFour {
+
+    private lateinit var binding: FragmentSubGameFourBinding
+    private lateinit var viewModel : SubGameFourViewModel
 
     private val navController by lazy {
         val navHostFragment = activity?.supportFragmentManager
@@ -43,17 +44,14 @@ class SubGameThreeTypeFragment :Fragment() {
 
         navHostFragment.navController
     }
-    var media_player : MediaPlayer? = null
+
     val mainActivity  by lazy { activity }
     var sharedPrefsHelper : SharedPrefsHelper? = null
-    lateinit var data : ArrayList<ListenGames>
+    lateinit var data : ArrayList<MemoryGames>
     lateinit var background : General
     var num_game = 0
     var answer = "0"
     var size_data = 0
-    var sound:String = ""
-    var sound2:String = ""
-    var access_check = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,8 +59,8 @@ class SubGameThreeTypeFragment :Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentSubGameTypeThreeBinding.inflate(inflater , container , false)
-        viewModel = ViewModelProvider(this).get(SubGameThreeViewModel::class.java)
+        binding = FragmentSubGameFourBinding.inflate(inflater , container , false)
+        viewModel = ViewModelProvider(this).get(SubGameFourViewModel::class.java)
         sharedPrefsHelper = SharedPrefsHelper(mainActivity!!.applicationContext)
 
 
@@ -74,7 +72,7 @@ class SubGameThreeTypeFragment :Fragment() {
         viewModel.getListItems(id)
 
         viewModel.requestLiveData.observe(viewLifecycleOwner, Observer {
-             data = it as ArrayList<ListenGames>
+             data = it as ArrayList<MemoryGames>
             size_data = data.size
             getCurrentQuestion(num_game)
         })
@@ -85,13 +83,22 @@ class SubGameThreeTypeFragment :Fragment() {
     }
 
     private fun getCurrentQuestion(num:Int){
-        answer = data[num].answer!!
-        showGames(data[num].sound!! , data[num_game].question!!)
+        binding.image.visibility = View.VISIBLE
+        binding.timer.visibility = View.VISIBLE
+        binding.game.visibility = View.INVISIBLE
 
-        //
-        val drawable2 = getResources().getDrawable(R.drawable.bg_corner_white)
-        binding.answer1.background = drawable2
-        binding.answer2.background = drawable2
+        answer = data[num].answer!!
+        showGames(data[num].image!! , data[num].choose!! , data[num_game].question!!)
+
+        //handel time
+        timeDown( data[num].time!!.toLong())
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.image.visibility = View.INVISIBLE
+            binding.timer.visibility = View.INVISIBLE
+            binding.game.visibility = View.VISIBLE
+        }, data[num].time!!.toLong())
+
         //back button
         if(num == 0)
             binding.back.visibility = View.GONE
@@ -104,21 +111,24 @@ class SubGameThreeTypeFragment :Fragment() {
         else
             binding.next.visibility = View.VISIBLE
     }
-    private fun showGames(data : ArrayList<String> , question : String) {
+
+    private fun showGames( image : String , data : ArrayList<String> , question : String) {
         binding.question.text = question
-        sound = data[0]
-        sound2 = data[1]
+        binding.image.setGlideImageUrl(image!!,binding.progress)
+
+        // loading image
+        val drawable = getResources().getDrawable(R.drawable.border_green_check)
+
+        val adapter = AdapterSubGameFour(data,this,drawable,true)
+        binding.game.adapter = adapter
     }
 
     private fun setGeneral() {
          background = Gson().fromJson(sharedPrefsHelper?.getStringValue(Constants.GENERAL), General::class.java)
         // loading image
         binding.progress.visibility = View.VISIBLE
-        binding.layout.setGlideImageUrl(background.game_listen!!,binding.progress)
-
-
+        binding.layout.setGlideImageUrl(background.game_memory!!,binding.progress)
     }
-
 
     fun clickable(){
         binding.backHome.setOnClickListener {
@@ -130,48 +140,25 @@ class SubGameThreeTypeFragment :Fragment() {
         binding.next.setOnClickListener {
             getCurrentQuestion(++num_game)
         }
-        // check when be correct answer
-        if(access_check) {
-            binding.image.setOnClickListener {
-                if (media_player != null) setPauseMedia()
-                startSound(sound)
-            }
-            binding.image2.setOnClickListener {
-                if (media_player != null) setPauseMedia()
-                startSound(sound2)
-            }
-            val drawable = getResources().getDrawable(R.drawable.border_green_check)
 
-            binding.answer1.setOnClickListener {
-                binding.answer1.background = drawable
-                checkAnswer("0")
-            }
-            binding.answer2.setOnClickListener {
-                binding.answer2.background = drawable
-                checkAnswer("1")
-            }
-        }
+
     }
 
-    private fun checkAnswer(id: String) {
-        if(media_player != null) setPauseMedia()
+    fun skip(){
+        navController.navigate(R.id.SubGameFourFragment_to_GameFourFragment)
+    }
+
+    override fun onClickChooseGames(id: String) {
+
         if(id == answer){
-            access_check = false
             show_result(true)
         }else{
-            val drawable2 = getResources().getDrawable(R.drawable.bg_corner_white)
-            binding.answer1.background = drawable2
-            binding.answer2.background = drawable2
             show_result(false)
             Handler(Looper.getMainLooper()).postDelayed({
                 getCurrentQuestion(num_game)
             }, 3000)
 
         }
-    }
-
-    fun skip(){
-        navController.navigate(R.id.SubGameThreeTypeFragment_to_GameThreeFragment)
     }
 
     fun show_result(result : Boolean){
@@ -201,7 +188,6 @@ class SubGameThreeTypeFragment :Fragment() {
             mediaPlayer.setDataSource(sound)
             mediaPlayer.prepare()
             mediaPlayer.start()
-            media_player = mediaPlayer
             Log.i(ContentValues.TAG, "playAudio: true")
         } catch (e: IOException) {
             e.printStackTrace()
@@ -209,13 +195,22 @@ class SubGameThreeTypeFragment :Fragment() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        if(media_player!= null) setPauseMedia()
-    }
+    fun timeDown(time:Long){
+        // countdown Interveal is 1sec = 1000 I have used
+        object : CountDownTimer(time, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                // Used for formatting digit to be in 2 digits only
+                val f: NumberFormat = DecimalFormat("00")
+                val hour = millisUntilFinished / 3600000 % 24
+                val min = millisUntilFinished / 60000 % 60
+                val sec = millisUntilFinished / 1000 % 60
+                binding.timer.text = f.format(hour).toString() + ":" + f.format(min) + ":" + f.format(sec)
+            }
 
-    fun setPauseMedia(){
-        media_player!!.pause()
+            // When the task is over it will print 00:00:00 there
+            override fun onFinish() {
+                binding.timer.text = "00:00:00"
+            }
+        }.start()
     }
-
 }

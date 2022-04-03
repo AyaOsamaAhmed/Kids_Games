@@ -25,6 +25,7 @@
         <entry key="..\:/projects/games/app/src/main/res/layout/dialog_loading.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_exam.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_forget_password.xml" value="0.2843601895734597" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_game_four.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_game_one.xml" value="0.33" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_game_three.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_game_two.xml" value="0.18" />
@@ -34,14 +35,17 @@
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_signup.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_splash.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_splash2.xml" value="0.1" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_four.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_one.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_three.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_two.xml" value="0.18" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_type_three.xml" value="0.33" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/item_category_game_four.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_category_game_one.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_category_game_three.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_category_game_two.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_home.xml" value="0.2" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_four.xml" value="0.1693121693121693" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_three.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_two.xml" value="0.2" />
       </map>
