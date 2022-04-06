@@ -31,7 +31,7 @@
     <dimen name="width_memory_type">@dimen/_50sdp</dimen>
     <dimen name="height_memory_type">@dimen/_60sdp</dimen>
 
-    <dimen name="width_memory_pizzel">100</dimen>
+    <dimen name="width_memory_pizzel">@dimen/_100sdp</dimen>
 
     <dimen name="bottom_space">@dimen/_45sdp</dimen>
     <dimen name="edit_text_size">@dimen/_10sdp</dimen>

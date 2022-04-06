@@ -80,6 +80,9 @@ class SubGameFourMemoryFragment :Fragment() , OnClickSubGameFourMemory {
         viewModel.requestMemoryLiveData.observe(viewLifecycleOwner, Observer {
              data = it as ArrayList<MemoryGamesPizzel>
             size_data = data.size
+            repeat(data[num_game].image!!.size){
+                result_arrange_image.add(it)
+            }
 
             getCurrentQuestion(num_game)
         })
@@ -132,11 +135,6 @@ class SubGameFourMemoryFragment :Fragment() , OnClickSubGameFourMemory {
         // loading image
         binding.progress.visibility = View.VISIBLE
         binding.layout.setGlideImageUrl(background.game_memory!!,binding.progress)
-
-        result_arrange_image.add(0)
-        result_arrange_image.add(1)
-        result_arrange_image.add(2)
-
     }
 
     fun clickable(){
