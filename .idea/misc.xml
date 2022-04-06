@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/projects/games/app/src/main/res/drawable-v24/bg_corner_green.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable-v24/bg_corner_white.xml" value="0.2037037037037037" />
+        <entry key="..\:/projects/games/app/src/main/res/drawable-v24/border_orange_check.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/background_border_grey.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/background_login.xml" value="0.14722222222222223" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/bg_corner_button.xml" value="0.21614583333333334" />
@@ -12,6 +13,9 @@
         <entry key="..\:/projects/games/app/src/main/res/drawable/bg_corner_white.xml" value="0.13703703703703704" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/border_green_check.xml" value="0.16018518518518518" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/button_round_dark.xml" value="0.21614583333333334" />
+        <entry key="..\:/projects/games/app/src/main/res/drawable/circular_progress_bar.xml" value="0.21614583333333334" />
+        <entry key="..\:/projects/games/app/src/main/res/drawable/drawable_circle_dark_blue.xml" value="0.19814814814814816" />
+        <entry key="..\:/projects/games/app/src/main/res/drawable/drawable_circle_yellow.xml" value="0.19814814814814816" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_back.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_check_click.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_email.xml" value="0.21614583333333334" />
@@ -35,7 +39,9 @@
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_signup.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_splash.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_splash2.xml" value="0.1" />
-        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_four.xml" value="0.2" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_four.xml" value="0.18" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_four_memory.xml" value="0.12380952380952381" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_four_type.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_one.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_three.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_two.xml" value="0.18" />
@@ -46,6 +52,8 @@
         <entry key="..\:/projects/games/app/src/main/res/layout/item_category_game_two.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_home.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_four.xml" value="0.1693121693121693" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_four_memory.xml" value="0.1693121693121693" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_four_type.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_three.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_two.xml" value="0.2" />
       </map>

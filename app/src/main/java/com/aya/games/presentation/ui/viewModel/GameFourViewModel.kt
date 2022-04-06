@@ -47,7 +47,7 @@ class GameFourViewModel(application: Application) : AndroidViewModel(application
 
                                 data.id = document!!.get("id").toString()
                                 data.image = document.get("image").toString()
-                              //  data.type = document.get("type").toString()
+                                data.type = document.get("type").toString()
                                 data.name_ar = document.get("name_ar").toString()
 
                            lookCategoryGames.add(data)

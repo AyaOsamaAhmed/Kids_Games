@@ -31,14 +31,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
-    <ImageView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/image"
-        android:layout_width="@dimen/width_memory"
-        android:layout_height="@dimen/height_memory"
-        android:padding="@dimen/small_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        tools:src="@tools:sample/avatars"
+        tools:listitem="@layout/item_sub_game_four_memory"
+        tools:itemCount="4"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/question"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/game"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/resultData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        tools:src="@tools:sample/avatars"
+        tools:listitem="@layout/item_sub_game_four_memory"
+        tools:itemCount="4"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/question"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/game"
         />
 

@@ -15,9 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.aya.games.R
-import com.aya.games.databinding.FragmentSubGameFourBinding
 import com.aya.games.domain.model.General
-import com.aya.games.domain.model.MemoryGames
 import com.aya.games.presentation.ui.adapter.AdapterSubGameFour
 import com.aya.games.presentation.ui.interfaces.OnClickSubGameFour
 import com.aya.games.presentation.ui.viewModel.SubGameFourViewModel
@@ -29,13 +27,22 @@ import com.google.gson.Gson
 import java.io.IOException
 import kotlin.collections.ArrayList
 import android.os.CountDownTimer
+import com.aya.games.databinding.FragmentSubGameFourTypeBinding
+import com.aya.games.domain.model.MemoryGamesType
+import com.aya.games.presentation.ui.adapter.AdapterSubGameFourType
 import java.text.DecimalFormat
 import java.text.NumberFormat
+import android.view.animation.RotateAnimation
+
+import android.view.animation.Animation
 
 
-class SubGameFourFragment :Fragment() , OnClickSubGameFour {
 
-    private lateinit var binding: FragmentSubGameFourBinding
+
+
+class SubGameFourTypeFragment :Fragment() , OnClickSubGameFour {
+
+    private lateinit var binding: FragmentSubGameFourTypeBinding
     private lateinit var viewModel : SubGameFourViewModel
 
     private val navController by lazy {
@@ -47,7 +54,7 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
 
     val mainActivity  by lazy { activity }
     var sharedPrefsHelper : SharedPrefsHelper? = null
-    lateinit var data : ArrayList<MemoryGames>
+    lateinit var data : ArrayList<MemoryGamesType>
     lateinit var background : General
     var num_game = 0
     var answer = "0"
@@ -59,7 +66,7 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentSubGameFourBinding.inflate(inflater , container , false)
+        binding = FragmentSubGameFourTypeBinding.inflate(inflater , container , false)
         viewModel = ViewModelProvider(this).get(SubGameFourViewModel::class.java)
         sharedPrefsHelper = SharedPrefsHelper(mainActivity!!.applicationContext)
 
@@ -68,10 +75,10 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
         val id = arguments?.getString("category")
 
         if(id != null)
-        viewModel.getListItems(id)
+        viewModel.getGamesTypeItems(id)
 
-        viewModel.requestLiveData.observe(viewLifecycleOwner, Observer {
-             data = it as ArrayList<MemoryGames>
+        viewModel.requestTypeLiveData.observe(viewLifecycleOwner, Observer {
+             data = it as ArrayList<MemoryGamesType>
             size_data = data.size
             getCurrentQuestion(num_game)
         })
@@ -82,21 +89,16 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
     }
 
     private fun getCurrentQuestion(num:Int){
-        binding.image.visibility = View.VISIBLE
+        binding.letter.visibility = View.VISIBLE
+        binding.name.visibility = View.VISIBLE
         binding.timer.visibility = View.VISIBLE
         binding.game.visibility = View.INVISIBLE
-
+        binding.question.visibility = View.INVISIBLE
         answer = data[num].answer!!
-        showGames(data[num].image!! , data[num].choose!! , data[num_game].question!!)
+        showGames(data[num].letter!! , data[num].image!! , data[num].choose!! , data[num].name!! , data[num_game].question!!)
 
         //handel time
         timeDown( data[num].time!!.toLong())
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            binding.image.visibility = View.INVISIBLE
-            binding.timer.visibility = View.INVISIBLE
-            binding.game.visibility = View.VISIBLE
-        }, data[num].time!!.toLong())
 
         //back button
         if(num == 0)
@@ -111,14 +113,15 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
             binding.next.visibility = View.VISIBLE
     }
 
-    private fun showGames( image : String , data : ArrayList<String> , question : String) {
-        binding.question.text = question
+    private fun showGames( letter : String , image : String , data : ArrayList<String> , name : String  , question : String) {
+        binding.letter.setGlideImageUrl(letter!!,binding.progress)
+        binding.name.setGlideImageUrl(name!!,binding.progress)
         binding.image.setGlideImageUrl(image!!,binding.progress)
-
+        binding.question.text = question
         // loading image
         val drawable = getResources().getDrawable(R.drawable.border_green_check)
 
-        val adapter = AdapterSubGameFour(data,this,drawable,true)
+        val adapter = AdapterSubGameFourType(data,this,drawable,true)
         binding.game.adapter = adapter
     }
 
@@ -126,7 +129,7 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
          background = Gson().fromJson(sharedPrefsHelper?.getStringValue(Constants.GENERAL), General::class.java)
         // loading image
         binding.progress.visibility = View.VISIBLE
-        binding.layout.setGlideImageUrl(background.game_memory!!,binding.progress)
+        binding.layout.setGlideImageUrl(background.background_letter_play!!,binding.progress)
     }
 
     fun clickable(){
@@ -144,7 +147,7 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
     }
 
     fun skip(){
-        navController.navigate(R.id.SubGameFourFragment_to_GameFourFragment)
+        navController.navigate(R.id.SubGameFourTypeFragment_to_GameFourFragment)
     }
 
     override fun onClickChooseGames(id: String) {
@@ -196,19 +199,29 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
 
     fun timeDown(time:Long){
         // countdown Interveal is 1sec = 1000 I have used
+        val an: Animation = RotateAnimation(0.0f, 90.0f, 250f, 273f)
+        an.setFillAfter(true);
+        binding.barTimer.startAnimation(an);
+
         object : CountDownTimer(time, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 // Used for formatting digit to be in 2 digits only
                 val f: NumberFormat = DecimalFormat("00")
-                val hour = millisUntilFinished / 3600000 % 24
                 val min = millisUntilFinished / 60000 % 60
                 val sec = millisUntilFinished / 1000 % 60
-                binding.timer.text = f.format(hour).toString() + ":" + f.format(min) + ":" + f.format(sec)
+                binding.timer.text =  f.format(min) + ":" + f.format(sec)
+                val seconds: Int = (30000 / 1000).toInt()
+                binding.barTimer.setProgress(seconds)
             }
 
             // When the task is over it will print 00:00:00 there
             override fun onFinish() {
                 binding.timer.text = "00:00:00"
+                binding.letter.visibility = View.INVISIBLE
+                binding.name.visibility = View.INVISIBLE
+                binding.timer.visibility = View.INVISIBLE
+                binding.question.visibility = View.VISIBLE
+                binding.game.visibility = View.VISIBLE
             }
         }.start()
     }

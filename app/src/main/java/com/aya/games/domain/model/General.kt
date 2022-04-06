@@ -10,5 +10,6 @@ data class General(
     //
     var game_look :String? = null,
     var game_listen : String? = null,
-    var game_memory : String? = null
+    var game_memory : String? = null,
+    var background_letter_play : String? = null
 )

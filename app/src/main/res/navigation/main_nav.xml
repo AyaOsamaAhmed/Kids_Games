@@ -240,6 +240,23 @@
                 android:defaultValue="0" />
         </action>
 
+        <action
+            android:id="@+id/GameFourFragment_to_SubGameFourTypeFragment"
+            app:destination="@id/SubGameFourTypeFragment">
+            <argument
+                android:name="category"
+                app:argType="string"
+                android:defaultValue="0" />
+        </action>
+
+        <action
+            android:id="@+id/GameFourFragment_to_SubGameFourMemoryFragment"
+            app:destination="@id/SubGameFourMemoryFragment">
+            <argument
+                android:name="category"
+                app:argType="string"
+                android:defaultValue="0" />
+        </action>
 
     </fragment>
 
@@ -251,6 +268,30 @@
 
         <action
             android:id="@+id/SubGameFourFragment_to_GameFourFragment"
+            app:destination="@id/GameFourFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/SubGameFourTypeFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.memoryGames.SubGameFourTypeFragment"
+        tools:layout="@layout/fragment_sub_game_four_type"
+        >
+
+        <action
+            android:id="@+id/SubGameFourTypeFragment_to_GameFourFragment"
+            app:destination="@id/GameFourFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/SubGameFourMemoryFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.memoryGames.SubGameFourMemoryFragment"
+        tools:layout="@layout/fragment_sub_game_four_memory"
+        >
+
+        <action
+            android:id="@+id/SubGameFourMemoryFragment_to_GameFourFragment"
             app:destination="@id/GameFourFragment"/>
 
     </fragment>

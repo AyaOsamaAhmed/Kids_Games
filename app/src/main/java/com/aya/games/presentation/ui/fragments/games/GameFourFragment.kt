@@ -95,8 +95,17 @@ class GameFourFragment :Fragment() , OnClickGameFour {
     }
 
     override fun onClickChooseGames(id: String , type:String) {
-        val bundle = bundleOf("category" to id)
-        navController.navigate(R.id.GameFourFragment_to_SubGameFourFragment,bundle)
+        if(type == "1") {
+            val bundle = bundleOf("category" to id)
+            navController.navigate(R.id.GameFourFragment_to_SubGameFourFragment, bundle)
+        }else if (type == "2"){
+            val bundle = bundleOf("category" to id)
+            navController.navigate(R.id.GameFourFragment_to_SubGameFourTypeFragment, bundle)
+        }else if (type == "3"){
+            val bundle = bundleOf("category" to id)
+            navController.navigate(R.id.GameFourFragment_to_SubGameFourMemoryFragment, bundle)
+        }
+
     }
 
 
