@@ -6,6 +6,7 @@
         <entry key="..\:/projects/games/app/src/main/res/drawable-v24/bg_corner_green.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable-v24/bg_corner_white.xml" value="0.2037037037037037" />
         <entry key="..\:/projects/games/app/src/main/res/drawable-v24/border_orange_check.xml" value="0.21614583333333334" />
+        <entry key="..\:/projects/games/app/src/main/res/drawable/background_back.xml" value="0.2128205128205128" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/background_border_grey.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/background_login.xml" value="0.14722222222222223" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/bg_corner_button.xml" value="0.21614583333333334" />
@@ -17,11 +18,14 @@
         <entry key="..\:/projects/games/app/src/main/res/drawable/drawable_circle_dark_blue.xml" value="0.19814814814814816" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/drawable_circle_yellow.xml" value="0.19814814814814816" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_back.xml" value="0.21614583333333334" />
+        <entry key="..\:/projects/games/app/src/main/res/drawable/ic_back_back.xml" value="0.1648148148148148" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_check_click.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_email.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_home.xml" value="0.18425925925925926" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_mic.xml" value="0.21614583333333334" />
+        <entry key="..\:/projects/games/app/src/main/res/drawable/ic_next.xml" value="0.1175925925925926" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_password.xml" value="0.21614583333333334" />
+        <entry key="..\:/projects/games/app/src/main/res/drawable/ic_return.xml" value="0.1648148148148148" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_setting.xml" value="0.1" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_sound.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_user.xml" value="0.20833333333333334" />
@@ -30,6 +34,7 @@
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_exam.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_forget_password.xml" value="0.2843601895734597" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_game_four.xml" value="0.2" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_game_four_remember.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_game_one.xml" value="0.33" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_game_three.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_game_two.xml" value="0.18" />
@@ -40,7 +45,9 @@
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_splash.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_splash2.xml" value="0.1" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_four.xml" value="0.18" />
-        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_four_memory.xml" value="0.1" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_four_memory.xml" value="0.15" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_four_remember.xml" value="0.2" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_four_remember_phase.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_four_type.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_one.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_sub_game_three.xml" value="0.2" />
@@ -53,6 +60,8 @@
         <entry key="..\:/projects/games/app/src/main/res/layout/item_home.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_four.xml" value="0.1" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_four_memory.xml" value="0.1" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_four_remember.xml" value="0.2" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_four_remember_phase.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_four_type.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_three.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_two.xml" value="0.2" />

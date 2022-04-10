@@ -59,6 +59,7 @@ class SubGameFourTypeFragment :Fragment() , OnClickSubGameFour {
     var num_game = 0
     var answer = "0"
     var size_data = 0
+    var trying : Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -77,10 +78,12 @@ class SubGameFourTypeFragment :Fragment() , OnClickSubGameFour {
         if(id != null)
         viewModel.getGamesTypeItems(id)
 
+        binding.progressGame.visibility = View.VISIBLE
+
         viewModel.requestTypeLiveData.observe(viewLifecycleOwner, Observer {
              data = it as ArrayList<MemoryGamesType>
             size_data = data.size
-            getCurrentQuestion(num_game)
+            getCurrentQuestion(num_game, trying)
         })
 
         clickable()
@@ -88,16 +91,21 @@ class SubGameFourTypeFragment :Fragment() , OnClickSubGameFour {
         return binding.root
     }
 
-    private fun getCurrentQuestion(num:Int){
+    private fun getCurrentQuestion(num:Int , secondTry : Boolean){
         binding.letter.visibility = View.VISIBLE
         binding.name.visibility = View.VISIBLE
         binding.timer.visibility = View.VISIBLE
         binding.game.visibility = View.INVISIBLE
         binding.question.visibility = View.INVISIBLE
+        binding.progressGame.visibility = View.INVISIBLE
+
         answer = data[num].answer!!
         showGames(data[num].letter!! , data[num].image!! , data[num].choose!! , data[num].name!! , data[num_game].question!!)
 
         //handel time
+        if(secondTry)
+            timeDown( data[num].time!!.toLong()/2)
+            else
         timeDown( data[num].time!!.toLong())
 
         //back button
@@ -137,10 +145,10 @@ class SubGameFourTypeFragment :Fragment() , OnClickSubGameFour {
            skip()
         }
         binding.back.setOnClickListener {
-            getCurrentQuestion(--num_game)
+            getCurrentQuestion(--num_game , trying)
         }
         binding.next.setOnClickListener {
-            getCurrentQuestion(++num_game)
+            getCurrentQuestion(++num_game , trying)
         }
 
 
@@ -156,8 +164,9 @@ class SubGameFourTypeFragment :Fragment() , OnClickSubGameFour {
             show_result(true)
         }else{
             show_result(false)
+            trying = true
             Handler(Looper.getMainLooper()).postDelayed({
-                getCurrentQuestion(num_game)
+                getCurrentQuestion(num_game, trying)
             }, 3000)
 
         }
@@ -198,10 +207,12 @@ class SubGameFourTypeFragment :Fragment() , OnClickSubGameFour {
     }
 
     fun timeDown(time:Long){
+        binding.next.isEnabled = false
+        binding.back.isEnabled = false
         // countdown Interveal is 1sec = 1000 I have used
         val an: Animation = RotateAnimation(0.0f, 90.0f, 250f, 273f)
         an.setFillAfter(true);
-        binding.barTimer.startAnimation(an);
+     //   binding.barTimer.startAnimation(an);
 
         object : CountDownTimer(time, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -209,19 +220,22 @@ class SubGameFourTypeFragment :Fragment() , OnClickSubGameFour {
                 val f: NumberFormat = DecimalFormat("00")
                 val min = millisUntilFinished / 60000 % 60
                 val sec = millisUntilFinished / 1000 % 60
-                binding.timer.text =  f.format(min) + ":" + f.format(sec)
+                binding.timer.text =  f.format(sec)
                 val seconds: Int = (30000 / 1000).toInt()
-                binding.barTimer.setProgress(seconds)
+             //   binding.barTimer.setProgress(seconds)
             }
 
             // When the task is over it will print 00:00:00 there
             override fun onFinish() {
-                binding.timer.text = "00:00:00"
+                binding.timer.text = "00"
                 binding.letter.visibility = View.INVISIBLE
                 binding.name.visibility = View.INVISIBLE
                 binding.timer.visibility = View.INVISIBLE
                 binding.question.visibility = View.VISIBLE
                 binding.game.visibility = View.VISIBLE
+
+                binding.next.isEnabled = true
+                binding.back.isEnabled = true
             }
         }.start()
     }

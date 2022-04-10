@@ -16,8 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:contentDescription="@string/question" />
-
+        />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -25,10 +24,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:src="@tools:sample/avatars"
-        tools:listitem="@layout/item_sub_game_two"
+        tools:listitem="@layout/item_category_game_one"
         tools:itemCount="3"
         android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,20 +46,6 @@
         />
 
 
-    <TextView
-        android:id="@+id/question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="@string/back_home"
-        android:textColor="@color/black"
-        android:textSize="@dimen/large_text_size"
-        android:textStyle="bold"
-        android:layout_margin="@dimen/medium_margin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/game"
-        />
-
     <ImageView
         android:id="@+id/back_home"
         android:layout_width="wrap_content"
@@ -75,41 +60,5 @@
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/question"
         />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/back"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:background="@drawable/ic_back"
-        android:layout_margin="@dimen/medium_margin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/next"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:background="@drawable/ic_next"
-        android:layout_margin="@dimen/medium_margin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/result"
-        android:layout_width="@dimen/width_look"
-        android:layout_height="@dimen/width_look"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="@dimen/small_margin"
-        app:lottie_autoPlay="true"
-        android:visibility="gone"
-        android:background="@drawable/bg_corner_result"
-        app:lottie_fileName="correct_answer.json"
-        app:lottie_loop="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

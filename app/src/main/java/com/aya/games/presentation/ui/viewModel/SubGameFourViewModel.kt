@@ -29,6 +29,14 @@ class SubGameFourViewModel(application: Application) : AndroidViewModel(applicat
     var requestMemoryLiveData = MutableLiveData<Any>()
     var MemoryGames : ArrayList<MemoryGamesPizzel> = arrayListOf()
 
+    // remember
+    var requestRememberLiveData = MutableLiveData<Any>()
+    var RememberGames : ArrayList<MemoryGamesRemember> = arrayListOf()
+
+    // rememberPhase
+    var requestRememberPhaseLiveData = MutableLiveData<Any>()
+    var RememberPhaseGames : ArrayList<MemoryGamesRememberPhase> = arrayListOf()
+
 
     // Initialize Firebase store
      var db: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -134,4 +142,64 @@ class SubGameFourViewModel(application: Application) : AndroidViewModel(applicat
             };
     }
 
+    fun getListRemember(id :String) {
+
+        val docRef = db.collection("memory").document(id).collection("1")
+
+        docRef.get()
+            .addOnSuccessListener( OnSuccessListener<QuerySnapshot>() {
+                if(it.isEmpty)  Log.d(TAG, "onSuccess: LIST EMPTY");
+                else{
+                    val   size =it.documents.size
+                    var   list_id : MutableList<DocumentSnapshot> =  it.documents
+                    repeat(size){
+                        val document = list_id.get(it).data
+                        var data  = MemoryGamesRemember()
+
+                        data.id = document!!.get("id").toString()
+                        data.name =  document.get("name").toString()
+                        data.image  = document.get("image").toString()
+                        data.num = document.get("num").toString().toInt()
+
+                        RememberGames.add(data)
+                    }
+                    requestRememberLiveData.value = RememberGames
+                    Log.d(TAG, "onSuccess: $size")
+                }
+
+            })
+            .addOnFailureListener {
+                Log.d(TAG, "onFailure: $it")
+            };
+    }
+
+    fun getListRememberPhase(id :String , phase : String ) {
+
+        val docRef = db.collection("memory").document(id).collection("1").document(phase).collection("1")
+
+        docRef.get()
+            .addOnSuccessListener( OnSuccessListener<QuerySnapshot>() {
+                if(it.isEmpty)  Log.d(TAG, "onSuccess: LIST EMPTY");
+                else{
+                    val   size =it.documents.size
+                    var   list_id : MutableList<DocumentSnapshot> =  it.documents
+                    repeat(size){
+                        val document = list_id.get(it).data
+                        var data  = MemoryGamesRememberPhase()
+
+                        data.id = document!!.get("id").toString()
+                        data.images  = document.get("images") as ArrayList<String>
+                        data.answer  = document.get("answer") as ArrayList<String>
+
+                        RememberPhaseGames.add(data)
+                    }
+                    requestRememberPhaseLiveData.value = RememberPhaseGames
+                    Log.d(TAG, "onSuccess: $size")
+                }
+
+            })
+            .addOnFailureListener {
+                Log.d(TAG, "onFailure: $it")
+            };
+    }
 }

@@ -10,6 +10,7 @@
 
     <color name="button">#F44336</color>
     <color name="green_bg">#9421CFA1</color>
+    <color name="pink_bg">#B4ED64DB</color>
     <color name="green">#4CAF50</color>
     <color name="blue">#03A9F4</color>
     <color name="yellow">#fec43e</color>

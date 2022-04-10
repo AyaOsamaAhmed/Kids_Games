@@ -256,7 +256,18 @@
                 android:name="category"
                 app:argType="string"
                 android:defaultValue="0" />
+
         </action>
+
+        <action
+            android:id="@+id/GameFourFragment_to_SubGameFourRememberFragment"
+            app:destination="@id/SubGameFourRememberFragment">
+            <argument
+                android:name="category"
+                app:argType="string"
+                android:defaultValue="0" />
+    </action>
+
 
     </fragment>
 
@@ -295,6 +306,51 @@
             app:destination="@id/GameFourFragment"/>
 
     </fragment>
+
+    <fragment
+        android:id="@+id/SubGameFourRememberFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.memoryGames.SubGameFourRememberFragment"
+        tools:layout="@layout/fragment_sub_game_four_remember"
+        >
+
+        <action
+            android:id="@+id/SubGameFourRememberFragment_to_GameFourFragment"
+            app:destination="@id/GameFourFragment"/>
+
+        <action
+            android:id="@+id/SubGameFourRememberFragment_to_SubGameFourRememberPhaseFragment"
+            app:destination="@id/SubGameFourRememberPhaseFragment">
+            <argument
+                android:name="category"
+                app:argType="string"
+                android:defaultValue="0" />
+            <argument
+                android:name="phase"
+                app:argType="string"
+                android:defaultValue="0" />
+            <argument
+                android:name="layoutCount"
+                app:argType="integer"
+                android:defaultValue="0" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/SubGameFourRememberPhaseFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.memoryGames.remember.SubGameFourRememberPhaseFragment"
+        tools:layout="@layout/fragment_sub_game_four_remember_phase"
+        >
+        <action
+            android:id="@+id/SubGameFourRememberPhaseFragment_to_SubGameFourRememberFragment"
+            app:destination="@id/SubGameFourRememberFragment">
+            <argument
+                android:name="category"
+                app:argType="string"
+                android:defaultValue="0" />
+        </action>
+    </fragment>
+
 
 
 </navigation>

@@ -52,6 +52,7 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
     var num_game = 0
     var answer = "0"
     var size_data = 0
+    var trying : Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,11 +70,12 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
 
         if(id != null)
         viewModel.getListItems(id)
+        binding.progressGame.visibility = View.VISIBLE
 
         viewModel.requestLiveData.observe(viewLifecycleOwner, Observer {
              data = it as ArrayList<MemoryGames>
             size_data = data.size
-            getCurrentQuestion(num_game)
+            getCurrentQuestion(num_game, trying)
         })
 
         clickable()
@@ -81,15 +83,19 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
         return binding.root
     }
 
-    private fun getCurrentQuestion(num:Int){
+    private fun getCurrentQuestion(num:Int , secondTry : Boolean){
         binding.image.visibility = View.VISIBLE
         binding.timer.visibility = View.VISIBLE
         binding.game.visibility = View.INVISIBLE
+        binding.progressGame.visibility = View.INVISIBLE
 
         answer = data[num].answer!!
         showGames(data[num].image!! , data[num].choose!! , data[num_game].question!!)
 
         //handel time
+        if(secondTry)
+            timeDown( data[num].time!!.toLong()/2)
+            else
         timeDown( data[num].time!!.toLong())
 
         Handler(Looper.getMainLooper()).postDelayed({
@@ -126,7 +132,7 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
          background = Gson().fromJson(sharedPrefsHelper?.getStringValue(Constants.GENERAL), General::class.java)
         // loading image
         binding.progress.visibility = View.VISIBLE
-        binding.layout.setGlideImageUrl(background.game_memory!!,binding.progress)
+        binding.layout.setGlideImageUrl(background.game_look!!,binding.progress)
     }
 
     fun clickable(){
@@ -134,10 +140,12 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
            skip()
         }
         binding.back.setOnClickListener {
-            getCurrentQuestion(--num_game)
+            trying = false
+            getCurrentQuestion(--num_game, trying)
         }
         binding.next.setOnClickListener {
-            getCurrentQuestion(++num_game)
+            trying = false
+            getCurrentQuestion(++num_game, trying)
         }
 
 
@@ -153,8 +161,9 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
             show_result(true)
         }else{
             show_result(false)
+            trying = true
             Handler(Looper.getMainLooper()).postDelayed({
-                getCurrentQuestion(num_game)
+                getCurrentQuestion(num_game , trying)
             }, 3000)
 
         }
@@ -195,6 +204,8 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
     }
 
     fun timeDown(time:Long){
+        binding.next.isEnabled = false
+        binding.back.isEnabled = false
         // countdown Interveal is 1sec = 1000 I have used
         object : CountDownTimer(time, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -203,12 +214,15 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
                 val hour = millisUntilFinished / 3600000 % 24
                 val min = millisUntilFinished / 60000 % 60
                 val sec = millisUntilFinished / 1000 % 60
-                binding.timer.text = f.format(hour).toString() + ":" + f.format(min) + ":" + f.format(sec)
+                binding.timer.text =  f.format(sec)
+
             }
 
             // When the task is over it will print 00:00:00 there
             override fun onFinish() {
-                binding.timer.text = "00:00:00"
+                binding.timer.text = "00"
+                binding.next.isEnabled = true
+                binding.back.isEnabled = true
             }
         }.start()
     }
