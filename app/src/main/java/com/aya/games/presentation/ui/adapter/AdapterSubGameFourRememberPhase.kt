@@ -8,12 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.aya.games.R
-import com.aya.games.databinding.ItemCategoryGameFourBinding
-import com.aya.games.databinding.ItemSubGameFourRememberBinding
 import com.aya.games.databinding.ItemSubGameFourRememberPhaseBinding
-import com.aya.games.domain.model.MemoryGamesRemember
-import com.aya.games.domain.model.MemoryGamesRememberPhase
-import com.aya.games.presentation.ui.interfaces.OnClickSubGameFourRemember
 import com.aya.games.presentation.ui.interfaces.OnClickSubGameFourRememberPhase
 import com.aya.games.presentation.utils.setGlideImageUrl
 
@@ -52,9 +47,7 @@ class AdapterSubGameFourRememberPhase(
         holder.itemRowBinding.cover.setOnClickListener {
             holder.itemRowBinding.cover.visibility = View.GONE
             checkCover(position)
-
         }
-
 
     }
 
@@ -62,9 +55,14 @@ class AdapterSubGameFourRememberPhase(
         num_cover ++
         answer.add(ans)
         if(num_cover == 2){
-            onClick.onClickChooseGames(answer[0],answer[1])
-            num_cover = 0
+           if(! onClick.onClickChooseGames(answer[0],answer[1])){
+               notifyItemChanged(answer[0])
+               notifyItemChanged(answer[1])
+           }
 
+
+            num_cover = 0
+            answer.clear()
         }
     }
     class ViewHolderSubGameFour(binding: ItemSubGameFourRememberPhaseBinding) :

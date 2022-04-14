@@ -51,6 +51,7 @@ class SubGameFourRememberPhaseFragment :Fragment() , OnClickSubGameFourRememberP
     var num_game = 0
     var img_cover  = ""
     var category_id : String? = null
+    var layoutCount : Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,14 +68,14 @@ class SubGameFourRememberPhaseFragment :Fragment() , OnClickSubGameFourRememberP
         setGeneral()
         category_id = arguments?.getString("category")
         val phase_id = arguments?.getString("phase")
-        val layoutCount = arguments?.getInt("layoutCount")
+         layoutCount = arguments?.getInt("layoutCount")
 
         if(category_id != null && phase_id != null)
             viewModel.getListRememberPhase(category_id!! , phase_id)
 
         viewModel.requestRememberPhaseLiveData.observe(viewLifecycleOwner, Observer {
             data = it as ArrayList<MemoryGamesRememberPhase>
-            showCategory(num_game,data , layoutCount!!)
+            getCurrentQuestion(num_game)
         })
 
         clickable()
@@ -83,11 +84,23 @@ class SubGameFourRememberPhaseFragment :Fragment() , OnClickSubGameFourRememberP
         return binding.root
     }
 
-    private fun showCategory(num : Int , data : ArrayList<MemoryGamesRememberPhase> , layoutCount : Int) {
+    private fun getCurrentQuestion(num : Int) {
         // loading list
-        binding.game.layoutManager = GridLayoutManager(mainActivity,layoutCount)
+        binding.game.layoutManager = GridLayoutManager(mainActivity,layoutCount!!)
         val adapter = AdapterSubGameFourRememberPhase(data[num].images!!,this,img_cover)
         binding.game.adapter = adapter
+
+        //back button
+        if(num == 0)
+            binding.back.visibility = View.GONE
+        else
+            binding.back.visibility = View.VISIBLE
+
+        //next button
+        if(num == data.size - 1 )
+            binding.next.visibility = View.GONE
+        else
+            binding.next.visibility = View.VISIBLE
     }
 
     private fun setGeneral() {
@@ -103,6 +116,12 @@ class SubGameFourRememberPhaseFragment :Fragment() , OnClickSubGameFourRememberP
         binding.backHome.setOnClickListener {
            skip()
         }
+        binding.back.setOnClickListener {
+            getCurrentQuestion(--num_game)
+        }
+        binding.next.setOnClickListener {
+            getCurrentQuestion(++num_game)
+        }
     }
 
     fun skip(){
@@ -115,7 +134,7 @@ class SubGameFourRememberPhaseFragment :Fragment() , OnClickSubGameFourRememberP
 
         for (ans in data[num_game].answer!!) {
 
-        if (ans.equals("$answer_id_1-$answer_id_2")) {
+        if (ans.equals("$answer_id_1-$answer_id_2") || ans.equals("$answer_id_2-$answer_id_1")) {
             result = true
             Toast.makeText(mainActivity, "congratulation", Toast.LENGTH_LONG).show()
 

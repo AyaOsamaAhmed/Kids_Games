@@ -79,7 +79,7 @@
         android:id="@+id/back"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
-        android:background="@drawable/ic_back"
+        android:background="@drawable/ic_back_back"
         android:layout_margin="@dimen/medium_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
