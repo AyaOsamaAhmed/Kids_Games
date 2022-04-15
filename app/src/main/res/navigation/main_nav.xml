@@ -84,6 +84,9 @@
             android:id="@+id/HomeFragment_to_GameFourFragment"
             app:destination="@id/GameFourFragment"/>
 
+        <action
+            android:id="@+id/HomeFragment_to_GameFiveFragment"
+            app:destination="@id/GameFiveFragment"/>
 
 
     </fragment>
@@ -351,6 +354,37 @@
         </action>
     </fragment>
 
+    <fragment
+        android:id="@+id/GameFiveFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.GameFiveFragment"
+        tools:layout="@layout/fragment_game_five"
+        >
+        <action
+            android:id="@+id/GameFiveFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment"/>
 
+        <action
+            android:id="@+id/GameFiveFragment_to_SubGameFiveFragment"
+            app:destination="@id/SubGameFiveFragment"
+            >
+            <argument
+                android:name="category"
+                app:argType="string"
+                android:defaultValue="0" />
+        </action>
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/SubGameFiveFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.listenLookGames.SubGameFiveFragment"
+        tools:layout="@layout/fragment_game_five"
+        >
+        <action
+            android:id="@+id/SubGameFiveFragment_to_GameFiveFragment"
+            app:destination="@id/GameFiveFragment"
+            />
+    </fragment>
 
 </navigation>
