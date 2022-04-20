@@ -6,19 +6,34 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/small_margin"
+        android:layout_margin="@dimen/_10sdp"
         >
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="@dimen/width_listen_check"
-        android:layout_height="@dimen/width_listen_check"
-        tools:src="@tools:sample/backgrounds/scenic"
-        android:scaleType="fitCenter"
+        android:layout_width="@dimen/width_look_category"
+        android:layout_height="@dimen/height_look_category"
+        tools:src="@tools:sample/avatars"
+        android:scaleType="fitXY"
+        android:padding="@dimen/_2sdp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/image_tx"
+        />
+
+    <TextView
+        android:id="@+id/image_tx"
+        android:layout_width="@dimen/width_look_category"
+        android:layout_height="wrap_content"
+        tools:text="@tools:sample/cities"
+        android:textSize="@dimen/text_size"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:background="@drawable/bg_corner_green"
+        app:layout_constraintTop_toBottomOf="@id/image"
+        app:layout_constraintStart_toStartOf="@id/image"
+        app:layout_constraintEnd_toEndOf="@id/image"
         />
 
     <ProgressBar

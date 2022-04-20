@@ -23,7 +23,6 @@ import com.aya.games.presentation.ui.interfaces.OnClickGameTwo
 import com.aya.games.presentation.ui.viewModel.GameTwoViewModel
 import com.aya.games.presentation.utils.Constants
 import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.getRefrenceHiddenHome
 import com.aya.games.presentation.utils.setGlideImageUrl
 import com.google.gson.Gson
 import kotlin.collections.ArrayList
@@ -56,8 +55,6 @@ class GameTwoFragment :Fragment() , OnClickGameTwo{
         viewModel = ViewModelProvider(this).get(GameTwoViewModel::class.java)
         sharedPrefsHelper = SharedPrefsHelper(mainActivity!!.applicationContext)
 
-
-        getRefrenceHiddenHome().autoRunSound(false)
         setGeneral()
         viewModel.getListItems()
         viewModel.requestLiveData.observe(viewLifecycleOwner, Observer {

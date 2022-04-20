@@ -21,14 +21,10 @@ import com.aya.games.domain.model.General
 import com.aya.games.domain.model.ListenLookGames
 import com.aya.games.domain.model.LookGames
 import com.aya.games.presentation.ui.adapter.AdapterSubGameFive
-import com.aya.games.presentation.ui.adapter.AdapterSubGameTwo
 import com.aya.games.presentation.ui.interfaces.OnClickSubGameFive
-import com.aya.games.presentation.ui.interfaces.OnClickSubGameTwo
 import com.aya.games.presentation.ui.viewModel.SubGameFiveViewModel
-import com.aya.games.presentation.ui.viewModel.SubGameTwoViewModel
 import com.aya.games.presentation.utils.Constants
 import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.getRefrenceHiddenHome
 import com.aya.games.presentation.utils.setGlideImageUrl
 import com.google.gson.Gson
 import java.io.IOException
@@ -47,6 +43,7 @@ class SubGameFiveFragment :Fragment() , OnClickSubGameFive {
     }
 
     val mainActivity  by lazy { activity }
+    var media_player  : MediaPlayer? = null
     var sharedPrefsHelper : SharedPrefsHelper? = null
     lateinit var data : ArrayList<ListenLookGames>
     lateinit var background : General
@@ -66,8 +63,6 @@ class SubGameFiveFragment :Fragment() , OnClickSubGameFive {
         viewModel = ViewModelProvider(this).get(SubGameFiveViewModel::class.java)
         sharedPrefsHelper = SharedPrefsHelper(mainActivity!!.applicationContext)
 
-
-        getRefrenceHiddenHome().autoRunSound(false)
         setGeneral()
         val id = arguments?.getString("category")
 
@@ -78,6 +73,7 @@ class SubGameFiveFragment :Fragment() , OnClickSubGameFive {
              data = it as ArrayList<ListenLookGames>
             size_data = data.size
             getCurrentQuestion(num_game)
+            startSound( data[num_game].question_sound!!)
         })
 
         clickable()
@@ -125,19 +121,24 @@ class SubGameFiveFragment :Fragment() , OnClickSubGameFive {
 
     fun clickable(){
         binding.backHome.setOnClickListener {
+            if(media_player!= null) setPauseMedia()
            skip()
         }
         binding.sound.setOnClickListener {
+            if(media_player!= null) setPauseMedia()
             startSound(check_sound)
         }
 
         binding.question.setOnClickListener {
+            if(media_player!= null) setPauseMedia()
             startSound(question_sound)
         }
         binding.back.setOnClickListener {
+            if(media_player!= null) setPauseMedia()
             getCurrentQuestion(--num_game)
         }
         binding.next.setOnClickListener {
+            if(media_player!= null) setPauseMedia()
             getCurrentQuestion(++num_game)
         }
 
@@ -149,7 +150,7 @@ class SubGameFiveFragment :Fragment() , OnClickSubGameFive {
     }
 
     override fun onClickChooseGames(id: String) {
-
+        if(media_player!= null) setPauseMedia()
         if(id == answer){
             show_result(true)
         }else{
@@ -182,19 +183,29 @@ class SubGameFiveFragment :Fragment() , OnClickSubGameFive {
     fun startSound (sound : String){
         // stream type for our media player.
         val mediaPlayer  = MediaPlayer()
+        media_player = MediaPlayer()
+
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
         try {
             mediaPlayer.setDataSource(sound)
             mediaPlayer.prepare()
             mediaPlayer.start()
+            media_player = mediaPlayer
             Log.i(ContentValues.TAG, "playAudio: true")
         } catch (e: IOException) {
             e.printStackTrace()
             Log.i(ContentValues.TAG, "playAudio: false")
         }
     }
+    override fun onPause() {
+        super.onPause()
+        if(media_player!= null) setPauseMedia()
+    }
 
+    fun setPauseMedia(){
+        media_player!!.pause()
+    }
 
 
 }

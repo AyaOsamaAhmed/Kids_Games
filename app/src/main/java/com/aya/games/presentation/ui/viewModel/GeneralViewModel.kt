@@ -46,6 +46,7 @@ class GeneralViewModel(application: Application) : AndroidViewModel(application)
                                    data.game_look = document.get("game_look").toString()
                                    data.background_question_remember = document.get("background_question_remember").toString()
                                    data.background_remember = document.get("background_remember").toString()
+                                   data.background_focus = document.get("background_focus").toString()
                               requestLiveData.value = data
                          }
 

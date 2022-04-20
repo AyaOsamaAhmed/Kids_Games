@@ -1,4 +1,4 @@
-package com.aya.games.presentation.ui.fragments.games.listenGames
+package com.aya.games.presentation.ui.fragments.games.focusGames
 
 import android.content.ContentValues
 import android.media.AudioManager
@@ -6,7 +6,6 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,11 +15,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.aya.games.R
-import com.aya.games.databinding.FragmentSubGameThreeBinding
-import com.aya.games.databinding.FragmentSubGameTypeThreeBinding
+import com.aya.games.databinding.FragmentSubGameFiveBinding
+import com.aya.games.databinding.FragmentSubGameSixBinding
+import com.aya.games.domain.model.FocusGames
 import com.aya.games.domain.model.General
-import com.aya.games.domain.model.ListenGames
-import com.aya.games.presentation.ui.viewModel.SubGameThreeViewModel
+import com.aya.games.domain.model.ListenLookGames
+import com.aya.games.presentation.ui.adapter.AdapterSubGameFive
+import com.aya.games.presentation.ui.adapter.AdapterSubGameSix
+import com.aya.games.presentation.ui.interfaces.OnClickSubGameSix
+import com.aya.games.presentation.ui.viewModel.SubGameFiveViewModel
+import com.aya.games.presentation.ui.viewModel.SubGameSixViewModel
 import com.aya.games.presentation.utils.Constants
 import com.aya.games.presentation.utils.SharedPrefsHelper
 import com.aya.games.presentation.utils.setGlideImageUrl
@@ -28,10 +32,10 @@ import com.google.gson.Gson
 import java.io.IOException
 import kotlin.collections.ArrayList
 
-class SubGameThreeTypeFragment :Fragment() {
+class SubGameSixFragment :Fragment() , OnClickSubGameSix {
 
-    private lateinit var binding: FragmentSubGameTypeThreeBinding
-    private lateinit var viewModel : SubGameThreeViewModel
+    private lateinit var binding: FragmentSubGameSixBinding
+    private lateinit var viewModel : SubGameSixViewModel
 
     private val navController by lazy {
         val navHostFragment = activity?.supportFragmentManager
@@ -39,17 +43,16 @@ class SubGameThreeTypeFragment :Fragment() {
 
         navHostFragment.navController
     }
-    var media_player : MediaPlayer? = null
+
     val mainActivity  by lazy { activity }
+    var media_player  : MediaPlayer? = null
     var sharedPrefsHelper : SharedPrefsHelper? = null
-    lateinit var data : ArrayList<ListenGames>
+    lateinit var data : ArrayList<FocusGames>
     lateinit var background : General
     var num_game = 0
     var answer = "0"
     var size_data = 0
-    var sound:String = ""
-    var sound2:String = ""
-    var access_check = true
+    var question_sound  = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,8 +60,8 @@ class SubGameThreeTypeFragment :Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentSubGameTypeThreeBinding.inflate(inflater , container , false)
-        viewModel = ViewModelProvider(this).get(SubGameThreeViewModel::class.java)
+        binding = FragmentSubGameSixBinding.inflate(inflater , container , false)
+        viewModel = ViewModelProvider(this).get(SubGameSixViewModel::class.java)
         sharedPrefsHelper = SharedPrefsHelper(mainActivity!!.applicationContext)
 
         setGeneral()
@@ -68,9 +71,10 @@ class SubGameThreeTypeFragment :Fragment() {
         viewModel.getListItems(id)
 
         viewModel.requestLiveData.observe(viewLifecycleOwner, Observer {
-             data = it as ArrayList<ListenGames>
+             data = it as ArrayList<FocusGames>
             size_data = data.size
             getCurrentQuestion(num_game)
+            startSound( data[num_game].question_sound!!)
         })
 
         clickable()
@@ -80,12 +84,8 @@ class SubGameThreeTypeFragment :Fragment() {
 
     private fun getCurrentQuestion(num:Int){
         answer = data[num].answer!!
-        showGames(data[num].sound!! , data[num_game].question!!)
+        showGames(data[num].images!! , data[num_game].question!! ,data[num_game].question_sound!! , data[num_game].check_image!! )
 
-        //
-        val drawable2 = getResources().getDrawable(R.drawable.bg_corner_white)
-        binding.answer1.background = drawable2
-        binding.answer2.background = drawable2
         //back button
         if(num == 0)
             binding.back.visibility = View.GONE
@@ -98,74 +98,66 @@ class SubGameThreeTypeFragment :Fragment() {
         else
             binding.next.visibility = View.VISIBLE
     }
-    private fun showGames(data : ArrayList<String> , question : String) {
+
+
+    private fun showGames(data : ArrayList<String> , question : String , question_sound : String , check_image : String ) {
         binding.question.text = question
-        sound = data[0]
-        sound2 = data[1]
+        binding.image.setGlideImageUrl(check_image,binding.progress)
+
+        this.question_sound = question_sound
+
+        // loading image
+        val drawable = getResources().getDrawable(R.drawable.border_green_check)
+
+        val adapter = AdapterSubGameSix(data,this,drawable,true)
+        binding.game.adapter = adapter
     }
 
     private fun setGeneral() {
          background = Gson().fromJson(sharedPrefsHelper?.getStringValue(Constants.GENERAL), General::class.java)
         // loading image
         binding.progress.visibility = View.VISIBLE
-        binding.layout.setGlideImageUrl(background.game_listen!!,binding.progress)
-
-
+        binding.layout.setGlideImageUrl(background.background_focus!!,binding.progress)
     }
 
 
     fun clickable(){
         binding.backHome.setOnClickListener {
+            if(media_player!= null) setPauseMedia()
            skip()
         }
+
+        binding.question.setOnClickListener {
+            if(media_player!= null) setPauseMedia()
+            startSound(question_sound)
+        }
         binding.back.setOnClickListener {
+            if(media_player!= null) setPauseMedia()
             getCurrentQuestion(--num_game)
         }
         binding.next.setOnClickListener {
+            if(media_player!= null) setPauseMedia()
             getCurrentQuestion(++num_game)
         }
-        // check when be correct answer
-        if(access_check) {
-            binding.image.setOnClickListener {
-                if (media_player != null) setPauseMedia()
-                startSound(sound)
-            }
-            binding.image2.setOnClickListener {
-                if (media_player != null) setPauseMedia()
-                startSound(sound2)
-            }
-            val drawable = getResources().getDrawable(R.drawable.border_green_check)
 
-            binding.answer1.setOnClickListener {
-                binding.answer1.background = drawable
-                checkAnswer("0")
-            }
-            binding.answer2.setOnClickListener {
-                binding.answer2.background = drawable
-                checkAnswer("1")
-            }
-        }
+
     }
 
-    private fun checkAnswer(id: String) {
-        if(media_player != null) setPauseMedia()
+    fun skip(){
+        navController.navigate(R.id.SubGameSixFragment_to_GameSixFragment)
+    }
+
+    override fun onClickChooseGames(id: String) {
+        if(media_player!= null) setPauseMedia()
         if(id == answer){
-            access_check = false
             show_result(true)
         }else{
-            val drawable2 = getResources().getDrawable(R.drawable.bg_corner_white)
-            binding.answer1.background = drawable2
-            binding.answer2.background = drawable2
             show_result(false)
             Handler(Looper.getMainLooper()).postDelayed({
                 getCurrentQuestion(num_game)
             }, 3000)
 
         }
-    }
-
-    fun skip(){
-        navController.navigate(R.id.SubGameThreeTypeFragment_to_GameThreeFragment)
     }
 
     fun show_result(result : Boolean){
@@ -189,6 +181,8 @@ class SubGameThreeTypeFragment :Fragment() {
     fun startSound (sound : String){
         // stream type for our media player.
         val mediaPlayer  = MediaPlayer()
+        media_player = MediaPlayer()
+
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
         try {
@@ -202,7 +196,6 @@ class SubGameThreeTypeFragment :Fragment() {
             Log.i(ContentValues.TAG, "playAudio: false")
         }
     }
-
     override fun onPause() {
         super.onPause()
         if(media_player!= null) setPauseMedia()
@@ -211,5 +204,7 @@ class SubGameThreeTypeFragment :Fragment() {
     fun setPauseMedia(){
         media_player!!.pause()
     }
+
+
 
 }

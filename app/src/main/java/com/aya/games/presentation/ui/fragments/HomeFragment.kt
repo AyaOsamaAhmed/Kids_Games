@@ -1,6 +1,10 @@
 package com.aya.games.presentation.ui.fragments
 
+import android.content.ContentValues
+import android.media.AudioManager
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,10 +21,9 @@ import com.aya.games.presentation.ui.adapter.AdapterHome
 import com.aya.games.presentation.ui.viewModel.MainViewModel
 import com.aya.games.presentation.utils.Constants
 import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.getRefrenceHiddenHome
 import com.aya.games.presentation.utils.setGlideImageUrl
 import com.google.gson.Gson
-import com.squareup.picasso.Picasso
+import java.io.IOException
 
 class HomeFragment :Fragment() , OnClickHome {
 
@@ -37,6 +40,8 @@ class HomeFragment :Fragment() , OnClickHome {
     val mainActivity  by lazy { activity }
     var lislHomeGames : ArrayList<Home> = arrayListOf()
     var sharedPrefsHelper : SharedPrefsHelper? = null
+    var  mediaPlayer = MediaPlayer()
+    lateinit var background : General
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,12 +69,10 @@ class HomeFragment :Fragment() , OnClickHome {
     }
 
     private fun setGeneral() {
-        val background : General= Gson().fromJson(sharedPrefsHelper?.getStringValue(Constants.GENERAL), General::class.java)
-       // Picasso.get().load(background.background_main).into(binding.layout)
+         background = Gson().fromJson(sharedPrefsHelper?.getStringValue(Constants.GENERAL), General::class.java)
+        startSound()
         binding.layout.setGlideImageUrl(background.background_main!!,binding.progress)
 
-        if(!getRefrenceHiddenHome().checkIsPlaying())
-        getRefrenceHiddenHome().autoRunSound(true)
     }
 
     fun clickable(){
@@ -89,9 +92,32 @@ class HomeFragment :Fragment() , OnClickHome {
             "3" ->   navController.navigate(R.id.HomeFragment_to_GameThreeFragment)
             "4" ->   navController.navigate(R.id.HomeFragment_to_GameFourFragment)
             "5" ->   navController.navigate(R.id.HomeFragment_to_GameFiveFragment)
-
+            "6" ->   navController.navigate(R.id.HomeFragment_to_GameSixFragment)
         }
     }
 
+    fun startSound (){
+        mediaPlayer = MediaPlayer()
+
+        // stream type for our media player.
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+        try {
+            mediaPlayer.setDataSource(background.sound)
+            mediaPlayer.prepare()
+            mediaPlayer.start()
+            mediaPlayer.isLooping= true
+            Log.i(ContentValues.TAG, "playAudio: true")
+        } catch (e: IOException) {
+            e.printStackTrace()
+            Log.i(ContentValues.TAG, "playAudio: false")
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        mediaPlayer.pause()
+    }
 
 }

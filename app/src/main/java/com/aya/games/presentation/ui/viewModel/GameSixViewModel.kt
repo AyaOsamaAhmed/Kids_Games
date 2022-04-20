@@ -25,23 +25,23 @@ import kotlin.collections.ArrayList
  * Created by ( Eng Aya Osama )
  * Class do : GameFiveViewModel
  */
-class GameFiveViewModel(application: Application) : AndroidViewModel(application) {
+class GameSixViewModel(application: Application) : AndroidViewModel(application) {
 
     var requestLiveData = MutableLiveData<Any>()
-     var lookCategoryGames : ArrayList<ListenLookCategoryGames> = arrayListOf()
+     var FocusCategoryGames : ArrayList<ListenLookCategoryGames> = arrayListOf()
 
      // Initialize Firebase store
      var db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
       fun getListItems() {
 
-          db.collection("listen-look").get()
+          db.collection("focus").get()
                .addOnSuccessListener( OnSuccessListener<QuerySnapshot>() {
                     if(it.isEmpty)  Log.d(TAG, "onSuccess: LIST EMPTY");
                     else{
                       val   size =it.documents.size
                       var   list_id : MutableList<DocumentSnapshot> =  it.documents
-                        lookCategoryGames.clear()
+                        FocusCategoryGames.clear()
                        repeat(size){
                               val document = list_id.get(it).data
                               var data  = ListenLookCategoryGames()
@@ -50,9 +50,9 @@ class GameFiveViewModel(application: Application) : AndroidViewModel(application
                                 data.image = document.get("image").toString()
                                 data.name_ar = document.get("name_ar").toString()
 
-                           lookCategoryGames.add(data)
+                           FocusCategoryGames.add(data)
                          }
-                        requestLiveData.value = lookCategoryGames
+                        requestLiveData.value = FocusCategoryGames
                          Log.d(TAG, "onSuccess: $size")
                     }
 

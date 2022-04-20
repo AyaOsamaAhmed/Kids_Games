@@ -6,8 +6,6 @@
     app:startDestination="@id/SplashFragment"
     >
 
-
-
     <fragment
         android:id="@+id/SplashFragment"
         android:name="com.aya.games.presentation.ui.fragments.SplashFragment"
@@ -87,6 +85,11 @@
         <action
             android:id="@+id/HomeFragment_to_GameFiveFragment"
             app:destination="@id/GameFiveFragment"/>
+
+        <action
+            android:id="@+id/HomeFragment_to_GameSixFragment"
+            app:destination="@id/GameSixFragment"/>
+
 
 
     </fragment>
@@ -384,6 +387,38 @@
         <action
             android:id="@+id/SubGameFiveFragment_to_GameFiveFragment"
             app:destination="@id/GameFiveFragment"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/GameSixFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.GameSixFragment"
+        tools:layout="@layout/fragment_game_six"
+        >
+        <action
+            android:id="@+id/GameSixFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment"/>
+
+        <action
+            android:id="@+id/GameSixFragment_to_SubGameSixFragment"
+            app:destination="@id/SubGameSixFragment"
+            >
+            <argument
+                android:name="category"
+                app:argType="string"
+                android:defaultValue="0" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/SubGameSixFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.focusGames.SubGameSixFragment"
+        tools:layout="@layout/fragment_sub_game_six"
+        >
+        <action
+            android:id="@+id/SubGameSixFragment_to_GameSixFragment"
+            app:destination="@id/GameSixFragment"
             />
     </fragment>
 

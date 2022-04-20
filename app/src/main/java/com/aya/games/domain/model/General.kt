@@ -16,5 +16,7 @@ data class General(
     var background_question_remember :String? = null,
     var background_remember : String? = null,
     //
-    var background_listen_look: String? = null
+    var background_listen_look: String? = null,
+
+    var background_focus :String? = null
 )

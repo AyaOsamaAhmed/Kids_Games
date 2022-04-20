@@ -26,7 +26,6 @@ import com.aya.games.presentation.ui.viewModel.GameThreeViewModel
 import com.aya.games.presentation.ui.viewModel.SubGameFourViewModel
 import com.aya.games.presentation.utils.Constants
 import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.getRefrenceHiddenHome
 import com.aya.games.presentation.utils.setGlideImageUrl
 import com.google.gson.Gson
 import kotlin.collections.ArrayList
@@ -58,8 +57,6 @@ class SubGameFourRememberFragment :Fragment() , OnClickSubGameFourRemember {
         viewModel = ViewModelProvider(this).get(SubGameFourViewModel::class.java)
         sharedPrefsHelper = SharedPrefsHelper(mainActivity!!.applicationContext)
 
-
-        getRefrenceHiddenHome().autoRunSound(false)
         setGeneral()
         val id = arguments?.getString("category")
 

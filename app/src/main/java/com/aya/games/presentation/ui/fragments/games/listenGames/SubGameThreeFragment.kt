@@ -31,7 +31,6 @@ import com.aya.games.presentation.ui.interfaces.OnClickSubGameThree
 import com.aya.games.presentation.ui.viewModel.SubGameThreeViewModel
 import com.aya.games.presentation.utils.Constants
 import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.getRefrenceHiddenHome
 import com.aya.games.presentation.utils.setGlideImageUrl
 import com.google.gson.Gson
 import java.io.IOException
@@ -74,8 +73,6 @@ class SubGameThreeFragment :Fragment()  {
         viewModel = ViewModelProvider(this).get(SubGameThreeViewModel::class.java)
         sharedPrefsHelper = SharedPrefsHelper(mainActivity!!.applicationContext)
 
-
-        getRefrenceHiddenHome().autoRunSound(false)
         setGeneral()
         val id = arguments?.getString("category")
 

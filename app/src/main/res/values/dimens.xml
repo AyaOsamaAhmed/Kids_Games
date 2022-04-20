@@ -38,7 +38,9 @@
     <dimen name="width_listen_look">@dimen/_180sdp</dimen>
     <dimen name="height_listen_look">@dimen/_100sdp</dimen>
 
-    <dimen name="width_listen_check">@dimen/_80sdp</dimen>
+    <dimen name="width_listen_check">@dimen/_100sdp</dimen>
+
+    <dimen name="width_focus_check">@dimen/_80sdp</dimen>
 
     <dimen name="bottom_space">@dimen/_45sdp</dimen>
     <dimen name="edit_text_size">@dimen/_10sdp</dimen>

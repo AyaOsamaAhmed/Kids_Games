@@ -34,6 +34,7 @@ class SubGameThreeViewModel(application: Application) : AndroidViewModel(applica
                     else{
                       val   size =it.documents.size
                       var   list_id : MutableList<DocumentSnapshot> =  it.documents
+                        lookCategoryGames.clear()
                        repeat(size){
                           val document = list_id.get(it).data
                           var data  = ListenGames()

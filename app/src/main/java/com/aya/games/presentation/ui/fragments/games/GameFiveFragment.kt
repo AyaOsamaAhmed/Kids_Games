@@ -20,7 +20,6 @@ import com.aya.games.presentation.ui.interfaces.OnClickGameFive
 import com.aya.games.presentation.ui.viewModel.GameFiveViewModel
 import com.aya.games.presentation.utils.Constants
 import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.getRefrenceHiddenHome
 import com.aya.games.presentation.utils.setGlideImageUrl
 import com.google.gson.Gson
 import kotlin.collections.ArrayList
@@ -53,7 +52,7 @@ class GameFiveFragment :Fragment() , OnClickGameFive {
         sharedPrefsHelper = SharedPrefsHelper(mainActivity!!.applicationContext)
 
 
-        getRefrenceHiddenHome().autoRunSound(false)
+//        getRefrenceHiddenHome().autoRunSound(false)
         setGeneral()
         viewModel.getListItems()
         viewModel.requestLiveData.observe(viewLifecycleOwner, Observer {

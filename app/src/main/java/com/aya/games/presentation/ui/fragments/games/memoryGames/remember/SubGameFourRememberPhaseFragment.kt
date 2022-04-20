@@ -21,12 +21,9 @@ import com.aya.games.presentation.ui.interfaces.OnClickGameFour
 import com.aya.games.presentation.ui.interfaces.OnClickGameThree
 import com.aya.games.presentation.ui.interfaces.OnClickSubGameFourRemember
 import com.aya.games.presentation.ui.interfaces.OnClickSubGameFourRememberPhase
-import com.aya.games.presentation.ui.viewModel.GameFourViewModel
-import com.aya.games.presentation.ui.viewModel.GameThreeViewModel
 import com.aya.games.presentation.ui.viewModel.SubGameFourViewModel
 import com.aya.games.presentation.utils.Constants
 import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.getRefrenceHiddenHome
 import com.aya.games.presentation.utils.setGlideImageUrl
 import com.google.gson.Gson
 import kotlin.collections.ArrayList
@@ -63,8 +60,6 @@ class SubGameFourRememberPhaseFragment :Fragment() , OnClickSubGameFourRememberP
         viewModel = ViewModelProvider(this).get(SubGameFourViewModel::class.java)
         sharedPrefsHelper = SharedPrefsHelper(mainActivity!!.applicationContext)
 
-
-        getRefrenceHiddenHome().autoRunSound(false)
         setGeneral()
         category_id = arguments?.getString("category")
         val phase_id = arguments?.getString("phase")

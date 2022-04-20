@@ -74,6 +74,7 @@ class SubGameOneViewModel(application: Application) : AndroidViewModel(applicati
                 else{
                     val   size =it.documents.size
                     var   list_id : MutableList<DocumentSnapshot> =  it.documents
+                    TalkGames.clear()
                     repeat(size){
                         val document = list_id.get(it).data
                         var data  = TalkGames()

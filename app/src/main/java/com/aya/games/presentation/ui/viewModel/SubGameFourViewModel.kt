@@ -51,6 +51,7 @@ class SubGameFourViewModel(application: Application) : AndroidViewModel(applicat
                     else{
                       val   size =it.documents.size
                       var   list_id : MutableList<DocumentSnapshot> =  it.documents
+                        lookCategoryGames.clear()
                        repeat(size){
                           val document = list_id.get(it).data
                           var data  = MemoryGames()
@@ -84,6 +85,7 @@ class SubGameFourViewModel(application: Application) : AndroidViewModel(applicat
                 else{
                     val   size =it.documents.size
                     var   list_id : MutableList<DocumentSnapshot> =  it.documents
+                    lookCategoryGames.clear()
                     repeat(size){
                         val document = list_id.get(it).data
                         var data  = MemoryGamesType()
@@ -119,6 +121,7 @@ class SubGameFourViewModel(application: Application) : AndroidViewModel(applicat
                 else{
                     val   size =it.documents.size
                     var   list_id : MutableList<DocumentSnapshot> =  it.documents
+                    MemoryGames.clear()
                     repeat(size){
                         val document = list_id.get(it).data
                         var data  = MemoryGamesPizzel()
@@ -152,6 +155,7 @@ class SubGameFourViewModel(application: Application) : AndroidViewModel(applicat
                 else{
                     val   size =it.documents.size
                     var   list_id : MutableList<DocumentSnapshot> =  it.documents
+                    RememberGames.clear()
                     repeat(size){
                         val document = list_id.get(it).data
                         var data  = MemoryGamesRemember()
@@ -183,6 +187,7 @@ class SubGameFourViewModel(application: Application) : AndroidViewModel(applicat
                 else{
                     val   size =it.documents.size
                     var   list_id : MutableList<DocumentSnapshot> =  it.documents
+                    RememberPhaseGames.clear()
                     repeat(size){
                         val document = list_id.get(it).data
                         var data  = MemoryGamesRememberPhase()

@@ -29,7 +29,6 @@ import com.aya.games.domain.model.TalkGames
 import com.aya.games.presentation.ui.viewModel.SubGameOneViewModel
 import com.aya.games.presentation.utils.Constants
 import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.getRefrenceHiddenHome
 import com.aya.games.presentation.utils.setGlideImageUrl
 import com.google.gson.Gson
 import java.io.IOException
@@ -87,7 +86,6 @@ class SubGameOneFragment :Fragment() {
         if(id != null)
             viewModel.getListItems(id)
 
-        getRefrenceHiddenHome().autoRunSound(false)
         setGeneral()
 
         viewModel.requestLiveData.observe(viewLifecycleOwner, Observer {
