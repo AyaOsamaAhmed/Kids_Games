@@ -26,10 +26,10 @@
         android:textSize="@dimen/large_text_size"
         android:textStyle="bold"
         android:paddingTop="@dimen/_15sdp"
+        android:layout_marginHorizontal="@dimen/small_margin"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/image"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         />
 
     <androidx.recyclerview.widget.RecyclerView

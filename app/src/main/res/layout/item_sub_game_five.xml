@@ -15,6 +15,7 @@
         android:layout_height="@dimen/width_listen_check"
         tools:src="@tools:sample/backgrounds/scenic"
         android:scaleType="fitCenter"
+        android:background="@drawable/border_orange_check"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

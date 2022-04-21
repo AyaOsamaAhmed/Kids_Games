@@ -56,4 +56,10 @@ class SubGameFiveViewModel(application: Application) : AndroidViewModel(applicat
                     Log.d(TAG, "onFailure: $it")
                };
                }
+
+    /*
+     fun roll(): Int {
+       return (1..numSides).random()
+   }
+     */
 }

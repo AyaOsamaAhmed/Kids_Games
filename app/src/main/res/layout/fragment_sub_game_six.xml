@@ -29,18 +29,16 @@
         android:textStyle="bold"
         android:drawableEnd="@drawable/ic_sound"
         android:drawablePadding="@dimen/small_margin"
-        android:layout_marginBottom="@dimen/small_margin"
+        android:layout_marginHorizontal="@dimen/small_margin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/back_home"
         app:layout_constraintBottom_toTopOf="@id/image"
         />
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="@dimen/width_memory"
-        android:layout_height="@dimen/height_memory"
-        android:padding="@dimen/small_margin"
+        android:layout_width="@dimen/width_focus"
+        android:layout_height="@dimen/height_focus"
         app:layout_constraintTop_toBottomOf="@id/question"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
