@@ -1,4 +1,4 @@
-package com.aya.games.presentation.ui.fragments.games
+package com.aya.games.presentation.ui.fragments.games.focusGames
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -29,7 +29,7 @@ import com.aya.games.presentation.utils.setGlideImageUrl
 import com.google.gson.Gson
 import kotlin.collections.ArrayList
 
-class GameSixFragment :Fragment() , OnClickGameSix {
+class PuzzelCategoryGameSixFragment :Fragment() , OnClickGameSix {
 
     private lateinit var binding: FragmentGameSixBinding
     private lateinit var viewModel : GameSixViewModel

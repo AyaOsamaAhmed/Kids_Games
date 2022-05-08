@@ -50,6 +50,7 @@ class SubGameThreeTypeFragment :Fragment() {
     var sound:String = ""
     var sound2:String = ""
     var access_check = true
+    var question_sound = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -81,7 +82,8 @@ class SubGameThreeTypeFragment :Fragment() {
     private fun getCurrentQuestion(num:Int){
         answer = data[num].answer!!
         showGames(data[num].sound!! , data[num_game].question!!)
-
+         question_sound = data[num].question_sound!!
+        startSound(question_sound)
         //
         val drawable2 = getResources().getDrawable(R.drawable.bg_corner_white)
         binding.answer1.background = drawable2
@@ -123,6 +125,10 @@ class SubGameThreeTypeFragment :Fragment() {
         }
         binding.next.setOnClickListener {
             getCurrentQuestion(++num_game)
+        }
+
+        binding.question.setOnClickListener {
+            startSound(question_sound)
         }
         // check when be correct answer
         if(access_check) {

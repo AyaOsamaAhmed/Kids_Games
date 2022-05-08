@@ -41,6 +41,7 @@ class SubGameThreeViewModel(application: Application) : AndroidViewModel(applica
 
                            data.id = document!!.get("id").toString()
                            data.question =  document.get("question").toString()
+                           data.question_sound =  document.get("question_sound").toString()
                            data.sound = document.get("sound") as ArrayList<String>
                            data.answer = document.get("answer").toString()
 

@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:contentDescription="@string/question" />
+        android:contentDescription="@string/question"
+        />
 
 
 
@@ -28,7 +29,7 @@
         android:background="@drawable/bg_corner_white"
         android:padding="@dimen/small_margin"
         android:layout_marginBottom="@dimen/large_margin"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/question"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/image2"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@id/image"
         app:layout_constraintStart_toStartOf="@id/image"
         app:layout_constraintEnd_toEndOf="@id/image"
-        />
+          />
 
     <ImageView
         android:id="@+id/image2"
@@ -57,7 +58,7 @@
         android:background="@drawable/bg_corner_white"
         android:padding="@dimen/small_margin"
         android:layout_marginBottom="@dimen/large_margin"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/question"
         app:layout_constraintEnd_toStartOf="@id/image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -77,7 +78,7 @@
         app:layout_constraintTop_toBottomOf="@id/image2"
         app:layout_constraintStart_toStartOf="@id/image2"
         app:layout_constraintEnd_toEndOf="@id/image2"
-        />
+         />
 
     <ProgressBar
         android:id="@+id/progress"
@@ -100,9 +101,12 @@
         android:textSize="@dimen/large_text_size"
         android:textStyle="bold"
         android:layout_margin="@dimen/medium_margin"
+        android:drawableEnd="@drawable/ic_sound"
+        android:drawablePadding="@dimen/small_margin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/back_home"
-        app:layout_constraintBottom_toTopOf="@id/image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/image2"
         />
 
     <ImageView

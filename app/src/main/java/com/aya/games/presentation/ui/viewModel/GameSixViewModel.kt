@@ -28,7 +28,7 @@ import kotlin.collections.ArrayList
 class GameSixViewModel(application: Application) : AndroidViewModel(application) {
 
     var requestLiveData = MutableLiveData<Any>()
-     var FocusCategoryGames : ArrayList<ListenLookCategoryGames> = arrayListOf()
+     var FocusCategoryGames : ArrayList<FocusCategoryGames> = arrayListOf()
 
      // Initialize Firebase store
      var db: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -44,11 +44,12 @@ class GameSixViewModel(application: Application) : AndroidViewModel(application)
                         FocusCategoryGames.clear()
                        repeat(size){
                               val document = list_id.get(it).data
-                              var data  = ListenLookCategoryGames()
+                              var data  = FocusCategoryGames()
 
                                 data.id = document!!.get("id").toString()
                                 data.image = document.get("image").toString()
                                 data.name_ar = document.get("name_ar").toString()
+                                data.type = document.get("type").toString()
 
                            FocusCategoryGames.add(data)
                          }

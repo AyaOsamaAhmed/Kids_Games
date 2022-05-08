@@ -62,6 +62,7 @@ class SubGameThreeFragment :Fragment()  {
     var answer = "0"
     var size_data = 0
     var question:String = ""
+    var question_sound = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -83,6 +84,8 @@ class SubGameThreeFragment :Fragment()  {
              data = it as ArrayList<ListenGames>
             size_data = data.size
             getCurrentQuestion(num_game)
+            question_sound = data[0].question_sound!!
+            startSound(question_sound)
         })
 
         clickable()
@@ -95,7 +98,10 @@ class SubGameThreeFragment :Fragment()  {
 
         binding.question.text = data[num_game].question!!
         question = data[num].sound!![0]
-        startSound(question)
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            startSound(question) }, 2000)
+
         // Reset answer
         binding.answer.text = ""
         binding.answer.setBackgroundResource(R.drawable.bg_corner_white)
@@ -138,6 +144,10 @@ class SubGameThreeFragment :Fragment()  {
         }
         binding.image.setOnClickListener {
             startSound(question)
+        }
+        binding.question.setOnClickListener {
+            if(media_player!= null) setPauseMedia()
+            startSound(question_sound)
         }
         binding.answer.setOnClickListener {
             if(media_player!= null) setPauseMedia()

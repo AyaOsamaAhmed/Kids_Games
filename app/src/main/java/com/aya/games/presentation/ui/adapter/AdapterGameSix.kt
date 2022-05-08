@@ -5,14 +5,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.aya.games.R
-import com.aya.games.databinding.ItemCategoryGameFiveBinding
 import com.aya.games.databinding.ItemCategoryGameSixBinding
-import com.aya.games.domain.model.ListenLookCategoryGames
+import com.aya.games.domain.model.FocusCategoryGames
 import com.aya.games.presentation.ui.interfaces.OnClickGameSix
 import com.aya.games.presentation.utils.setGlideImageUrl
 
 class AdapterGameSix(
-    private var list: ArrayList<ListenLookCategoryGames>,
+    private var list: ArrayList<FocusCategoryGames>,
     val onClick : OnClickGameSix
 
 ) : RecyclerView.Adapter<AdapterGameSix.ViewHolderSubGameSix>() {
@@ -36,7 +35,7 @@ class AdapterGameSix(
         holder.itemRowBinding.imageTx.text = model.name_ar
 
         holder.itemRowBinding.image.setOnClickListener {
-                onClick.onClickChooseGames(model.id.toString())
+                onClick.onClickChooseGames(model.id.toString() , model.type.toString())
         }
     }
 

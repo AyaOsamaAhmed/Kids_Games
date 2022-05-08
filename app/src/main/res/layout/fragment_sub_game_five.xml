@@ -32,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@id/sound"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/back"
+        app:layout_constraintBottom_toBottomOf="@id/back"
         />
 
     <ProgressBar
@@ -57,10 +57,10 @@
         android:textStyle="bold"
         android:drawableEnd="@drawable/ic_sound"
         android:drawablePadding="@dimen/small_margin"
-        android:layout_marginBottom="@dimen/small_margin"
+        android:layout_margin ="@dimen/medium_margin"
         android:layout_marginHorizontal="@dimen/small_margin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/back_home"
+        app:layout_constraintTop_toTopOf="@id/back_home"
         app:layout_constraintBottom_toTopOf="@id/sound"
         />
 

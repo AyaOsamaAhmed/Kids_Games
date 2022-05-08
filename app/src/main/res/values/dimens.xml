@@ -36,7 +36,7 @@
     <dimen name="width_memory_cover">@dimen/_140sdp</dimen>
 
     <dimen name="width_listen_look">@dimen/_180sdp</dimen>
-    <dimen name="height_listen_look">@dimen/_100sdp</dimen>
+    <dimen name="height_listen_look">@dimen/_90sdp</dimen>
 
     <dimen name="width_listen_check">@dimen/_100sdp</dimen>
 
