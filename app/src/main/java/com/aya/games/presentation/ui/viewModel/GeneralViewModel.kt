@@ -47,6 +47,9 @@ class GeneralViewModel(application: Application) : AndroidViewModel(application)
                                    data.background_question_remember = document.get("background_question_remember").toString()
                                    data.background_remember = document.get("background_remember").toString()
                                    data.background_focus = document.get("background_focus").toString()
+                                   data.puzzel_background_ans = document.get("puzzel_background_ans").toString()
+                                   data.puzzel_background_hint = document.get("puzzel_background_hint").toString()
+
                               requestLiveData.value = data
                          }
 

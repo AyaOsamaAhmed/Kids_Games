@@ -94,17 +94,13 @@ class GameSixFragment :Fragment() , OnClickGameSix {
     }
 
     override fun onClickChooseGames(id: String , type:String ) {
-
+        val bundle = bundleOf("category" to id)
         when(type){
-            "1" -> {  val bundle = bundleOf("category" to id)
-                    navController.navigate(R.id.GameSixFragment_to_SubGameSixFragment, bundle)
-                    }
-            "2" -> {
-                val bundle = bundleOf("category" to id)
-                navController.navigate(R.id.GameSixFragment_to_SubGameSixFragment, bundle)
+            "1" ->  navController.navigate(R.id.GameSixFragment_to_SubGameSixFragment, bundle)
 
-            }
+            "2" ->  navController.navigate(R.id.GameSixFragment_to_PuzzelCategoryGameSixFragment, bundle)
 
+            "3" ->  navController.navigate(R.id.GameSixFragment_to_DiffGameSixFragment, bundle)
     }}
 
 

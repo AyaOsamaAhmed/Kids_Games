@@ -409,6 +409,26 @@
                 android:defaultValue="0" />
         </action>
 
+        <action
+            android:id="@+id/GameSixFragment_to_PuzzelCategoryGameSixFragment"
+            app:destination="@id/PuzzelCategoryGameSixFragment"
+            >
+            <argument
+                android:name="category"
+                app:argType="string"
+                android:defaultValue="0" />
+        </action>
+
+        <action
+            android:id="@+id/GameSixFragment_to_DiffGameSixFragment"
+            app:destination="@id/DiffGameSixFragment"
+            >
+            <argument
+                android:name="category"
+                app:argType="string"
+                android:defaultValue="0" />
+        </action>
+
     </fragment>
 
     <fragment
@@ -421,5 +441,98 @@
             app:destination="@id/GameSixFragment"
             />
     </fragment>
+
+    <fragment
+        android:id="@+id/PuzzelCategoryGameSixFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.focusGames.PuzzelCategoryGameSixFragment"
+        tools:layout="@layout/fragment_puzzel_game_six"
+        >
+        <action
+            android:id="@+id/PuzzelCategoryGameSixFragment_to_GameSixFragment"
+            app:destination="@id/GameSixFragment"
+            />
+
+        <action
+            android:id="@+id/PuzzelCategoryGameSixFragment_to_PuzzelGameSixFragment"
+            app:destination="@id/PuzzelGameSixFragment"
+            >
+            <argument
+                android:name="level"
+                app:argType="string"
+                android:defaultValue="0" />
+            <argument
+                android:name="category"
+                app:argType="string"
+                android:defaultValue="0" />
+        </action>
+        <action
+            android:id="@+id/PuzzelCategoryGameSixFragment_to_PuzzelThirdGameSixFragment"
+            app:destination="@id/PuzzelThirdGameSixFragment"
+            >
+            <argument
+                android:name="level"
+                app:argType="string"
+                android:defaultValue="0" />
+            <argument
+                android:name="category"
+                app:argType="string"
+                android:defaultValue="0" />
+        </action>
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/PuzzelGameSixFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.focusGames.PuzzelGameSixFragment"
+        tools:layout="@layout/fragment_puzzel_third_game_six"
+        >
+        <action
+            android:id="@+id/PuzzelGameSixFragment_to_PuzzelCategoryGameSixFragment"
+            app:destination="@id/PuzzelCategoryGameSixFragment"
+            >
+            <argument
+                android:name="category"
+                app:argType="string"
+                android:defaultValue="0" />
+
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/PuzzelThirdGameSixFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.focusGames.PuzzelThirdGameSixFragment"
+        tools:layout="@layout/fragment_game_puzzel_category"
+        >
+        <action
+            android:id="@+id/PuzzelThirdGameSixFragment_to_PuzzelCategoryGameSixFragment"
+            app:destination="@id/PuzzelCategoryGameSixFragment"
+            >
+            <argument
+                android:name="category"
+                app:argType="string"
+                android:defaultValue="0" />
+
+        </action>
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/DiffGameSixFragment"
+        android:name="com.aya.games.presentation.ui.fragments.games.focusGames.DiffGameSixFragment"
+        tools:layout="@layout/fragment_diff_game_six"
+        >
+        <action
+            android:id="@+id/DiffGameSixFragment_to_GameSixFragment"
+            app:destination="@id/GameSixFragment"
+            >
+            <argument
+                android:name="category"
+                app:argType="string"
+                android:defaultValue="0" />
+
+        </action>
+    </fragment>
+
 
 </navigation>

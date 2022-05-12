@@ -30,7 +30,7 @@ class GameSixViewModel(application: Application) : AndroidViewModel(application)
     var requestLiveData = MutableLiveData<Any>()
      var FocusCategoryGames : ArrayList<FocusCategoryGames> = arrayListOf()
 
-     // Initialize Firebase store
+    // Initialize Firebase store
      var db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
       fun getListItems() {
@@ -62,4 +62,6 @@ class GameSixViewModel(application: Application) : AndroidViewModel(application)
                     Log.d(TAG, "onFailure: $it")
                };
                }
+
+
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Switch
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -12,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aya.games.R
 import com.aya.games.databinding.FragmentGameFiveBinding
+import com.aya.games.databinding.FragmentGamePuzzelCategoryBinding
 import com.aya.games.databinding.FragmentGameSixBinding
 import com.aya.games.domain.model.FocusCategoryGames
 import com.aya.games.domain.model.General
@@ -23,6 +25,7 @@ import com.aya.games.presentation.ui.interfaces.OnClickGameFive
 import com.aya.games.presentation.ui.interfaces.OnClickGameSix
 import com.aya.games.presentation.ui.viewModel.GameFiveViewModel
 import com.aya.games.presentation.ui.viewModel.GameSixViewModel
+import com.aya.games.presentation.ui.viewModel.SubGameSixViewModel
 import com.aya.games.presentation.utils.Constants
 import com.aya.games.presentation.utils.SharedPrefsHelper
 import com.aya.games.presentation.utils.setGlideImageUrl
@@ -31,8 +34,8 @@ import kotlin.collections.ArrayList
 
 class PuzzelCategoryGameSixFragment :Fragment() , OnClickGameSix {
 
-    private lateinit var binding: FragmentGameSixBinding
-    private lateinit var viewModel : GameSixViewModel
+    private lateinit var binding: FragmentGamePuzzelCategoryBinding
+    private lateinit var viewModel : SubGameSixViewModel
 
     private val navController by lazy {
         val navHostFragment = activity?.supportFragmentManager
@@ -44,6 +47,7 @@ class PuzzelCategoryGameSixFragment :Fragment() , OnClickGameSix {
     val mainActivity  by lazy { activity }
     var sharedPrefsHelper : SharedPrefsHelper? = null
     lateinit var background : General
+    var category_id = ""
 
 
     override fun onCreateView(
@@ -52,13 +56,17 @@ class PuzzelCategoryGameSixFragment :Fragment() , OnClickGameSix {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentGameSixBinding.inflate(inflater , container , false)
-        viewModel = ViewModelProvider(this).get(GameSixViewModel::class.java)
+        binding = FragmentGamePuzzelCategoryBinding.inflate(inflater , container , false)
+        viewModel = ViewModelProvider(this).get(SubGameSixViewModel::class.java)
         sharedPrefsHelper = SharedPrefsHelper(mainActivity!!.applicationContext)
 
+        category_id = arguments?.getString("category")!!
+
+        if(category_id != null)
+            viewModel.getListCategoryPuzzelItems(category_id)
+
         setGeneral()
-        viewModel.getListItems()
-        viewModel.requestLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.requestCategoryLiveData.observe(viewLifecycleOwner, Observer {
           val   data = it as ArrayList<FocusCategoryGames>
             showCategory(data)
         })
@@ -90,22 +98,19 @@ class PuzzelCategoryGameSixFragment :Fragment() , OnClickGameSix {
     }
 
     fun skip(){
-        navController.navigate(R.id.GameSixFragment_to_HomeFragment)
+        navController.navigate(R.id.PuzzelCategoryGameSixFragment_to_GameSixFragment)
     }
 
-    override fun onClickChooseGames(id: String , type:String ) {
+    override fun onClickChooseGames(id: String , type : String ) {
+        val bundle = bundleOf("level" to id , "category" to category_id)
 
-        when(type){
-            "1" -> {  val bundle = bundleOf("category" to id)
-                    navController.navigate(R.id.GameSixFragment_to_SubGameSixFragment, bundle)
-                    }
-            "2" -> {
-                val bundle = bundleOf("category" to id)
-                navController.navigate(R.id.GameSixFragment_to_SubGameSixFragment, bundle)
+        when(id){
+           "1" -> navController.navigate(R.id.PuzzelCategoryGameSixFragment_to_PuzzelGameSixFragment, bundle)
+           "2" ->  navController.navigate(R.id.PuzzelCategoryGameSixFragment_to_PuzzelThirdGameSixFragment, bundle)
 
-            }
+       }
 
-    }}
+    }
 
 
 

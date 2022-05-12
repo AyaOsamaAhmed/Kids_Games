@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/projects/games/app/src/main/res/drawable-v24/background_border_green.xml" value="0.1" />
+        <entry key="..\:/projects/games/app/src/main/res/drawable-v24/background_border_pink.xml" value="0.1" />
         <entry key="..\:/projects/games/app/src/main/res/drawable-v24/bg_corner_green.xml" value="0.21614583333333334" />
         <entry key="..\:/projects/games/app/src/main/res/drawable-v24/bg_corner_white.xml" value="0.2037037037037037" />
         <entry key="..\:/projects/games/app/src/main/res/drawable-v24/border_orange_check.xml" value="0.21614583333333334" />
@@ -31,17 +33,21 @@
         <entry key="..\:/projects/games/app/src/main/res/drawable/ic_user.xml" value="0.20833333333333334" />
         <entry key="..\:/projects/games/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/projects/games/app/src/main/res/layout/dialog_loading.xml" value="0.2" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_diff_game_six.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_exam.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_forget_password.xml" value="0.2843601895734597" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_game_five.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_game_four.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_game_four_remember.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_game_one.xml" value="0.33" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_game_puzzel_category.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_game_six.xml" value="0.1" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_game_three.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_game_two.xml" value="0.18" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_login.xml" value="0.1" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_puzzel_game_six.xml" value="0.1875" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/fragment_puzzel_third_game_six.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_setting.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_signup.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/fragment_splash.xml" value="0.2" />
@@ -65,6 +71,8 @@
         <entry key="..\:/projects/games/app/src/main/res/layout/item_category_game_two.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_category_game_سهء.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_home.xml" value="0.2" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/item_puzzel_ans_sub_game_six.xml" value="0.2" />
+        <entry key="..\:/projects/games/app/src/main/res/layout/item_puzzel_sub_game_six.xml" value="0.1693121693121693" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_five.xml" value="0.2" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_four.xml" value="0.1" />
         <entry key="..\:/projects/games/app/src/main/res/layout/item_sub_game_four_memory.xml" value="0.1" />

@@ -18,5 +18,8 @@ data class General(
     //
     var background_listen_look: String? = null,
 
-    var background_focus :String? = null
+    var background_focus :String? = null,
+    var puzzel_background_ans :String? = null,
+    var puzzel_background_hint :String? = null
+
 )
