@@ -34,7 +34,7 @@ import com.google.gson.Gson
 import java.io.IOException
 import kotlin.collections.ArrayList
 
-class DiffGameSixFragment :Fragment() , OnClickSubGameSix {
+class DiffGameSixFragment :Fragment(){
 
     private lateinit var binding: FragmentDiffGameSixBinding
     private lateinit var viewModel : SubGameSixViewModel
@@ -52,7 +52,7 @@ class DiffGameSixFragment :Fragment() , OnClickSubGameSix {
     lateinit var data : ArrayList<FocusDiffGames>
     lateinit var background : General
     var num_game = 0
-    var answer = ""
+     var listAnswer : ArrayList<String> = arrayListOf()
     var size_data = 0
     var question_sound  = ""
 
@@ -76,7 +76,7 @@ class DiffGameSixFragment :Fragment() , OnClickSubGameSix {
              data = it as ArrayList<FocusDiffGames>
             size_data = data.size
             getCurrentQuestion(num_game)
-         //   startSound( data[num_game].question_sound!!)
+            startSound( data[num_game].question_sound!!)
         })
 
         clickable()
@@ -85,7 +85,7 @@ class DiffGameSixFragment :Fragment() , OnClickSubGameSix {
     }
 
     private fun getCurrentQuestion(num:Int){
-         showGames(data[num].list_image!! , data[num].background!! , data[num].list!! )
+         showGames(data[num].list_image!! , data[num].background!! , data[num].list!! , data[num].question!!)
 
         //back button
         if(num == 0)
@@ -101,8 +101,8 @@ class DiffGameSixFragment :Fragment() , OnClickSubGameSix {
     }
 
 
-    private fun showGames(data : ArrayList<String> , image : String ,list : ArrayList<String> ) {
-      //  binding.question.text = question
+    private fun showGames(data : ArrayList<String> , image : String ,list : ArrayList<String> , question : String ) {
+        binding.question.text = question
         binding.image.setGlideImageUrl(image,binding.progress)
         binding.imageAns.setGlideImageUrl(image,binding.progress)
 
@@ -114,6 +114,7 @@ class DiffGameSixFragment :Fragment() , OnClickSubGameSix {
              "3" ->  binding.imgStart.setGlideImageUrl(data[index], binding.progress)
              "4" ->  binding.imgEnd.setGlideImageUrl(data[index], binding.progress)
              "5" ->  binding.imgBottomEnd.setGlideImageUrl(data[index],binding.progress)
+             "6" ->  binding.imgCenter.setGlideImageUrl(data[index],binding.progress)
          }
 
         }
@@ -121,11 +122,22 @@ class DiffGameSixFragment :Fragment() , OnClickSubGameSix {
     }
 
     fun clearImages(){
+
+        listAnswer.clear()
+
         binding.imgStart.setImageResource(0)
         binding.imgBottom.setImageResource(0)
         binding.imgEnd.setImageResource(0)
         binding.imgBottomEnd.setImageResource(0)
         binding.imgTop.setImageResource(0)
+        binding.imgCenter.setImageResource(0)
+
+        binding.imgStart.setBackgroundResource(0)
+        binding.imgBottom.setBackgroundResource(0)
+        binding.imgEnd.setBackgroundResource(0)
+        binding.imgBottomEnd.setBackgroundResource(0)
+        binding.imgTop.setBackgroundResource(0)
+        binding.imgCenter.setBackgroundResource(0)
 
 
     }
@@ -143,26 +155,36 @@ class DiffGameSixFragment :Fragment() , OnClickSubGameSix {
            skip()
         }
 
-      /*  binding.question.setOnClickListener {
+        binding.question.setOnClickListener {
             if(media_player!= null) setPauseMedia()
             startSound(question_sound)
-        }*/
+        }
         binding.imgStart.setOnClickListener {
             binding.imgStart.setBackgroundResource(R.drawable.background_border_pink)
+            choosePhoto("3")
 
         }
         binding.imgEnd.setOnClickListener {
             binding.imgEnd.setBackgroundResource(R.drawable.background_border_pink)
-
+            choosePhoto("4")
         }
         binding.imgBottom.setOnClickListener {
             binding.imgBottom.setBackgroundResource(R.drawable.background_border_pink)
-
+            choosePhoto("2")
         }
         binding.imgTop.setOnClickListener {
             binding.imgTop.setBackgroundResource(R.drawable.background_border_pink)
-
+            choosePhoto("1")
         }
+        binding.imgBottomEnd.setOnClickListener {
+            binding.imgBottomEnd.setBackgroundResource(R.drawable.background_border_pink)
+            choosePhoto("5")
+        }
+        binding.imgCenter.setOnClickListener {
+            binding.imgCenter.setBackgroundResource(R.drawable.background_border_pink)
+            choosePhoto("6")
+        }
+
         binding.back.setOnClickListener {
             if(media_player!= null) setPauseMedia()
             getCurrentQuestion(--num_game)
@@ -179,17 +201,26 @@ class DiffGameSixFragment :Fragment() , OnClickSubGameSix {
         navController.navigate(R.id.DiffGameSixFragment_to_GameSixFragment)
     }
 
-    override fun onClickChooseGames(id: String) {
+    fun choosePhoto(id :String ){
+        listAnswer.add(id)
+        checkGames()
+    }
+
+     fun checkGames() {
         if(media_player!= null) setPauseMedia()
-        if(id == answer){
+         val ans = data[num_game].list!!
+         if( ans.size == listAnswer.size){
+             ans.sort()
+             listAnswer.sort()
+        if(ans.equals(listAnswer)){
             show_result(true)
-        }else{
+        }else {
             show_result(false)
             Handler(Looper.getMainLooper()).postDelayed({
                 getCurrentQuestion(num_game)
             }, 3000)
 
-        }
+        }        }
     }
 
     fun show_result(result : Boolean){

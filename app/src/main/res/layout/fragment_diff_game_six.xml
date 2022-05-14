@@ -18,10 +18,25 @@
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@string/back_home"
+        android:textColor="@color/black"
+        android:textSize="@dimen/large_text_size"
+        android:textStyle="bold"
+        android:drawableEnd="@drawable/ic_sound"
+        android:drawablePadding="@dimen/small_margin"
+        android:layout_margin ="@dimen/medium_margin"
+        android:layout_marginHorizontal="@dimen/small_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/back_home"
+        />
     <ImageView
         android:id="@+id/image_ans"
         android:layout_width="@dimen/_250sdp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_150sdp"
         android:scaleType="fitXY"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +49,7 @@
     <ImageView
         android:id="@+id/image"
         android:layout_width="@dimen/_250sdp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_150sdp"
         android:scaleType="fitXY"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +78,7 @@
 
     <ImageView
         android:id="@+id/img_end"
-        android:layout_width="@dimen/_70sdp"
+        android:layout_width="@dimen/_50sdp"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
         android:layout_margin="@dimen/very_small_margin"
@@ -72,7 +87,7 @@
         />
     <ImageView
         android:id="@+id/img_start"
-        android:layout_width="@dimen/_70sdp"
+        android:layout_width="@dimen/_50sdp"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
         android:layout_margin="@dimen/very_small_margin"
@@ -80,8 +95,18 @@
         app:layout_constraintTop_toTopOf="@id/image_ans"
         />
     <ImageView
+        android:id="@+id/img_center"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:layout_margin="@dimen/very_small_margin"
+        app:layout_constraintStart_toEndOf="@id/img_top"
+        app:layout_constraintTop_toBottomOf="@id/img_start"
+        />
+
+    <ImageView
         android:id="@+id/img_bottom_end"
-        android:layout_width="@dimen/_70sdp"
+        android:layout_width="@dimen/_50sdp"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
         android:layout_margin="@dimen/very_small_margin"

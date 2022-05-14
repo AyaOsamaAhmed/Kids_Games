@@ -1,7 +1,10 @@
 package com.aya.games.presentation.ui.adapter
 
 import android.annotation.SuppressLint
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -36,8 +39,11 @@ class AdapterPuzzelAnsGameSix(
         holder.itemRowBinding.image.setOnClickListener {
             if(list[position].isEmpty()) {
                 holder.itemRowBinding.image.setBackgroundResource(R.drawable.background_border_pink)
-                onClick.onClickChooseGames(position)
 
+                onClick.onClickChooseGames(position)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    holder.itemRowBinding.image.setBackgroundResource(R.drawable.background_border_pink)
+                }, 7000)
             }
         }
 

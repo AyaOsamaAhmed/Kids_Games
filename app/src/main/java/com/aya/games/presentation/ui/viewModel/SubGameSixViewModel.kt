@@ -150,6 +150,8 @@ class SubGameSixViewModel(application: Application) : AndroidViewModel(applicati
                         var data  = FocusDiffGames()
 
                         data.id = document!!.get("id").toString()
+                        data.question = document!!.get("question").toString()
+                        data.question_sound = document!!.get("question_sound").toString()
                         data.list =  document.get("list") as ArrayList<String>
                         data.background =  document.get("background").toString()
                         data.list_image =  document.get("list_image") as ArrayList<String>

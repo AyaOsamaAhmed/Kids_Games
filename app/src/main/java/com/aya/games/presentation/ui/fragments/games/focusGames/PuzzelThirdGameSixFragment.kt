@@ -214,6 +214,7 @@ class PuzzelThirdGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuz
     override fun onClickChooseGames(id: Int) {
 
         selected_id = id
+
     }
 
     override fun onClickChooseAnsGames(id: Int) {

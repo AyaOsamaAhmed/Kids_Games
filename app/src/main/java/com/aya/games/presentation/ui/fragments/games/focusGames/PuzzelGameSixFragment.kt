@@ -167,7 +167,6 @@ class PuzzelGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuzzelAn
 
     fun skip(){
         val bundle = bundleOf( "category" to category_id)
-
         navController.navigate(R.id.PuzzelGameSixFragment_to_PuzzelCategoryGameSixFragment,bundle)
     }
 
@@ -215,8 +214,12 @@ class PuzzelGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuzzelAn
         media_player!!.pause()
     }
 
-    override fun onClickChooseGames(id: Int) {
+    override fun onClickChooseGames(id: Int){
         selected_id = id
+        binding.image.layoutManager = GridLayoutManager(mainActivity, level_id)
+        val adapterAns = AdapterPuzzelAnsGameSix(imgAns, this)
+        binding.image.adapter = adapterAns
+
     }
 
     override fun onClickChooseAnsGames(id: Int) {
