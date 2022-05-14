@@ -79,7 +79,7 @@ class SubGameSixViewModel(application: Application) : AndroidViewModel(applicati
                 else{
                     val   size =it.documents.size
                     var   list_id : MutableList<DocumentSnapshot> =  it.documents
-                    FocusGames.clear()
+                    PuzzelCategoryGames.clear()
                     repeat(size){
                         val document = list_id.get(it).data
                         var data  = FocusCategoryGames()
@@ -111,7 +111,7 @@ class SubGameSixViewModel(application: Application) : AndroidViewModel(applicati
                 else{
                     val   size =it.documents.size
                     var   list_id : MutableList<DocumentSnapshot> =  it.documents
-                    FocusGames.clear()
+                    PuzzelGames.clear()
                     repeat(size){
                         val document = list_id.get(it).data
                         var data  = FocusPuzzelGames()
@@ -144,13 +144,13 @@ class SubGameSixViewModel(application: Application) : AndroidViewModel(applicati
                 else{
                     val   size =it.documents.size
                     var   list_id : MutableList<DocumentSnapshot> =  it.documents
-                    FocusGames.clear()
+                    DiffGames.clear()
                     repeat(size){
                         val document = list_id.get(it).data
                         var data  = FocusDiffGames()
 
                         data.id = document!!.get("id").toString()
-                        data.answer =  document.get("answer").toString()
+                        data.list =  document.get("list") as ArrayList<String>
                         data.background =  document.get("background").toString()
                         data.list_image =  document.get("list_image") as ArrayList<String>
 

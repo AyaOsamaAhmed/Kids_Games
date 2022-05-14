@@ -20,22 +20,76 @@
 
     <ImageView
         android:id="@+id/image_ans"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_250sdp"
         android:layout_height="wrap_content"
+        android:scaleType="fitXY"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/image"
         />
+
+
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_250sdp"
         android:layout_height="wrap_content"
+        android:scaleType="fitXY"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/image_ans"
         app:layout_constraintBottom_toBottomOf="parent"
         />
+    <ImageView
+        android:id="@+id/img_top"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:layout_margin="@dimen/very_small_margin"
+        app:layout_constraintStart_toStartOf="@id/image_ans"
+        app:layout_constraintTop_toTopOf="@id/image_ans"
+        />
+
+    <ImageView
+        android:id="@+id/img_bottom"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:layout_margin="@dimen/very_small_margin"
+        app:layout_constraintStart_toStartOf="@id/image_ans"
+        app:layout_constraintBottom_toBottomOf="@id/image_ans"
+        />
+
+    <ImageView
+        android:id="@+id/img_end"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:layout_margin="@dimen/very_small_margin"
+        app:layout_constraintStart_toEndOf="@id/img_bottom"
+        app:layout_constraintBottom_toBottomOf="@id/image_ans"
+        />
+    <ImageView
+        android:id="@+id/img_start"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:layout_margin="@dimen/very_small_margin"
+        app:layout_constraintStart_toEndOf="@id/img_top"
+        app:layout_constraintTop_toTopOf="@id/image_ans"
+        />
+    <ImageView
+        android:id="@+id/img_bottom_end"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:layout_margin="@dimen/very_small_margin"
+        app:layout_constraintEnd_toEndOf="@id/image_ans"
+        app:layout_constraintBottom_toBottomOf="@id/image_ans"
+        />
+
+
     <ProgressBar
         android:id="@+id/progress"
         style="?android:attr/progressBarStyle"

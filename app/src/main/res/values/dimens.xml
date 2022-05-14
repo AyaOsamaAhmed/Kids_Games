@@ -45,7 +45,8 @@
 
     <dimen name="width_focus_check">@dimen/_100sdp</dimen>
 
-    <dimen name="width_puzzel_check">@dimen/_75sdp</dimen>
+    <dimen name="width_puzzel_check">@dimen/_65sdp</dimen>
+    <dimen name="width_puzzel_third_check">@dimen/_75sdp</dimen>
 
     <dimen name="bottom_space">@dimen/_45sdp</dimen>
     <dimen name="edit_text_size">@dimen/_10sdp</dimen>

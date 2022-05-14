@@ -19,10 +19,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.aya.games.R
 import com.aya.games.databinding.*
 import com.aya.games.domain.model.*
-import com.aya.games.presentation.ui.adapter.AdapterGameFive
-import com.aya.games.presentation.ui.adapter.AdapterGameSix
-import com.aya.games.presentation.ui.adapter.AdapterPuzzelAnsGameSix
-import com.aya.games.presentation.ui.adapter.AdapterPuzzelGameSix
+import com.aya.games.presentation.ui.adapter.*
 import com.aya.games.presentation.ui.interfaces.OnClickGameFive
 import com.aya.games.presentation.ui.interfaces.OnClickGameSix
 import com.aya.games.presentation.ui.interfaces.OnClickPuzzelAnsGameSix
@@ -118,7 +115,7 @@ class PuzzelThirdGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuz
         imgAns.add("")
 
         binding.image.layoutManager = GridLayoutManager(mainActivity,level_id)
-        val adapterAns = AdapterPuzzelAnsGameSix(imgAns,this)
+        val adapterAns = AdapterPuzzelThirdAnsGameSix(imgAns,this)
         binding.image.adapter = adapterAns
         imgQuestion.addAll(data[num_game].list_images!!)
 
@@ -215,6 +212,7 @@ class PuzzelThirdGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuz
     }
 
     override fun onClickChooseGames(id: Int) {
+
         selected_id = id
     }
 
@@ -224,7 +222,7 @@ class PuzzelThirdGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuz
 
             imgAns[selected_id] = img
             binding.image.layoutManager = GridLayoutManager(mainActivity, level_id)
-            val adapterAns = AdapterPuzzelAnsGameSix(imgAns, this)
+            val adapterAns = AdapterPuzzelThirdAnsGameSix(imgAns, this)
             binding.image.adapter = adapterAns
 
             //

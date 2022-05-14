@@ -52,7 +52,7 @@ class DiffGameSixFragment :Fragment() , OnClickSubGameSix {
     lateinit var data : ArrayList<FocusDiffGames>
     lateinit var background : General
     var num_game = 0
-    var answer = "0"
+    var answer = ""
     var size_data = 0
     var question_sound  = ""
 
@@ -85,8 +85,7 @@ class DiffGameSixFragment :Fragment() , OnClickSubGameSix {
     }
 
     private fun getCurrentQuestion(num:Int){
-        answer = data[num].answer!!
-      //  showGames(data[num].images!! , data[num_game].question!! ,data[num_game].question_sound!! , data[num_game].check_image!! )
+         showGames(data[num].list_image!! , data[num].background!! , data[num].list!! )
 
         //back button
         if(num == 0)
@@ -102,19 +101,34 @@ class DiffGameSixFragment :Fragment() , OnClickSubGameSix {
     }
 
 
-    private fun showGames(data : ArrayList<String> , question : String , question_sound : String , check_image : String ) {
+    private fun showGames(data : ArrayList<String> , image : String ,list : ArrayList<String> ) {
       //  binding.question.text = question
-        binding.image.setGlideImageUrl(check_image,binding.progress)
+        binding.image.setGlideImageUrl(image,binding.progress)
+        binding.imageAns.setGlideImageUrl(image,binding.progress)
 
-        this.question_sound = question_sound
+        clearImages()
+        for ((index,num) in list.withIndex() ) {
+         when(num){
+             "1" ->  binding.imgTop.setGlideImageUrl(data[index], binding.progress)
+             "2" ->  binding.imgBottom.setGlideImageUrl(data[index], binding.progress)
+             "3" ->  binding.imgStart.setGlideImageUrl(data[index], binding.progress)
+             "4" ->  binding.imgEnd.setGlideImageUrl(data[index], binding.progress)
+             "5" ->  binding.imgBottomEnd.setGlideImageUrl(data[index],binding.progress)
+         }
 
-        // loading image
-        val drawable = getResources().getDrawable(R.drawable.border_green_check)
+        }
 
-        val adapter = AdapterSubGameSix(data,this,drawable,true)
-       // binding.game.adapter = adapter
     }
 
+    fun clearImages(){
+        binding.imgStart.setImageResource(0)
+        binding.imgBottom.setImageResource(0)
+        binding.imgEnd.setImageResource(0)
+        binding.imgBottomEnd.setImageResource(0)
+        binding.imgTop.setImageResource(0)
+
+
+    }
     private fun setGeneral() {
          background = Gson().fromJson(sharedPrefsHelper?.getStringValue(Constants.GENERAL), General::class.java)
         // loading image
@@ -133,6 +147,22 @@ class DiffGameSixFragment :Fragment() , OnClickSubGameSix {
             if(media_player!= null) setPauseMedia()
             startSound(question_sound)
         }*/
+        binding.imgStart.setOnClickListener {
+            binding.imgStart.setBackgroundResource(R.drawable.background_border_pink)
+
+        }
+        binding.imgEnd.setOnClickListener {
+            binding.imgEnd.setBackgroundResource(R.drawable.background_border_pink)
+
+        }
+        binding.imgBottom.setOnClickListener {
+            binding.imgBottom.setBackgroundResource(R.drawable.background_border_pink)
+
+        }
+        binding.imgTop.setOnClickListener {
+            binding.imgTop.setBackgroundResource(R.drawable.background_border_pink)
+
+        }
         binding.back.setOnClickListener {
             if(media_player!= null) setPauseMedia()
             getCurrentQuestion(--num_game)

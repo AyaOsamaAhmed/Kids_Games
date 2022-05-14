@@ -7,19 +7,20 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.aya.games.R
 import com.aya.games.databinding.ItemPuzzelAnsSubGameSixBinding
+import com.aya.games.databinding.ItemPuzzelThirdAnsSubGameSixBinding
 import com.aya.games.presentation.ui.interfaces.OnClickPuzzelGameSix
 import com.aya.games.presentation.utils.setGlideImageUrl
 
-class AdapterPuzzelAnsGameSix(
+class AdapterPuzzelThirdAnsGameSix(
     private var list: ArrayList<String>,
     val onClick : OnClickPuzzelGameSix
 
-) : RecyclerView.Adapter<AdapterPuzzelAnsGameSix.ViewHolderSubGameSix>() {
+) : RecyclerView.Adapter<AdapterPuzzelThirdAnsGameSix.ViewHolderSubGameSix>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderSubGameSix {
-        val binding: ItemPuzzelAnsSubGameSixBinding = DataBindingUtil.inflate(
+        val binding: ItemPuzzelThirdAnsSubGameSixBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_puzzel_ans_sub_game_six, parent, false
+            R.layout.item_puzzel_third_ans_sub_game_six, parent, false
         )
         return ViewHolderSubGameSix(binding)
     }
@@ -44,9 +45,9 @@ class AdapterPuzzelAnsGameSix(
     }
 
 
-    class ViewHolderSubGameSix(binding: ItemPuzzelAnsSubGameSixBinding) :
+    class ViewHolderSubGameSix(binding: ItemPuzzelThirdAnsSubGameSixBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        var itemRowBinding: ItemPuzzelAnsSubGameSixBinding = binding
+        var itemRowBinding: ItemPuzzelThirdAnsSubGameSixBinding = binding
         fun bind(model: String) {
             itemRowBinding.executePendingBindings()
         }
