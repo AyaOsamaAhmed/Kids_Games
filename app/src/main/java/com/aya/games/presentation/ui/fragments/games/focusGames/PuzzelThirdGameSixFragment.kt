@@ -88,7 +88,7 @@ class PuzzelThirdGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuz
             size_data = data.size
 
             showQuestion(num_game)
-
+            startSound(data[num_game].question_sound!!)
         })
 
         clickable()
@@ -98,7 +98,7 @@ class PuzzelThirdGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuz
 
     private fun showQuestion(num:Int) {
         binding.imgHint.setGlideImageUrl(data[num].image!!,binding.progress)
-
+        binding.question.text = data[num].question
         imageAnswer.clear()
         imgQuestion.clear()
 
@@ -147,6 +147,9 @@ class PuzzelThirdGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuz
            skip()
         }
 
+        binding.question.setOnClickListener {
+            startSound(data[num_game].question_sound!!)
+        }
         binding.reload.setOnClickListener {
             showQuestion(num_game)
         }

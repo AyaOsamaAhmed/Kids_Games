@@ -74,6 +74,7 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
              data = it as ArrayList<MemoryGames>
             size_data = data.size
             getCurrentQuestion(num_game, trying)
+            startSound(data[num_game].question_sound!!)
         })
 
         clickable()
@@ -136,6 +137,9 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
     fun clickable(){
         binding.backHome.setOnClickListener {
            skip()
+        }
+        binding.question.setOnClickListener {
+            startSound(data[num_game].question_sound!!)
         }
         binding.back.setOnClickListener {
             trying = false

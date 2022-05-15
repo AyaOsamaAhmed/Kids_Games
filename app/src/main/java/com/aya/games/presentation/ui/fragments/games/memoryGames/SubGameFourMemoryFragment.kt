@@ -151,6 +151,9 @@ class SubGameFourMemoryFragment :Fragment() , OnClickSubGameFourMemory {
             trying = false
             getCurrentQuestion(--num_game, trying)
         }
+        binding.question.setOnClickListener {
+            startSound(data[num_game].question_sound!!)
+        }
         binding.next.setOnClickListener {
             trying = false
             getCurrentQuestion(++num_game , trying)

@@ -161,7 +161,12 @@ class SubGameOneFragment :Fragment() {
         }
         binding.question.setOnClickListener {
          //   viewModel.speak(binding.question.text.toString(),mainActivity!!.applicationContext)
+            startSound(data[page_num]!!.question_sound?.get(0)!!)
         }
+        binding.questionTwo.setOnClickListener {
+              startSound(data[page_num]!!.question_sound?.get(1)!!)
+        }
+
     }
 
     fun skip(){

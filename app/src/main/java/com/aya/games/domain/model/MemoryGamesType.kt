@@ -5,6 +5,7 @@ data class MemoryGamesType(
     var image : String? = null,
     var name : String? = null,
     var question:String? = null ,
+    var question_sound:String? = null ,
     var answer :String? = null,
     var letter:String? = null,
     var time :String? = null,

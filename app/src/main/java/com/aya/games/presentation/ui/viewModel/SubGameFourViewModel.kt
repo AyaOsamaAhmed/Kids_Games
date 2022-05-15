@@ -58,6 +58,7 @@ class SubGameFourViewModel(application: Application) : AndroidViewModel(applicat
 
                            data.id = document!!.get("id").toString()
                            data.question =  document.get("question").toString()
+                           data.question_sound =  document.get("question_sound").toString()
                            data.image  = document.get("image").toString()
                            data.time  = document.get("time").toString()
                            data.choose = document.get("choose") as ArrayList<String>

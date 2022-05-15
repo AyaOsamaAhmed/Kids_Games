@@ -118,6 +118,8 @@ class SubGameSixViewModel(application: Application) : AndroidViewModel(applicati
 
                         data.id = document!!.get("id").toString()
                         data.image =  document.get("image").toString()
+                        data.question =  document.get("question").toString()
+                        data.question_sound =  document.get("question_sound").toString()
                         data.list_images =  document.get("list_images") as ArrayList<String>
                         data.list_ans_images =  document.get("list_ans_images") as ArrayList<String>
 

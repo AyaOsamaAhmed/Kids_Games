@@ -18,6 +18,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@tools:sample/cities"
+        android:textSize="@dimen/large_text_size"
+        android:textStyle="bold"
+        android:drawableEnd="@drawable/ic_sound"
+        android:drawablePadding="@dimen/small_margin"
+        android:layout_marginHorizontal="@dimen/small_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/image"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
     <ImageView
         android:id="@+id/img_hint"
         android:layout_width="@dimen/_160sdp"

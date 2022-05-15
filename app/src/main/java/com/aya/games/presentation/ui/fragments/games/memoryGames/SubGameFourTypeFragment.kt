@@ -142,6 +142,9 @@ class SubGameFourTypeFragment :Fragment() , OnClickSubGameFour {
         binding.backHome.setOnClickListener {
            skip()
         }
+        binding.question.setOnClickListener {
+            startSound(data[num_game].question_sound!!)
+        }
         binding.back.setOnClickListener {
             getCurrentQuestion(--num_game , trying)
         }

@@ -53,6 +53,7 @@ class SubGameTwoViewModel(application: Application) : AndroidViewModel(applicati
 
                            data.id = document!!.get("id").toString()
                            data.question =  document.get("question").toString()
+                           data.question_sound =  document.get("question_sound").toString()
                            data.images = document.get("images") as ArrayList<String>
                            data.answer = document.get("answer").toString()
 

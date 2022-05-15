@@ -47,6 +47,7 @@ class SubGameTwoFragment :Fragment() , OnClickSubGameTwo {
     var num_game = 0
     var answer = "0"
     var size_data = 0
+    var category_id =""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,15 +60,16 @@ class SubGameTwoFragment :Fragment() , OnClickSubGameTwo {
         sharedPrefsHelper = SharedPrefsHelper(mainActivity!!.applicationContext)
 
         setGeneral()
-        val id = arguments?.getString("category")
+        category_id = arguments?.getString("category")!!
 
-        if(id != null)
-        viewModel.getListItems(id)
+        if(category_id != null)
+        viewModel.getListItems(category_id)
 
         viewModel.requestLiveData.observe(viewLifecycleOwner, Observer {
              data = it as ArrayList<LookGames>
             size_data = data.size
             getCurrentQuestion(num_game)
+            if(!category_id.equals("3")) startSound(data[num_game].question_sound!!)
         })
 
         clickable()
@@ -77,7 +79,7 @@ class SubGameTwoFragment :Fragment() , OnClickSubGameTwo {
 
     private fun getCurrentQuestion(num:Int){
         answer = data[num].answer!!
-        showGames(data[num].images!! , data[num_game].question!!)
+        showGames(data[num].images!! , data[num_game].question!!,data[num_game].question_sound!!)
 
         //back button
         if(num == 0)
@@ -91,8 +93,9 @@ class SubGameTwoFragment :Fragment() , OnClickSubGameTwo {
         else
             binding.next.visibility = View.VISIBLE
     }
-    private fun showGames(data : ArrayList<String> , question : String) {
+    private fun showGames(data : ArrayList<String> , question : String , question_sound:String) {
         binding.question.text = question
+        if(category_id.equals("3"))  startSound(question_sound)
         // loading image
         val drawable = getResources().getDrawable(R.drawable.border_green_check)
 
@@ -114,7 +117,9 @@ class SubGameTwoFragment :Fragment() , OnClickSubGameTwo {
         binding.backHome.setOnClickListener {
            skip()
         }
-
+        binding.question.setOnClickListener {
+            startSound(data[num_game].question_sound!!)
+        }
         binding.back.setOnClickListener {
             getCurrentQuestion(--num_game)
         }
