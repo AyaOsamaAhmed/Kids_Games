@@ -21,9 +21,7 @@ import com.aya.games.databinding.FragmentSubGameTypeThreeBinding
 import com.aya.games.domain.model.General
 import com.aya.games.domain.model.ListenGames
 import com.aya.games.presentation.ui.viewModel.SubGameThreeViewModel
-import com.aya.games.presentation.utils.Constants
-import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.setGlideImageUrl
+import com.aya.games.presentation.utils.*
 import com.google.gson.Gson
 import java.io.IOException
 import kotlin.collections.ArrayList
@@ -39,18 +37,13 @@ class SubGameThreeTypeFragment :Fragment() {
 
         navHostFragment.navController
     }
-    var media_player : MediaPlayer? = null
     val mainActivity  by lazy { activity }
     var sharedPrefsHelper : SharedPrefsHelper? = null
     lateinit var data : ArrayList<ListenGames>
     lateinit var background : General
     var num_game = 0
-    var answer = "0"
-    var size_data = 0
     var sound:String = ""
     var sound2:String = ""
-    var access_check = true
-    var question_sound = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,7 +63,6 @@ class SubGameThreeTypeFragment :Fragment() {
 
         viewModel.requestLiveData.observe(viewLifecycleOwner, Observer {
              data = it as ArrayList<ListenGames>
-            size_data = data.size
             getCurrentQuestion(num_game)
         })
 
@@ -80,10 +72,11 @@ class SubGameThreeTypeFragment :Fragment() {
     }
 
     private fun getCurrentQuestion(num:Int){
-        answer = data[num].answer!!
+        pauseSound()
+        binding.result.visibility = View.GONE
+
         showGames(data[num].sound!! , data[num_game].question!!)
-         question_sound = data[num].question_sound!!
-        startSound(question_sound)
+        startSound(data[num].question_sound!!)
         //
         val drawable2 = getResources().getDrawable(R.drawable.bg_corner_white)
         binding.answer1.background = drawable2
@@ -95,7 +88,7 @@ class SubGameThreeTypeFragment :Fragment() {
             binding.back.visibility = View.VISIBLE
 
         //next button
-        if(num == size_data - 1 )
+        if(num == data.size - 1 )
             binding.next.visibility = View.GONE
         else
             binding.next.visibility = View.VISIBLE
@@ -128,35 +121,30 @@ class SubGameThreeTypeFragment :Fragment() {
         }
 
         binding.question.setOnClickListener {
-            startSound(question_sound)
+            startSound(data[num_game].question_sound!!)
         }
-        // check when be correct answer
-        if(access_check) {
-            binding.image.setOnClickListener {
-                if (media_player != null) setPauseMedia()
-                startSound(sound)
-            }
-            binding.image2.setOnClickListener {
-                if (media_player != null) setPauseMedia()
-                startSound(sound2)
-            }
-            val drawable = getResources().getDrawable(R.drawable.border_green_check)
+        binding.image.setOnClickListener {
+            startSound(sound)
+        }
+        binding.image2.setOnClickListener {
+            startSound(sound2)
+        }
+        val drawable = getResources().getDrawable(R.drawable.border_green_check)
 
-            binding.answer1.setOnClickListener {
-                binding.answer1.background = drawable
-                checkAnswer("0")
-            }
-            binding.answer2.setOnClickListener {
-                binding.answer2.background = drawable
-                checkAnswer("1")
-            }
+        binding.answer1.setOnClickListener {
+            binding.answer1.background = drawable
+            checkAnswer("0")
         }
+        binding.answer2.setOnClickListener {
+            binding.answer2.background = drawable
+            checkAnswer("1")
+        }
+
     }
 
     private fun checkAnswer(id: String) {
-        if(media_player != null) setPauseMedia()
-        if(id == answer){
-            access_check = false
+        pauseSound()
+        if(id == data[num_game].answer!!){
             show_result(true)
         }else{
             val drawable2 = getResources().getDrawable(R.drawable.bg_corner_white)
@@ -192,30 +180,8 @@ class SubGameThreeTypeFragment :Fragment() {
 
     }
 
-    fun startSound (sound : String){
-        // stream type for our media player.
-        val mediaPlayer  = MediaPlayer()
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
-        try {
-            mediaPlayer.setDataSource(sound)
-            mediaPlayer.prepare()
-            mediaPlayer.start()
-            media_player = mediaPlayer
-            Log.i(ContentValues.TAG, "playAudio: true")
-        } catch (e: IOException) {
-            e.printStackTrace()
-            Log.i(ContentValues.TAG, "playAudio: false")
-        }
-    }
-
     override fun onPause() {
+        pauseSound()
         super.onPause()
-        if(media_player!= null) setPauseMedia()
     }
-
-    fun setPauseMedia(){
-        media_player!!.pause()
-    }
-
 }

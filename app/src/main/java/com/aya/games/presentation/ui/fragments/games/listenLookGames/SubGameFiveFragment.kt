@@ -1,12 +1,8 @@
 package com.aya.games.presentation.ui.fragments.games.listenLookGames
 
-import android.content.ContentValues
-import android.media.AudioManager
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,18 +12,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.aya.games.R
 import com.aya.games.databinding.FragmentSubGameFiveBinding
-import com.aya.games.databinding.FragmentSubGameTwoBinding
 import com.aya.games.domain.model.General
 import com.aya.games.domain.model.ListenLookGames
-import com.aya.games.domain.model.LookGames
 import com.aya.games.presentation.ui.adapter.AdapterSubGameFive
 import com.aya.games.presentation.ui.interfaces.OnClickSubGameFive
 import com.aya.games.presentation.ui.viewModel.SubGameFiveViewModel
-import com.aya.games.presentation.utils.Constants
-import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.setGlideImageUrl
+import com.aya.games.presentation.utils.*
 import com.google.gson.Gson
-import java.io.IOException
 import kotlin.collections.ArrayList
 
 class SubGameFiveFragment :Fragment() , OnClickSubGameFive {
@@ -43,16 +34,11 @@ class SubGameFiveFragment :Fragment() , OnClickSubGameFive {
     }
 
     val mainActivity  by lazy { activity }
-    var media_player  : MediaPlayer? = null
     var sharedPrefsHelper : SharedPrefsHelper? = null
     lateinit var data : ArrayList<ListenLookGames>
     lateinit var background : General
     var num_game = 0
-    var answer = "0"
-    var size_data = 0
-    var question_sound  = ""
-    var check_sound = ""
-
+    var time = 7000
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -71,7 +57,6 @@ class SubGameFiveFragment :Fragment() , OnClickSubGameFive {
 
         viewModel.requestLiveData.observe(viewLifecycleOwner, Observer {
              data = it as ArrayList<ListenLookGames>
-            size_data = data.size
             getCurrentQuestion(num_game)
             startSound( data[num_game].question_sound!!)
         })
@@ -82,8 +67,16 @@ class SubGameFiveFragment :Fragment() , OnClickSubGameFive {
     }
 
     private fun getCurrentQuestion(num:Int){
-        answer = data[num].answer!!
-        showGames(data[num].images!! , data[num_game].question!! ,data[num_game].question_sound!! , data[num_game].check_sound!! )
+        pauseSound()
+        binding.result.visibility = View.GONE
+
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            startSound(data[num].check_sound!!)
+        }, time.toLong())
+
+        time = 0
+        showGames(data[num].images!! , data[num_game].question!!)
 
         //back button
         if(num == 0)
@@ -92,17 +85,15 @@ class SubGameFiveFragment :Fragment() , OnClickSubGameFive {
             binding.back.visibility = View.VISIBLE
 
         //next button
-        if(num == size_data - 1 )
+        if(num == data.size - 1 )
             binding.next.visibility = View.GONE
         else
             binding.next.visibility = View.VISIBLE
     }
 
 
-    private fun showGames(data : ArrayList<String> , question : String , question_sound : String , check_sound : String ) {
+    private fun showGames(data : ArrayList<String> , question : String  ) {
         binding.question.text = question
-        this.check_sound = check_sound
-        this.question_sound = question_sound
 
         // loading image
         val drawable = getResources().getDrawable(R.drawable.border_green_check)
@@ -121,24 +112,19 @@ class SubGameFiveFragment :Fragment() , OnClickSubGameFive {
 
     fun clickable(){
         binding.backHome.setOnClickListener {
-            if(media_player!= null) setPauseMedia()
            skip()
         }
         binding.sound.setOnClickListener {
-            if(media_player!= null) setPauseMedia()
-            startSound(check_sound)
+            startSound(data[num_game].check_sound!!)
         }
 
         binding.question.setOnClickListener {
-            if(media_player!= null) setPauseMedia()
-            startSound(question_sound)
+            startSound(data[num_game].question_sound!!)
         }
         binding.back.setOnClickListener {
-            if(media_player!= null) setPauseMedia()
             getCurrentQuestion(--num_game)
         }
         binding.next.setOnClickListener {
-            if(media_player!= null) setPauseMedia()
             getCurrentQuestion(++num_game)
         }
 
@@ -150,8 +136,8 @@ class SubGameFiveFragment :Fragment() , OnClickSubGameFive {
     }
 
     override fun onClickChooseGames(id: String) {
-        if(media_player!= null) setPauseMedia()
-        if(id == answer){
+        pauseSound()
+        if(id == data[num_game].answer!!){
             show_result(true)
         }else{
             show_result(false)
@@ -180,31 +166,10 @@ class SubGameFiveFragment :Fragment() , OnClickSubGameFive {
 
     }
 
-    fun startSound (sound : String){
-        // stream type for our media player.
-        val mediaPlayer  = MediaPlayer()
-        media_player = MediaPlayer()
 
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
-        try {
-            mediaPlayer.setDataSource(sound)
-            mediaPlayer.prepare()
-            mediaPlayer.start()
-            media_player = mediaPlayer
-            Log.i(ContentValues.TAG, "playAudio: true")
-        } catch (e: IOException) {
-            e.printStackTrace()
-            Log.i(ContentValues.TAG, "playAudio: false")
-        }
-    }
     override fun onPause() {
+        pauseSound()
         super.onPause()
-        if(media_player!= null) setPauseMedia()
-    }
-
-    fun setPauseMedia(){
-        media_player!!.pause()
     }
 
 

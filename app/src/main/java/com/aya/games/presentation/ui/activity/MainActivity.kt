@@ -64,21 +64,49 @@ class MainActivity : AppCompatActivity() {
         new_words= words.subSequence(0,index_last_space).toString()
         return new_words
 
-
+ */
         var inputArray  = arrayListOf(3, 6, -2, -5, 7, 3)
         var result : Int = 0
         var check_num = 0
-        var num_id = 0
+        var next_result = 0
+      /*  inputArray.size
         for ((index,num)in inputArray.withIndex() ){
-            num_id = index
+            var next_index = index
+            num_id = next_index ++
             if(check_num < num ){
                 check_num = num
                result =  inputArray[5]
             }
-        } */
+        }
+        for ((index,num) in inputArray.withIndex()){
+            var next_index = index
+            next_index ++
+            if(inputArray.size > next_index){
+                result = num * inputArray[next_index ]
+                if(result > next_result)
+                    next_result = result
+            }
+        }
+        val s = "MCMXCIV"
+        var result2 = 0
+        var last_char = ' '
+        repeat( s.length){num ->
+            when(s[num]){
+                'I' ->  result += 1
+                'V' -> { if (last_char == 'I') result += 4 else result += 5}
+                'X' ->  result += 10
+                'L' ->  result += 50
+                'C' ->  { if (last_char == 'X') result += 90 else result += 100}
+                'D' ->  result += 500
+                'M' ->  result += 1000
+            }
+            last_char = s[num]
+        }
+        result2 + 0
 
-
+       */
     }
+
 
     fun changeLang(){
         val localeToSwitchTo = Locale("ar")

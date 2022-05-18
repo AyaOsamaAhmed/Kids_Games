@@ -1,12 +1,8 @@
 package com.aya.games.presentation.ui.fragments.games.memoryGames
 
-import android.content.ContentValues
-import android.media.AudioManager
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,11 +13,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.aya.games.R
 import com.aya.games.domain.model.General
 import com.aya.games.presentation.ui.viewModel.SubGameFourViewModel
-import com.aya.games.presentation.utils.Constants
-import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.setGlideImageUrl
 import com.google.gson.Gson
-import java.io.IOException
 import kotlin.collections.ArrayList
 import android.os.CountDownTimer
 import com.aya.games.databinding.FragmentSubGameFourMemoryBinding
@@ -30,6 +22,7 @@ import com.aya.games.presentation.ui.adapter.AdapterSubGameFourData
 import com.aya.games.presentation.ui.adapter.AdapterSubGameFourMemory
 import com.aya.games.presentation.ui.adapter.AdapterSubGameFourPizzel
 import com.aya.games.presentation.ui.interfaces.OnClickSubGameFourMemory
+import com.aya.games.presentation.utils.*
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
@@ -54,7 +47,6 @@ class SubGameFourMemoryFragment :Fragment() , OnClickSubGameFourMemory {
     lateinit var background : General
     val onclick : OnClickSubGameFourMemory = this
     var num_game = 0
-    var size_data = 0
     var trying : Boolean = false
     var arrange_image :ArrayList<Int> = ArrayList<Int>()
     var result_arrange_image :ArrayList<Int> = ArrayList<Int>()
@@ -80,7 +72,6 @@ class SubGameFourMemoryFragment :Fragment() , OnClickSubGameFourMemory {
 
         viewModel.requestMemoryLiveData.observe(viewLifecycleOwner, Observer {
              data = it as ArrayList<MemoryGamesPizzel>
-            size_data = data.size
             repeat(data[num_game].image!!.size){
                 result_arrange_image.add(it)
             }
@@ -94,6 +85,11 @@ class SubGameFourMemoryFragment :Fragment() , OnClickSubGameFourMemory {
     }
 
     private fun getCurrentQuestion(num:Int , secondTry : Boolean){
+        pauseSound()
+        binding.result.visibility = View.GONE
+
+        startSound(data[num_game].question_sound!!)
+
         binding.image.visibility = View.VISIBLE
         binding.timer.visibility = View.VISIBLE
         binding.game.visibility = View.INVISIBLE
@@ -122,7 +118,7 @@ class SubGameFourMemoryFragment :Fragment() , OnClickSubGameFourMemory {
             binding.back.visibility = View.VISIBLE
 
         //next button
-        if(num == size_data - 1 )
+        if(num == data.size - 1 )
             binding.next.visibility = View.GONE
         else
             binding.next.visibility = View.VISIBLE
@@ -141,6 +137,7 @@ class SubGameFourMemoryFragment :Fragment() , OnClickSubGameFourMemory {
         // loading image
         binding.progress.visibility = View.VISIBLE
         binding.layout.setGlideImageUrl(background.game_look!!,binding.progress)
+
     }
 
     fun clickable(){
@@ -168,7 +165,7 @@ class SubGameFourMemoryFragment :Fragment() , OnClickSubGameFourMemory {
     }
 
     override fun onClickChooseGames(id: Int , image : String) {
-
+        pauseSound()
         val size = data[num_game].image!!.size
 
         resultData.addNewImage(image)
@@ -197,6 +194,7 @@ class SubGameFourMemoryFragment :Fragment() , OnClickSubGameFourMemory {
     }
 
     fun show_result(result : Boolean){
+        pauseSound()
         binding.result.visibility = View.VISIBLE
 
         if(result) {
@@ -214,21 +212,6 @@ class SubGameFourMemoryFragment :Fragment() , OnClickSubGameFourMemory {
 
     }
 
-    fun startSound (sound : String){
-        // stream type for our media player.
-        val mediaPlayer  = MediaPlayer()
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
-        try {
-            mediaPlayer.setDataSource(sound)
-            mediaPlayer.prepare()
-            mediaPlayer.start()
-            Log.i(ContentValues.TAG, "playAudio: true")
-        } catch (e: IOException) {
-            e.printStackTrace()
-            Log.i(ContentValues.TAG, "playAudio: false")
-        }
-    }
 
     fun timeDown(time:Long){
         binding.next.isEnabled = false
@@ -275,5 +258,10 @@ class SubGameFourMemoryFragment :Fragment() , OnClickSubGameFourMemory {
 
             }
         }.start()
+    }
+
+    override fun onPause() {
+        pauseSound()
+        super.onPause()
     }
 }

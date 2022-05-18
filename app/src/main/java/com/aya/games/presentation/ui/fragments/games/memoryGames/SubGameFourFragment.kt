@@ -21,13 +21,11 @@ import com.aya.games.domain.model.MemoryGames
 import com.aya.games.presentation.ui.adapter.AdapterSubGameFour
 import com.aya.games.presentation.ui.interfaces.OnClickSubGameFour
 import com.aya.games.presentation.ui.viewModel.SubGameFourViewModel
-import com.aya.games.presentation.utils.Constants
-import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.setGlideImageUrl
 import com.google.gson.Gson
 import java.io.IOException
 import kotlin.collections.ArrayList
 import android.os.CountDownTimer
+import com.aya.games.presentation.utils.*
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
@@ -49,8 +47,6 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
     lateinit var data : ArrayList<MemoryGames>
     lateinit var background : General
     var num_game = 0
-    var answer = "0"
-    var size_data = 0
     var trying : Boolean = false
 
     override fun onCreateView(
@@ -72,9 +68,8 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
 
         viewModel.requestLiveData.observe(viewLifecycleOwner, Observer {
              data = it as ArrayList<MemoryGames>
-            size_data = data.size
             getCurrentQuestion(num_game, trying)
-            startSound(data[num_game].question_sound!!)
+
         })
 
         clickable()
@@ -83,12 +78,19 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
     }
 
     private fun getCurrentQuestion(num:Int , secondTry : Boolean){
+        pauseSound()
+        binding.result.visibility = View.GONE
+
+        startSound(background.background_look_good!!)
+        Handler(Looper.getMainLooper()).postDelayed({
+            startSound(data[num_game].question_sound!!)
+        }, 5000)
+
         binding.image.visibility = View.VISIBLE
         binding.timer.visibility = View.VISIBLE
         binding.game.visibility = View.INVISIBLE
         binding.progressGame.visibility = View.INVISIBLE
 
-        answer = data[num].answer!!
         showGames(data[num].image!! , data[num].choose!! , data[num_game].question!!)
 
         //handel time
@@ -110,7 +112,7 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
             binding.back.visibility = View.VISIBLE
 
         //next button
-        if(num == size_data - 1 )
+        if(num == data.size - 1 )
             binding.next.visibility = View.GONE
         else
             binding.next.visibility = View.VISIBLE
@@ -158,8 +160,8 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
     }
 
     override fun onClickChooseGames(id: String) {
-
-        if(id == answer){
+            pauseSound()
+        if(id == data[num_game].answer!!){
             show_result(true)
         }else{
             show_result(false)
@@ -189,20 +191,9 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
 
     }
 
-    fun startSound (sound : String){
-        // stream type for our media player.
-        val mediaPlayer  = MediaPlayer()
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
-        try {
-            mediaPlayer.setDataSource(sound)
-            mediaPlayer.prepare()
-            mediaPlayer.start()
-            Log.i(ContentValues.TAG, "playAudio: true")
-        } catch (e: IOException) {
-            e.printStackTrace()
-            Log.i(ContentValues.TAG, "playAudio: false")
-        }
+    override fun onPause() {
+        pauseSound()
+        super.onPause()
     }
 
     fun timeDown(time:Long){

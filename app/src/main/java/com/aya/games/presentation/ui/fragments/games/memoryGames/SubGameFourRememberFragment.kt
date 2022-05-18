@@ -11,24 +11,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aya.games.R
-import com.aya.games.databinding.FragmentGameFourBinding
 import com.aya.games.databinding.FragmentSubGameFourRememberBinding
 import com.aya.games.domain.model.*
-import com.aya.games.presentation.ui.adapter.AdapterGameFour
-import com.aya.games.presentation.ui.adapter.AdapterGameThree
 import com.aya.games.presentation.ui.adapter.AdapterSubGameFourRemember
-import com.aya.games.presentation.ui.adapter.AdapterSubGameOne
-import com.aya.games.presentation.ui.interfaces.OnClickGameFour
-import com.aya.games.presentation.ui.interfaces.OnClickGameThree
 import com.aya.games.presentation.ui.interfaces.OnClickSubGameFourRemember
-import com.aya.games.presentation.ui.viewModel.GameFourViewModel
-import com.aya.games.presentation.ui.viewModel.GameThreeViewModel
 import com.aya.games.presentation.ui.viewModel.SubGameFourViewModel
 import com.aya.games.presentation.utils.Constants
 import com.aya.games.presentation.utils.SharedPrefsHelper
+import com.aya.games.presentation.utils.pauseSound
 import com.aya.games.presentation.utils.setGlideImageUrl
 import com.google.gson.Gson
 import kotlin.collections.ArrayList
+
 
 class SubGameFourRememberFragment :Fragment() , OnClickSubGameFourRemember {
 
@@ -38,7 +32,6 @@ class SubGameFourRememberFragment :Fragment() , OnClickSubGameFourRemember {
     private val navController by lazy {
         val navHostFragment = activity?.supportFragmentManager
             ?.findFragmentById(R.id.homeframlayout) as NavHostFragment
-
         navHostFragment.navController
     }
 
@@ -62,17 +55,13 @@ class SubGameFourRememberFragment :Fragment() , OnClickSubGameFourRemember {
 
         if(id != null)
             viewModel.getListRemember(id)
-       // binding.progressGame.visibility = View.VISIBLE
 
         viewModel.requestRememberLiveData.observe(viewLifecycleOwner, Observer {
             val   data = it as ArrayList<MemoryGamesRemember>
             category_id = id!!
             showCategory(data)
         })
-
         clickable()
-
-
         return binding.root
     }
 
@@ -106,7 +95,6 @@ class SubGameFourRememberFragment :Fragment() , OnClickSubGameFourRemember {
         navController.navigate(R.id.SubGameFourRememberFragment_to_SubGameFourRememberPhaseFragment, bundle)
 
     }
-
 
 
 }

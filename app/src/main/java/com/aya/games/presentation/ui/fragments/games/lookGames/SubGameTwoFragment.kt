@@ -21,9 +21,7 @@ import com.aya.games.domain.model.LookGames
 import com.aya.games.presentation.ui.adapter.AdapterSubGameTwo
 import com.aya.games.presentation.ui.interfaces.OnClickSubGameTwo
 import com.aya.games.presentation.ui.viewModel.SubGameTwoViewModel
-import com.aya.games.presentation.utils.Constants
-import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.setGlideImageUrl
+import com.aya.games.presentation.utils.*
 import com.google.gson.Gson
 import java.io.IOException
 import kotlin.collections.ArrayList
@@ -78,6 +76,9 @@ class SubGameTwoFragment :Fragment() , OnClickSubGameTwo {
     }
 
     private fun getCurrentQuestion(num:Int){
+        binding.result.visibility = View.GONE
+        pauseSound()
+
         answer = data[num].answer!!
         showGames(data[num].images!! , data[num_game].question!!,data[num_game].question_sound!!)
 
@@ -126,8 +127,6 @@ class SubGameTwoFragment :Fragment() , OnClickSubGameTwo {
         binding.next.setOnClickListener {
             getCurrentQuestion(++num_game)
         }
-
-
     }
 
     fun skip(){
@@ -165,20 +164,8 @@ class SubGameTwoFragment :Fragment() , OnClickSubGameTwo {
 
     }
 
-    fun startSound (sound : String){
-        // stream type for our media player.
-        val mediaPlayer  = MediaPlayer()
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
-        try {
-            mediaPlayer.setDataSource(sound)
-            mediaPlayer.prepare()
-            mediaPlayer.start()
-            Log.i(ContentValues.TAG, "playAudio: true")
-        } catch (e: IOException) {
-            e.printStackTrace()
-            Log.i(ContentValues.TAG, "playAudio: false")
-        }
+    override fun onPause() {
+        pauseSound()
+        super.onPause()
     }
-
 }

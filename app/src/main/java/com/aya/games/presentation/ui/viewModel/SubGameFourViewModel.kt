@@ -93,6 +93,7 @@ class SubGameFourViewModel(application: Application) : AndroidViewModel(applicat
 
                         data.id = document!!.get("id").toString()
                         data.question =  document.get("question").toString()
+                        data.question_sound =  document.get("question_sound").toString()
                         data.image  = document.get("image").toString()
                         data.letter  = document.get("letter").toString()
                         data.name  = document.get("name").toString()
@@ -129,6 +130,7 @@ class SubGameFourViewModel(application: Application) : AndroidViewModel(applicat
 
                         data.id = document!!.get("id").toString()
                         data.question =  document.get("question").toString()
+                        data.question_sound =  document.get("question_sound").toString()
                         data.image  = document.get("image") as ArrayList<String>
                         data.time  = document.get("time").toString()
                      //   data.choose = document.get("choose") as ArrayList<String>

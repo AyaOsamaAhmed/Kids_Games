@@ -27,9 +27,7 @@ import com.aya.games.presentation.ui.interfaces.OnClickPuzzelGameSix
 import com.aya.games.presentation.ui.viewModel.GameFiveViewModel
 import com.aya.games.presentation.ui.viewModel.GameSixViewModel
 import com.aya.games.presentation.ui.viewModel.SubGameSixViewModel
-import com.aya.games.presentation.utils.Constants
-import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.setGlideImageUrl
+import com.aya.games.presentation.utils.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.gson.Gson
@@ -53,7 +51,6 @@ class PuzzelThirdGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuz
     var sharedPrefsHelper : SharedPrefsHelper? = null
     lateinit var background : General
     lateinit var data : ArrayList<FocusPuzzelGames>
-    var media_player  : MediaPlayer? = null
     var imgAns : ArrayList<String> = arrayListOf()
     var imgQuestion : ArrayList<String> = arrayListOf()
     var imageAnswer : ArrayList<String> = arrayListOf()
@@ -97,6 +94,9 @@ class PuzzelThirdGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuz
     }
 
     private fun showQuestion(num:Int) {
+        pauseSound()
+        binding.result.visibility = View.GONE
+
         binding.imgHint.setGlideImageUrl(data[num].image!!,binding.progress)
         binding.question.text = data[num].question
         imageAnswer.clear()
@@ -154,11 +154,9 @@ class PuzzelThirdGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuz
             showQuestion(num_game)
         }
         binding.back.setOnClickListener {
-            if(media_player!= null) setPauseMedia()
             showQuestion(--num_game)
         }
         binding.next.setOnClickListener {
-            if(media_player!= null) setPauseMedia()
             showQuestion(++num_game)
         }
 
@@ -171,6 +169,7 @@ class PuzzelThirdGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuz
     }
 
     fun show_result(result : Boolean){
+        pauseSound()
         binding.result.visibility = View.VISIBLE
 
         if(result) {
@@ -188,36 +187,16 @@ class PuzzelThirdGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuz
 
     }
 
-    fun startSound (sound : String){
-        // stream type for our media player.
-        val mediaPlayer  : MediaPlayer = MediaPlayer()
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
-        try {
-            mediaPlayer.setDataSource(sound)
-            mediaPlayer.prepare()
-            mediaPlayer.start()
-            media_player = mediaPlayer
-            Log.i(ContentValues.TAG, "playAudio: true")
-        } catch (e: IOException) {
-            e.printStackTrace()
-            Log.i(ContentValues.TAG, "playAudio: false")
-        }
-    }
 
     override fun onPause() {
+        pauseSound()
         super.onPause()
-        if(media_player!= null) setPauseMedia()
     }
 
-    fun setPauseMedia(){
-        media_player!!.pause()
-    }
 
     override fun onClickChooseGames(id: Int) {
-
         selected_id = id
-
     }
 
     override fun onClickChooseAnsGames(id: Int) {

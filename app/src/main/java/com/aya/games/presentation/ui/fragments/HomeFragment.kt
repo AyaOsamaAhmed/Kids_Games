@@ -19,9 +19,7 @@ import com.aya.games.domain.model.Home
 import com.aya.games.presentation.ui.interfaces.OnClickHome
 import com.aya.games.presentation.ui.adapter.AdapterHome
 import com.aya.games.presentation.ui.viewModel.MainViewModel
-import com.aya.games.presentation.utils.Constants
-import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.setGlideImageUrl
+import com.aya.games.presentation.utils.*
 import com.google.gson.Gson
 import java.io.IOException
 
@@ -40,7 +38,7 @@ class HomeFragment :Fragment() , OnClickHome {
     val mainActivity  by lazy { activity }
     var lislHomeGames : ArrayList<Home> = arrayListOf()
     var sharedPrefsHelper : SharedPrefsHelper? = null
-    var  mediaPlayer = MediaPlayer()
+
     lateinit var background : General
 
     override fun onCreateView(
@@ -70,7 +68,7 @@ class HomeFragment :Fragment() , OnClickHome {
 
     private fun setGeneral() {
          background = Gson().fromJson(sharedPrefsHelper?.getStringValue(Constants.GENERAL), General::class.java)
-        startSound()
+        startSound(background.sound!!)
         binding.layout.setGlideImageUrl(background.background_main!!,binding.progress)
 
     }
@@ -96,28 +94,11 @@ class HomeFragment :Fragment() , OnClickHome {
         }
     }
 
-    fun startSound (){
-        mediaPlayer = MediaPlayer()
 
-        // stream type for our media player.
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
-        try {
-            mediaPlayer.setDataSource(background.sound)
-            mediaPlayer.prepare()
-            mediaPlayer.start()
-            mediaPlayer.isLooping= true
-            Log.i(ContentValues.TAG, "playAudio: true")
-        } catch (e: IOException) {
-            e.printStackTrace()
-            Log.i(ContentValues.TAG, "playAudio: false")
-        }
-    }
 
     override fun onPause() {
+        pauseSound()
         super.onPause()
-
-        mediaPlayer.pause()
     }
 
 }

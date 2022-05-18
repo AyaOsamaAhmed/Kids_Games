@@ -3,16 +3,12 @@ package com.aya.games.presentation.ui.fragments.games.TalkGames
 import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.ActivityNotFoundException
-import android.content.ContentValues
 import android.content.Intent
-import android.media.AudioManager
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,11 +23,8 @@ import com.aya.games.databinding.FragmentSubGameOneBinding
 import com.aya.games.domain.model.General
 import com.aya.games.domain.model.TalkGames
 import com.aya.games.presentation.ui.viewModel.SubGameOneViewModel
-import com.aya.games.presentation.utils.Constants
-import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.setGlideImageUrl
+import com.aya.games.presentation.utils.*
 import com.google.gson.Gson
-import java.io.IOException
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -101,6 +94,9 @@ class SubGameOneFragment :Fragment() {
     }
 
     private fun showQuestion(num : Int) {
+        pauseSound()
+        binding.result.visibility = View.GONE
+
         binding.question.text =  data[num].question!![0]
         binding.questionTwo.text = data[num].question!![1]
         answer = data[num].answer!!
@@ -161,10 +157,10 @@ class SubGameOneFragment :Fragment() {
         }
         binding.question.setOnClickListener {
          //   viewModel.speak(binding.question.text.toString(),mainActivity!!.applicationContext)
-            startSound(data[page_num]!!.question_sound?.get(0)!!)
+            startSound(data[page_num].question_sound?.get(0)!!)
         }
         binding.questionTwo.setOnClickListener {
-              startSound(data[page_num]!!.question_sound?.get(1)!!)
+              startSound(data[page_num].question_sound?.get(1)!!)
         }
 
     }
@@ -185,6 +181,7 @@ class SubGameOneFragment :Fragment() {
     }
 
     private fun startSpeechToText() {
+        pauseSound()
         val sttIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         sttIntent.putExtra(
             RecognizerIntent.EXTRA_LANGUAGE_MODEL,
@@ -264,24 +261,10 @@ class SubGameOneFragment :Fragment() {
 
     }
 
-    fun startSound (sound : String){
-        // stream type for our media player.
-        val mediaPlayer  = MediaPlayer()
-       mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
-        try {
-            mediaPlayer.setDataSource(sound)
-            mediaPlayer.prepare()
-            mediaPlayer.start()
-            Log.i(ContentValues.TAG, "playAudio: true")
-        } catch (e: IOException) {
-            e.printStackTrace()
-            Log.i(ContentValues.TAG, "playAudio: false")
-        }
-    }
 
     override fun onPause() {
         textToSpeechEngine.stop()
+        pauseSound()
         super.onPause()
     }
 

@@ -27,9 +27,7 @@ import com.aya.games.presentation.ui.adapter.AdapterSubGameSix
 import com.aya.games.presentation.ui.interfaces.OnClickSubGameSix
 import com.aya.games.presentation.ui.viewModel.SubGameFiveViewModel
 import com.aya.games.presentation.ui.viewModel.SubGameSixViewModel
-import com.aya.games.presentation.utils.Constants
-import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.setGlideImageUrl
+import com.aya.games.presentation.utils.*
 import com.google.gson.Gson
 import java.io.IOException
 import kotlin.collections.ArrayList
@@ -85,6 +83,8 @@ class DiffGameSixFragment :Fragment(){
     }
 
     private fun getCurrentQuestion(num:Int){
+        pauseSound()
+        binding.result.visibility = View.GONE
          showGames(data[num].list_image!! , data[num].background!! , data[num].list!! , data[num].question!!)
 
         //back button
@@ -151,12 +151,10 @@ class DiffGameSixFragment :Fragment(){
 
     fun clickable(){
         binding.backHome.setOnClickListener {
-            if(media_player!= null) setPauseMedia()
            skip()
         }
 
         binding.question.setOnClickListener {
-            if(media_player!= null) setPauseMedia()
             startSound(question_sound)
         }
         binding.imgStart.setOnClickListener {
@@ -186,11 +184,9 @@ class DiffGameSixFragment :Fragment(){
         }
 
         binding.back.setOnClickListener {
-            if(media_player!= null) setPauseMedia()
             getCurrentQuestion(--num_game)
         }
         binding.next.setOnClickListener {
-            if(media_player!= null) setPauseMedia()
             getCurrentQuestion(++num_game)
         }
 
@@ -207,7 +203,7 @@ class DiffGameSixFragment :Fragment(){
     }
 
      fun checkGames() {
-        if(media_player!= null) setPauseMedia()
+         pauseSound()
          val ans = data[num_game].list!!
          if( ans.size == listAnswer.size){
              ans.sort()
@@ -241,31 +237,10 @@ class DiffGameSixFragment :Fragment(){
 
     }
 
-    fun startSound (sound : String){
-        // stream type for our media player.
-        val mediaPlayer  = MediaPlayer()
-        media_player = MediaPlayer()
 
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
-        try {
-            mediaPlayer.setDataSource(sound)
-            mediaPlayer.prepare()
-            mediaPlayer.start()
-            media_player = mediaPlayer
-            Log.i(ContentValues.TAG, "playAudio: true")
-        } catch (e: IOException) {
-            e.printStackTrace()
-            Log.i(ContentValues.TAG, "playAudio: false")
-        }
-    }
     override fun onPause() {
+        pauseSound()
         super.onPause()
-        if(media_player!= null) setPauseMedia()
-    }
-
-    fun setPauseMedia(){
-        media_player!!.pause()
     }
 
 

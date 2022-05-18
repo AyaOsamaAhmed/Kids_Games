@@ -29,9 +29,7 @@ import com.aya.games.presentation.ui.adapter.AdapterSubGameThree
 import com.aya.games.presentation.ui.fragments.games.TalkGames.SubGameOneFragment
 import com.aya.games.presentation.ui.interfaces.OnClickSubGameThree
 import com.aya.games.presentation.ui.viewModel.SubGameThreeViewModel
-import com.aya.games.presentation.utils.Constants
-import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.setGlideImageUrl
+import com.aya.games.presentation.utils.*
 import com.google.gson.Gson
 import java.io.IOException
 import java.util.*
@@ -53,16 +51,11 @@ class SubGameThreeFragment :Fragment()  {
         private const val REQUEST_CODE_STT = 1
         private const val TAG = "SubGameThreeFragment"
     }
-     var media_player  : MediaPlayer? = null
     val mainActivity  by lazy { activity }
     var sharedPrefsHelper : SharedPrefsHelper? = null
     lateinit var data : ArrayList<ListenGames>
     lateinit var background : General
     var num_game = 0
-    var answer = "0"
-    var size_data = 0
-    var question:String = ""
-    var question_sound = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,10 +75,8 @@ class SubGameThreeFragment :Fragment()  {
 
         viewModel.requestLiveData.observe(viewLifecycleOwner, Observer {
              data = it as ArrayList<ListenGames>
-            size_data = data.size
             getCurrentQuestion(num_game)
-            question_sound = data[0].question_sound!!
-            startSound(question_sound)
+            startSound(data[0].question_sound!!)
         })
 
         clickable()
@@ -94,13 +85,14 @@ class SubGameThreeFragment :Fragment()  {
     }
 
     private fun getCurrentQuestion(num:Int){
-        answer = data[num].answer!!
+        pauseSound()
+        binding.result.visibility = View.GONE
+
 
         binding.question.text = data[num_game].question!!
-        question = data[num].sound!![0]
 
         Handler(Looper.getMainLooper()).postDelayed({
-            startSound(question) }, 2000)
+            startSound(data[num].sound!![0]) }, 7000)
 
         // Reset answer
         binding.answer.text = ""
@@ -115,7 +107,7 @@ class SubGameThreeFragment :Fragment()  {
             binding.back.visibility = View.VISIBLE
 
         //next button
-        if(num == size_data - 1 )
+        if(num == data.size - 1 )
             binding.next.visibility = View.GONE
         else
             binding.next.visibility = View.VISIBLE
@@ -135,27 +127,26 @@ class SubGameThreeFragment :Fragment()  {
         }
 
         binding.back.setOnClickListener {
-            if(media_player!= null) setPauseMedia()
             getCurrentQuestion(--num_game)
         }
         binding.next.setOnClickListener {
-            if(media_player!= null) setPauseMedia()
             getCurrentQuestion(++num_game)
         }
         binding.image.setOnClickListener {
-            startSound(question)
+            startSound(data[num_game].sound!![0])
         }
         binding.question.setOnClickListener {
-            if(media_player!= null) setPauseMedia()
-            startSound(question_sound)
+            startSound(data[0].question_sound!!)
         }
         binding.answer.setOnClickListener {
-            if(media_player!= null) setPauseMedia()
             startSpeechToText()
         }
     }
 
     private fun startSpeechToText() {
+        pauseSound()
+        binding.result.visibility = View.GONE
+
         val sttIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         sttIntent.putExtra(
             RecognizerIntent.EXTRA_LANGUAGE_MODEL,
@@ -189,7 +180,7 @@ class SubGameThreeFragment :Fragment()  {
     }
 
     private fun correctAnswer(recognizedText: String?) {
-            if(recognizedText == answer){
+            if(recognizedText ==  data[num_game].answer!!){
                 binding.answer.setBackgroundResource(R.drawable.bg_corner_green)
                 binding.answer.setCompoundDrawables(null,null,null,null)
                 show_result(true)
@@ -221,29 +212,10 @@ class SubGameThreeFragment :Fragment()  {
 
     }
 
-    fun startSound (sound : String){
-        // stream type for our media player.
-        val mediaPlayer  : MediaPlayer = MediaPlayer()
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
-        try {
-            mediaPlayer.setDataSource(sound)
-            mediaPlayer.prepare()
-            mediaPlayer.start()
-            media_player = mediaPlayer
-            Log.i(ContentValues.TAG, "playAudio: true")
-        } catch (e: IOException) {
-            e.printStackTrace()
-            Log.i(ContentValues.TAG, "playAudio: false")
-        }
-    }
-
     override fun onPause() {
         super.onPause()
-        if(media_player!= null) setPauseMedia()
+       pauseSound()
     }
 
-    fun setPauseMedia(){
-       media_player!!.pause()
-    }
+
 }
