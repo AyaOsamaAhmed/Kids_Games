@@ -87,8 +87,8 @@ class SubGameFourMemoryFragment :Fragment() , OnClickSubGameFourMemory {
     private fun getCurrentQuestion(num:Int , secondTry : Boolean){
         pauseSound()
         binding.result.visibility = View.GONE
-
-        startSound(data[num_game].question_sound!!)
+        binding.question.visibility = View.GONE
+        startSound(background.background_look_good!!)
 
         binding.image.visibility = View.VISIBLE
         binding.timer.visibility = View.VISIBLE
@@ -236,6 +236,8 @@ class SubGameFourMemoryFragment :Fragment() , OnClickSubGameFourMemory {
 
                 binding.next.isEnabled = true
                 binding.back.isEnabled = true
+                binding.question.visibility = View.VISIBLE
+                startSound(data[num_game].question_sound!!)
 
                 // loading image
                 val drawable = getResources().getDrawable(R.drawable.border_green_check)

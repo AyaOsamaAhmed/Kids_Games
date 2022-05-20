@@ -1,10 +1,7 @@
 package com.aya.games.presentation.ui.adapter
 
 import android.annotation.SuppressLint
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +16,8 @@ class AdapterPuzzelAnsGameSix(
 
 ) : RecyclerView.Adapter<AdapterPuzzelAnsGameSix.ViewHolderSubGameSix>() {
 
+    var row_position = -1
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderSubGameSix {
         val binding: ItemPuzzelAnsSubGameSixBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
@@ -31,19 +30,27 @@ class AdapterPuzzelAnsGameSix(
         return if (list.size > 0) list.size else 0
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: ViewHolderSubGameSix, position: Int) {
         val model = list[position]
+
+        if(row_position == position){
+            holder.itemRowBinding.image.setBackgroundResource(R.drawable.background_border_pink)
+        }
+        else
+        {
+            holder.itemRowBinding.image.setBackgroundResource(R.drawable.background_border_trans)
+        }
+
 
         holder.itemRowBinding.image.setGlideImageUrl(model ,holder.itemRowBinding.progress)
 
         holder.itemRowBinding.image.setOnClickListener {
             if(list[position].isEmpty()) {
-                holder.itemRowBinding.image.setBackgroundResource(R.drawable.background_border_pink)
-
+                row_position = position
                 onClick.onClickChooseGames(position)
-                Handler(Looper.getMainLooper()).postDelayed({
-                    holder.itemRowBinding.image.setBackgroundResource(R.drawable.background_border_pink)
-                }, 7000)
+                holder.itemRowBinding.image.setBackgroundResource(R.drawable.background_border_pink)
+                notifyDataSetChanged()
             }
         }
 

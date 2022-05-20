@@ -214,4 +214,9 @@ class SubGameFourTypeFragment :Fragment() , OnClickSubGameFour {
             }
         }.start()
     }
+
+    override fun onPause() {
+        pauseSound()
+        super.onPause()
+    }
 }

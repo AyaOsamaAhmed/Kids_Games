@@ -213,8 +213,8 @@ class SubGameThreeFragment :Fragment()  {
     }
 
     override fun onPause() {
+        pauseSound()
         super.onPause()
-       pauseSound()
     }
 
 

@@ -1,12 +1,8 @@
 package com.aya.games.presentation.ui.fragments.games.focusGames
 
-import android.content.ContentValues
-import android.media.AudioManager
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,19 +16,11 @@ import com.aya.games.R
 import com.aya.games.databinding.*
 import com.aya.games.domain.model.*
 import com.aya.games.presentation.ui.adapter.*
-import com.aya.games.presentation.ui.interfaces.OnClickGameFive
-import com.aya.games.presentation.ui.interfaces.OnClickGameSix
 import com.aya.games.presentation.ui.interfaces.OnClickPuzzelAnsGameSix
 import com.aya.games.presentation.ui.interfaces.OnClickPuzzelGameSix
-import com.aya.games.presentation.ui.viewModel.GameFiveViewModel
-import com.aya.games.presentation.ui.viewModel.GameSixViewModel
 import com.aya.games.presentation.ui.viewModel.SubGameSixViewModel
 import com.aya.games.presentation.utils.*
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.gson.Gson
-import com.google.protobuf.LazyStringArrayList
-import java.io.IOException
 import kotlin.collections.ArrayList
 
 class PuzzelThirdGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuzzelAnsGameSix{
@@ -197,6 +185,10 @@ class PuzzelThirdGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuz
 
     override fun onClickChooseGames(id: Int) {
         selected_id = id
+
+       //  val adapterAns = AdapterPuzzelAnsGameSix(imgAns, this)
+      //  binding.image.adapter = adapterAns
+
     }
 
     override fun onClickChooseAnsGames(id: Int) {

@@ -80,11 +80,9 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
     private fun getCurrentQuestion(num:Int , secondTry : Boolean){
         pauseSound()
         binding.result.visibility = View.GONE
-
+        binding.question.visibility = View.GONE
         startSound(background.background_look_good!!)
-        Handler(Looper.getMainLooper()).postDelayed({
-            startSound(data[num_game].question_sound!!)
-        }, 5000)
+
 
         binding.image.visibility = View.VISIBLE
         binding.timer.visibility = View.VISIBLE
@@ -216,6 +214,8 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
                 binding.timer.text = "00"
                 binding.next.isEnabled = true
                 binding.back.isEnabled = true
+                binding.question.visibility = View.GONE
+                startSound(data[num_game].question_sound!!)
             }
         }.start()
     }

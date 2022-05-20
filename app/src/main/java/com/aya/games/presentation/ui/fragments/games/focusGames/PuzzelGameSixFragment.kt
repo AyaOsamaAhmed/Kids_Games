@@ -200,9 +200,10 @@ class PuzzelGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuzzelAn
     override fun onClickChooseGames(id: Int){
         selected_id = id
         binding.image.layoutManager = GridLayoutManager(mainActivity, level_id)
-        val adapterAns = AdapterPuzzelAnsGameSix(imgAns, this)
-        binding.image.adapter = adapterAns
 
+      /*  val adapterAns = AdapterPuzzelAnsGameSix(imgAns, this)
+         binding.image.adapter = adapterAns
+*/
     }
 
     override fun onClickChooseAnsGames(id: Int) {
