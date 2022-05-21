@@ -38,7 +38,7 @@ class SubGameFiveFragment :Fragment() , OnClickSubGameFive {
     lateinit var data : ArrayList<ListenLookGames>
     lateinit var background : General
     var num_game = 0
-    var time = 7000
+    var time = 5500
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -42,7 +42,7 @@ class AdapterSubGameFourRememberPhase(
 
         Handler(Looper.getMainLooper()).postDelayed({
             holder.itemRowBinding.cover.visibility = View.VISIBLE
-        }, 2000)
+        }, 3000)
 
         holder.itemRowBinding.cover.setOnClickListener {
             holder.itemRowBinding.cover.visibility = View.GONE

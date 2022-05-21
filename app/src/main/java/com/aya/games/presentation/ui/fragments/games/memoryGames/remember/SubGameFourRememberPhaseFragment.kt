@@ -22,9 +22,7 @@ import com.aya.games.presentation.ui.interfaces.OnClickGameThree
 import com.aya.games.presentation.ui.interfaces.OnClickSubGameFourRemember
 import com.aya.games.presentation.ui.interfaces.OnClickSubGameFourRememberPhase
 import com.aya.games.presentation.ui.viewModel.SubGameFourViewModel
-import com.aya.games.presentation.utils.Constants
-import com.aya.games.presentation.utils.SharedPrefsHelper
-import com.aya.games.presentation.utils.setGlideImageUrl
+import com.aya.games.presentation.utils.*
 import com.google.gson.Gson
 import kotlin.collections.ArrayList
 
@@ -80,10 +78,14 @@ class SubGameFourRememberPhaseFragment :Fragment() , OnClickSubGameFourRememberP
     }
 
     private fun getCurrentQuestion(num : Int) {
+        //
+        startSound(background.background_look_good!!)
+
         // loading list
         binding.game.layoutManager = GridLayoutManager(mainActivity,layoutCount!!)
         val adapter = AdapterSubGameFourRememberPhase(data[num].images!!,this,img_cover)
         binding.game.adapter = adapter
+
 
         //back button
         if(num == 0)
@@ -132,11 +134,18 @@ class SubGameFourRememberPhaseFragment :Fragment() , OnClickSubGameFourRememberP
         if (ans.equals("$answer_id_1-$answer_id_2") || ans.equals("$answer_id_2-$answer_id_1")) {
             result = true
             Toast.makeText(mainActivity, "congratulation", Toast.LENGTH_LONG).show()
+            startSound(background.puzzel_excellent!!)
 
+        }else{
+            startSound(background.wrong_answer!!)
         }
     }
         return result
     }
 
+    override fun onPause() {
+        pauseSound()
+        super.onPause()
+    }
 
 }

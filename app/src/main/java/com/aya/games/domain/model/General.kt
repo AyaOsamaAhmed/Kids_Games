@@ -21,7 +21,10 @@ data class General(
     var background_focus :String? = null,
     var puzzel_background_ans :String? = null,
     var puzzel_background_hint :String? = null,
-    var background_look_good :String? = null
+    var background_look_good :String? = null,
+    var puzzel_excellent :String? = null
+
+
 //
 
 

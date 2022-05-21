@@ -156,6 +156,7 @@ class SubGameFourMemoryFragment :Fragment() , OnClickSubGameFourMemory {
             getCurrentQuestion(++num_game , trying)
         }
         binding.reload.setOnClickListener {
+            trying = true
             getCurrentQuestion(num_game , trying)
         }
     }

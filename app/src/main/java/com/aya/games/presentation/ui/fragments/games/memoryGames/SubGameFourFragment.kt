@@ -97,11 +97,6 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
             else
         timeDown( data[num].time!!.toLong())
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            binding.image.visibility = View.INVISIBLE
-            binding.timer.visibility = View.INVISIBLE
-            binding.game.visibility = View.VISIBLE
-        }, data[num].time!!.toLong())
 
         //back button
         if(num == 0)
@@ -215,7 +210,11 @@ class SubGameFourFragment :Fragment() , OnClickSubGameFour {
                 binding.next.isEnabled = true
                 binding.back.isEnabled = true
                 binding.question.visibility = View.GONE
+                binding.image.visibility = View.INVISIBLE
+                binding.timer.visibility = View.INVISIBLE
+                binding.game.visibility = View.VISIBLE
                 startSound(data[num_game].question_sound!!)
+
             }
         }.start()
     }

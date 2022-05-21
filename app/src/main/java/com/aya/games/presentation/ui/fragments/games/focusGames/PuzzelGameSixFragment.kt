@@ -181,6 +181,9 @@ class PuzzelGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuzzelAn
         else {
             binding.result.setAnimation("wrong_answer.json")
             startSound(background.wrong_answer!!)
+            Handler(Looper.getMainLooper()).postDelayed({
+                showQuestion(num_game)
+            }, 2000)
         }
         binding.result.playAnimation()
         Handler(Looper.getMainLooper()).postDelayed({
@@ -224,7 +227,6 @@ class PuzzelGameSixFragment :Fragment() , OnClickPuzzelGameSix , OnClickPuzzelAn
                     show_result(true)
                 else {
                     show_result(false)
-                    showQuestion(num_game)
                 }
 
             }

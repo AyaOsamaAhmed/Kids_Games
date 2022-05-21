@@ -38,7 +38,7 @@ class GeneralViewModel(application: Application) : AndroidViewModel(application)
                                    data.background_letter_play = document!!.get("background_letter_play").toString()
                                    data.background_listen_look = document!!.get("background_listen_look").toString()
                                    data.background_look_good = document!!.get("background_look_good").toString()
-
+                                   data.puzzel_excellent = document!!.get("puzzel_excellent").toString()
                                    data.sound = document!!.get("sound").toString()
                                    data.game_talk = document!!.get("game_talk").toString()
                                    data.correct_answer = document!!.get("correct_answer").toString()
